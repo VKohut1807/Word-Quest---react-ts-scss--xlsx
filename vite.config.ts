@@ -11,6 +11,7 @@ export default defineConfig({
     },
   },
   plugins: [react(), svgr(), tsconfigPaths()],
+  base: "/Word-Quest---react-ts-scss--xlsx/",
   build: {
     outDir: "dist",
     emptyOutDir: true,
