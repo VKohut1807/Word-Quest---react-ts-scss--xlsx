@@ -1,5 +1,7 @@
+const baseUrl = "/Word-Quest---react-ts-scss--xlsx";
+
 export const ROUTES = {
-  HOME: "/",
-  DICTIONARY: "/dictionary",
-  UPLOAD: "/upload",
+  HOME: baseUrl + "/",
+  DICTIONARY: baseUrl + "/dictionary",
+  UPLOAD: baseUrl + "/upload",
 };
