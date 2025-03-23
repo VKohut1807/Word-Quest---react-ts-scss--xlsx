@@ -1,0 +1,91 @@
+@use "../config/mixins" as *;
+@use "../config/colors" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+
+  font-size: clamp(0.75rem, 0.4651rem + 0.5935vw, 1rem);
+
+  @include break("lg") {
+    font-size: 14px;
+  }
+
+  @include break("sm") {
+    font-size: 12px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $third_20;
+    border-radius: 0.9rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0.9rem;
+    background: linear-gradient(180deg, $primary, $secondary, $primary);
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+
+  #root {
+    min-height: 100dvh;
+    background-color: $primary_20;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+svg {
+  display: block;
+  height: auto;
+}

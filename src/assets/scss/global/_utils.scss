@@ -1,0 +1,59 @@
+@use "../config/mixins" as *;
+@use "../config/colors" as *;
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  font-weight: 600;
+  border: 0.0625rem solid;
+  cursor: pointer;
+  padding: 0.75rem 1.875rem;
+  width: fit-content;
+  border-radius: 0.5rem;
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+
+  &:not([variant]),
+  &[variant="primary"] {
+    background-color: $primary;
+    border-color: $primary;
+    color: #fff;
+
+    &:not(:disabled):hover {
+      background-color: $secondary;
+      border-color: $secondary_80;
+    }
+
+    &:disabled {
+      background-color: $third_50;
+      border-color: $third_70;
+      cursor: initial;
+      color: $third_90;
+    }
+  }
+
+  &[variant="secondary"] {
+    background-color: $primary_50;
+    border-color: $primary_50;
+    color: #fff;
+
+    &:not(:disabled):hover {
+      background-color: $secondary_30;
+      border-color: $secondary_40;
+    }
+
+    &:disabled {
+      background-color: $third_50;
+      border-color: $third_70;
+      cursor: initial;
+      color: $third_90;
+    }
+  }
+}

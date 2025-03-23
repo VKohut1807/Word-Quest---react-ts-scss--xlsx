@@ -1,0 +1,159 @@
+@use "../config/index.scss" as *;
+
+.navbar {
+  border-radius: 0 0 1rem 1rem;
+  background-color: $secondary_30;
+  padding: 1.5rem 0;
+  border-bottom: 0.0625rem solid $secondary_80;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0.1rem 0.2rem 3rem $secondary_40;
+  z-index: 100;
+
+  .pages {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+    padding: 0 5rem;
+
+    .page {
+      align-items: center;
+      width: fit-content;
+
+      &.left {
+        margin-right: auto;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        height: 3rem;
+        position: relative;
+        margin-right: auto;
+        padding-left: 5rem;
+        font-size: 2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: $third_120;
+
+        .wordquest {
+          display: flex;
+          font-size: 2rem;
+          font-weight: 700;
+          gap: 0.5rem;
+
+          .letter {
+            user-select: none;
+            text-transform: uppercase;
+            position: relative;
+            transform: translateX(-0.5rem);
+            animation: bounceWave 3s infinite ease-in-out;
+            transition: transform 0.3s ease-in-out;
+
+            &-1 {
+              animation-delay: 0s;
+            }
+            &-2 {
+              animation-delay: 0.5s;
+            }
+            &-3 {
+              animation-delay: 1s;
+            }
+            &-4 {
+              animation-delay: 1.5s;
+            }
+            &-5 {
+              animation-delay: 2s;
+            }
+            &-6 {
+              animation-delay: 2.5s;
+            }
+            &-7 {
+              animation-delay: 3s;
+            }
+            &-8 {
+              animation-delay: 3.5s;
+            }
+            &-9 {
+              animation-delay: 4s;
+            }
+
+            @keyframes bounceWave {
+              0%,
+              100% {
+                transform: translateX(-0.5rem) scale(1);
+              }
+              50% {
+                transform: translateX(0.5rem) scale(1.2);
+              }
+            }
+          }
+        }
+
+        img {
+          position: absolute;
+          top: 50%;
+          left: -0.5rem;
+          width: 6rem;
+          height: 6rem;
+          transform: translateY(-50%);
+          z-index: 1;
+        }
+      }
+
+      .page-box {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.35rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: $third_120;
+        transition: color 0.3s ease-in-out;
+
+        .icon-box {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          border: 0.0625rem solid $third_120;
+          padding: 0.35rem;
+          transition: border 0.3s ease-in-out;
+          background-color: #fff;
+          box-shadow: 0.1rem 0.2rem 3rem #fff;
+
+          svg {
+            height: 1.5rem;
+            width: 1.5rem;
+
+            path {
+              fill: $third_120;
+              transition: fill 0.3s ease-in-out;
+            }
+          }
+        }
+        &.active-link {
+          pointer-events: none;
+        }
+
+        &.active-link,
+        &:hover {
+          color: $primary_30;
+
+          .icon-box {
+            border: 0.0625rem solid $primary_30;
+
+            svg {
+              path {
+                fill: $primary_30;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
