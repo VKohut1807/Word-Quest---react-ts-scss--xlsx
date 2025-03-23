@@ -1,16 +1,16 @@
 @use "../config/index.scss" as *;
 
 .home {
-  text-align: center;
+    text-align: center;
 
-  h1 {
-    color: $third_120;
-    font-size: 1.5rem;
-    margin: 1.5rem 0;
-    padding: 3rem 0 0;
-  }
+    h1 {
+        color: $third_120;
+        font-size: 1.5rem;
+        margin: 1.5rem 0;
+        padding: 3rem 0 0;
+    }
 
-  p {
-    font-size: 1.25rem;
-  }
+    p {
+        font-size: 1.25rem;
+    }
 }

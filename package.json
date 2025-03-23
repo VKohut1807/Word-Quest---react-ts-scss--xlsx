@@ -1,43 +1,43 @@
 {
-  "name": "word-quest---react-ts-scss--xlsx",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "homepage": "https://github.com/VKohut1807/Word-Quest---react-ts-scss--xlsx",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d dist"
-  },
-  "dependencies": {
-    "papaparse": "^5.5.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.3.0",
-    "sass": "^1.85.1",
-    "vite-plugin-dts": "^4.5.3",
-    "vite-plugin-svgr": "^4.3.0",
-    "vite-tsconfig-paths": "^5.1.4",
-    "xlsx": "^0.18.5"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.21.0",
-    "@types/papaparse": "^5.3.15",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
-    "@types/xlsx": "^0.0.36",
-    "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.21.0",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "gh-pages": "^6.3.0",
-    "globals": "^15.15.0",
-    "prettier": "^3.5.3",
-    "typescript": "~5.7.2",
-    "typescript-eslint": "^8.24.1",
-    "vite": "^6.2.0"
-  }
+    "name": "word-quest---react-ts-scss--xlsx",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "homepage": "https://github.com/VKohut1807/Word-Quest---react-ts-scss--xlsx",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "lint": "eslint .",
+        "preview": "vite preview",
+        "predeploy": "yarn build",
+        "deploy": "gh-pages -d dist"
+    },
+    "dependencies": {
+        "papaparse": "^5.5.2",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "react-router-dom": "^7.3.0",
+        "sass": "^1.85.1",
+        "vite-plugin-dts": "^4.5.3",
+        "vite-plugin-svgr": "^4.3.0",
+        "vite-tsconfig-paths": "^5.1.4",
+        "xlsx": "^0.18.5"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.21.0",
+        "@types/papaparse": "^5.3.15",
+        "@types/react": "^19.0.10",
+        "@types/react-dom": "^19.0.4",
+        "@types/xlsx": "^0.0.36",
+        "@vitejs/plugin-react": "^4.3.4",
+        "eslint": "^9.21.0",
+        "eslint-plugin-react-hooks": "^5.1.0",
+        "eslint-plugin-react-refresh": "^0.4.19",
+        "gh-pages": "^6.3.0",
+        "globals": "^15.15.0",
+        "prettier": "^3.5.3",
+        "typescript": "~5.7.2",
+        "typescript-eslint": "^8.24.1",
+        "vite": "^6.2.0"
+    }
 }

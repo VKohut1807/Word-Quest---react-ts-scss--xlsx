@@ -17,50 +17,50 @@ import RouteWrapper from "@/components/RouteWrapper";
 import {getItem} from "@/helpers/persistanceStorage";
 
 const App: React.FC = () => {
-  const [excelData, setExcelData] = useState<LocalStorage[]>([]);
+    const [excelData, setExcelData] = useState<LocalStorage[]>([]);
 
-  useEffect(() => {
-    const storedData = getItem("excelData");
-    if (storedData) {
-      setExcelData(storedData as LocalStorage[]);
-    }
-  }, []);
+    useEffect(() => {
+        const storedData = getItem("excelData");
+        if (storedData) {
+            setExcelData(storedData as LocalStorage[]);
+        }
+    }, []);
 
-  return (
-    <Router>
-      <>
-        <Novbar />
-        <UpButton />
+    return (
+        <Router>
+            <>
+                <Novbar />
+                <UpButton />
 
-        <Routes>
-          <Route
-            path={ROUTES.HOME}
-            element={
-              <RouteWrapper>
-                <Home />
-              </RouteWrapper>
-            }
-          />
-          <Route
-            path={ROUTES.DICTIONARY}
-            element={
-              <RouteWrapper>
-                <Dictionary data={excelData} />
-              </RouteWrapper>
-            }
-          />
-          <Route
-            path={ROUTES.UPLOAD}
-            element={
-              <RouteWrapper>
-                <FileUploader setExcelData={setExcelData} />
-              </RouteWrapper>
-            }
-          />
-        </Routes>
-      </>
-    </Router>
-  );
+                <Routes>
+                    <Route
+                        path={ROUTES.HOME}
+                        element={
+                            <RouteWrapper>
+                                <Home />
+                            </RouteWrapper>
+                        }
+                    />
+                    <Route
+                        path={ROUTES.DICTIONARY}
+                        element={
+                            <RouteWrapper>
+                                <Dictionary data={excelData} />
+                            </RouteWrapper>
+                        }
+                    />
+                    <Route
+                        path={ROUTES.UPLOAD}
+                        element={
+                            <RouteWrapper>
+                                <FileUploader setExcelData={setExcelData} />
+                            </RouteWrapper>
+                        }
+                    />
+                </Routes>
+            </>
+        </Router>
+    );
 };
 
 export default App;

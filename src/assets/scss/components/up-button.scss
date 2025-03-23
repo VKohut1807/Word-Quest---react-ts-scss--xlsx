@@ -1,68 +1,69 @@
 @use "../config/index.scss" as *;
 
 .up-botton {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  transform: rotate(90deg);
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 50%;
-  background-color: transparent;
-
-  .circle-box {
-    display: block;
-    cursor: pointer;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    transform: rotate(90deg);
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 50%;
-    overflow: hidden;
-    position: relative;
-    visibility: hidden;
-    opacity: 0;
-    box-shadow: 0 0rem 2rem $secondary_30;
-    transition:
-      visibility 0.3s ease-in-out,
-      opacity 0.3s ease-in-out;
+    background-color: transparent;
 
-    .icon-arrow {
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 1.75rem;
-      height: auto;
-      aspect-ratio: 1;
-      user-select: none;
-      z-index: 1;
+    .circle-box {
+        display: block;
+        cursor: pointer;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+        visibility: hidden;
+        opacity: 0;
+        box-shadow: 0 0rem 2rem $secondary_30;
+        transition:
+            visibility 0.3s ease-in-out,
+            opacity 0.3s ease-in-out;
 
-      path {
-        animation: scroll-top 4s linear infinite;
-      }
+        .icon-arrow {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1.75rem;
+            height: auto;
+            aspect-ratio: 1;
+            user-select: none;
+            z-index: 1;
+
+            path {
+                animation: scroll-top 4s linear infinite;
+            }
+        }
+
+        .icon-circle {
+            display: block;
+            user-select: none;
+            transform: rotate(-90deg);
+            border-radius: 50%;
+            overflow: hidden;
+
+            path {
+                fill: #fff;
+                stroke: $secondary_90;
+                stroke-width: 4;
+            }
+        }
     }
 
-    .icon-circle {
-      display: block;
-      user-select: none;
-      transform: rotate(-90deg);
-      border-radius: 50%;
-      overflow: hidden;
+    @keyframes scroll-top {
 
-      path {
-        fill: #fff;
-        stroke: $secondary_90;
-        stroke-width: 4;
-      }
-    }
-  }
+        0%,
+        100% {
+            stroke: $secondary_20;
+        }
 
-  @keyframes scroll-top {
-    0%,
-    100% {
-      stroke: $secondary_20;
+        50% {
+            stroke: $secondary_90;
+        }
     }
-
-    50% {
-      stroke: $secondary_90;
-    }
-  }
 }

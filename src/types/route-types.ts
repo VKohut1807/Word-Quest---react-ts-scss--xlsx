@@ -1,3 +1,3 @@
 export type RouteWrapperProps = {
-  children: React.ReactNode;
+    children: React.ReactNode;
 };

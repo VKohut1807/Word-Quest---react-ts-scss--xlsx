@@ -1,20 +1,20 @@
 @use "../config/mixins" as *;
 
 .wrapper {
-  width: 85%;
-  margin: 7rem auto 2rem;
+    width: 85%;
+    margin: 7rem auto 2rem;
 
-  &-75 {
-    width: 75%;
-    margin: 0 auto;
-  }
-
-  &-50 {
-    width: 50%;
-    margin: 0 auto;
-
-    @include break("lg") {
-      width: 75%;
+    &-75 {
+        width: 75%;
+        margin: 0 auto;
     }
-  }
+
+    &-50 {
+        width: 50%;
+        margin: 0 auto;
+
+        @include break("lg") {
+            width: 75%;
+        }
+    }
 }

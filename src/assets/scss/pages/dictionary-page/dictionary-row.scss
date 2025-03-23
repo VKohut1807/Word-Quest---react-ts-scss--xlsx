@@ -1,118 +1,119 @@
 @use "../../config/index.scss" as *;
 
 .row {
-  display: grid;
-  grid-template-areas:
-    "up up"
-    "left right";
-  padding: 1rem;
-  border: 0.0625rem solid $secondary_40;
-  background-color: #fff;
-  margin: 0;
-  border-radius: 1rem;
-  box-shadow: 0 0.1rem 0.3rem $secondary_40;
+    display: grid;
+    grid-template-areas:
+        "up up"
+        "left right";
+    padding: 1rem;
+    border: 0.0625rem solid $secondary_40;
+    background-color: #fff;
+    margin: 0;
+    border-radius: 1rem;
+    box-shadow: 0 0.1rem 0.3rem $secondary_40;
 
-  .up {
-    grid-area: up;
-    margin: 0 0 0 auto;
-    .transcription {
-      font-size: 1.25rem;
-      display: flex;
-      align-items: center;
+    .up {
+        grid-area: up;
+        margin: 0 0 0 auto;
 
-      code {
-        padding: 0 0.5rem;
-        color: $secondary;
-        letter-spacing: 0.25rem;
-      }
+        .transcription {
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+
+            code {
+                padding: 0 0.5rem;
+                color: $secondary;
+                letter-spacing: 0.25rem;
+            }
+        }
     }
-  }
 
-  .left {
-    grid-area: left;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    margin-top: -1.5rem;
-
-    .image-box {
-      background-color: $third_60;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 0.5rem;
-      overflow: hidden;
-      width: 7rem;
-      height: 7rem;
-      min-width: 7rem;
-      min-height: 7rem;
-      border: 0.0625rem solid $secondary_40;
-      position: relative;
-      box-shadow: 0.3rem 0.3rem 0.75rem $third_60;
-
-      &::after {
-        content: attr(data-number);
-        position: absolute;
-        top: 0.15rem;
-        left: 0.15rem;
-        width: 1.5rem;
-        height: 1.5rem;
+    .left {
+        grid-area: left;
         display: flex;
         align-items: center;
-        justify-content: center;
-        border-radius: 0.35rem;
-        color: $secondary_120;
-        background-color: #fff;
-        opacity: 0.5;
-        box-shadow: 0.3rem 0.3rem 0.75rem #fff;
-      }
+        gap: 2rem;
+        margin-top: -1.5rem;
 
-      img {
-        object-fit: cover;
-      }
+        .image-box {
+            background-color: $third_60;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            width: 7rem;
+            height: 7rem;
+            min-width: 7rem;
+            min-height: 7rem;
+            border: 0.0625rem solid $secondary_40;
+            position: relative;
+            box-shadow: 0.3rem 0.3rem 0.75rem $third_60;
+
+            &::after {
+                content: attr(data-number);
+                position: absolute;
+                top: 0.15rem;
+                left: 0.15rem;
+                width: 1.5rem;
+                height: 1.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 0.35rem;
+                color: $secondary_120;
+                background-color: #fff;
+                opacity: 0.5;
+                box-shadow: 0.3rem 0.3rem 0.75rem #fff;
+            }
+
+            img {
+                object-fit: cover;
+            }
+        }
+
+        .text-box {
+            display: flex;
+            flex-direction: column;
+            column-gap: 1rem;
+
+            h2 {
+                font-size: 2rem;
+                color: $third_120;
+            }
+
+            h5 {
+                font-size: 1rem;
+                font-style: italic;
+                color: $third_90;
+            }
+        }
     }
 
-    .text-box {
-      display: flex;
-      flex-direction: column;
-      column-gap: 1rem;
+    .right {
+        grid-area: right;
+        margin: 1rem 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-between;
 
-      h2 {
-        font-size: 2rem;
-        color: $third_120;
-      }
+        u {
+            font-size: 1rem;
+            font-style: italic;
+            color: $fourth;
+        }
 
-      h5 {
-        font-size: 1rem;
-        font-style: italic;
-        color: $third_90;
-      }
+        .readmore {
+            font-size: 0.75rem;
+            color: $primary;
+            width: fit-content;
+            transition: color 0.3s ease-in-out;
+
+            &:hover {
+                color: $primary_120;
+            }
+        }
     }
-  }
-
-  .right {
-    grid-area: right;
-    margin: 1rem 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
-
-    u {
-      font-size: 1rem;
-      font-style: italic;
-      color: $fourth;
-    }
-
-    .readmore {
-      font-size: 0.75rem;
-      color: $primary;
-      width: fit-content;
-      transition: color 0.3s ease-in-out;
-
-      &:hover {
-        color: $primary_120;
-      }
-    }
-  }
 }
