@@ -3,7 +3,7 @@
     "private": true,
     "version": "0.0.0",
     "type": "module",
-    "homepage": "https://github.com/VKohut1807/Word-Quest---react-ts-scss--xlsx",
+    "homepage": "https://vkohut1807.github.io/Word-Quest---react-ts-scss--xlsx",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
