@@ -28,7 +28,7 @@ const App: React.FC = () => {
     }, []);
 
     return (
-        <Router>
+        <Router basename="/Word-Quest---react-ts-scss--xlsx">
             <>
                 <Novbar />
                 <UpButton />
