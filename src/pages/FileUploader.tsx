@@ -9,7 +9,7 @@ import type {LocalStorage, DictionaryProps} from "@/types/dictionary-types";
 import "@/assets/scss/pages/file-uploader.scss";
 import ClipIcon from "@/assets/icons/clip.svg?react";
 
-import {setItem} from "@/helpers/persistanceStorage";
+import {setItem} from "@/helpers/persistance-storage";
 
 const FileUploader: React.FC<FileUploader> = ({setExcelData}) => {
     const navigate = useNavigate();

@@ -46,7 +46,7 @@ body {
 
     #root {
         min-height: 100dvh;
-        background-color: $primary_20;
+        background-color: $secondary_10;
     }
 }
 
@@ -71,6 +71,7 @@ li {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 ul,

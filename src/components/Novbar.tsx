@@ -7,6 +7,7 @@ import "@/assets/scss/components/novbar.scss";
 import HomeIcon from "@/assets/icons/home.svg?react";
 import BookIcon from "@/assets/icons/book.svg?react";
 import ClipIcon from "@/assets/icons/clip.svg?react";
+import GameIcon from "@/assets/icons/game.svg?react";
 import logo from "@/assets/images/logo-transformed.webp";
 
 const Novbar: React.FC = () => {
@@ -58,6 +59,21 @@ const Novbar: React.FC = () => {
                             <BookIcon />
                         </span>
                         Dictionary
+                    </Link>
+                </li>
+                <li className="page">
+                    <Link
+                        to={ROUTES.GAMES.ROOT}
+                        className={`page-box ${
+                            location.pathname === ROUTES.GAMES.ROOT
+                                ? "active-link"
+                                : ""
+                        }`}
+                    >
+                        <span className="icon-box">
+                            <GameIcon />
+                        </span>
+                        Games
                     </Link>
                 </li>
                 <li className="page">

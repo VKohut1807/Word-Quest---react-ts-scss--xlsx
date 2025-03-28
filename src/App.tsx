@@ -10,11 +10,12 @@ import type {LocalStorage} from "@/types/dictionary-types";
 import Home from "@/pages/Home";
 import FileUploader from "@/pages/FileUploader";
 import Dictionary from "@/pages/Dictionary";
+import TwinQuest from "@/pages/TwinQuest";
 import Novbar from "@/components/Novbar";
 import UpButton from "@/components/UpButton";
 import RouteWrapper from "@/components/RouteWrapper";
 
-import {getItem} from "@/helpers/persistanceStorage";
+import {getItem} from "@/helpers/persistance-storage";
 
 const App: React.FC = () => {
     const [excelData, setExcelData] = useState<LocalStorage[]>([]);
@@ -46,6 +47,14 @@ const App: React.FC = () => {
                         element={
                             <RouteWrapper>
                                 <Dictionary data={excelData} />
+                            </RouteWrapper>
+                        }
+                    />
+                    <Route
+                        path={ROUTES.GAMES.ROOT}
+                        element={
+                            <RouteWrapper>
+                                <TwinQuest localstorData={excelData} />
                             </RouteWrapper>
                         }
                     />
