@@ -1,3 +1,11 @@
-# node version is used --- v22.3.0
+# Node version used --- `v22.3.0`
+# used the `xlsx` library to read data from Excel.
+# used the `gh-pages` library for deploying to GitHub.
 
+#  used `HashRouter` to ensure compatibility with GitHub Pages
+## in the files:
+   * vite.config.ts --- added `base: "/Word-Quest---react-ts-scss--xlsx/"`
+   * package.json --- added `"homepage": "https://vkohut1807.github.io/Word-Quest---react-ts-scss--xlsx"`
+   * App.tsx --- added `import {HashRouter as Router, Route, Routes} from "react-router-dom"`
+   * App.tsx --- added `<Router basename="/">`
 #...
