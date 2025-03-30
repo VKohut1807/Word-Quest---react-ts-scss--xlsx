@@ -5,14 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Redirecting...</title>
         <script>
-            var redirectPath = window.location.pathname.replace(
-                /^\/Word-Quest---react-ts-scss--xlsx(\/index.html)?/,
-                "",
-            );
-
-            if (!redirectPath.startsWith("/index.html")) {
+            var path = window.location.pathname;
+            if (!path.includes(".html")) {
                 window.location.replace(
-                    "/Word-Quest---react-ts-scss--xlsx/#" + redirectPath,
+                    "/Word-Quest---react-ts-scss--xlsx/#" + path,
                 );
             }
         </script>

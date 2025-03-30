@@ -1,11 +1,11 @@
 const baseUrl = "";
 
 export const ROUTES = {
-    HOME: "/",
-    DICTIONARY: "/dictionary",
-    UPLOAD: "/upload",
+    HOME: baseUrl + "/",
+    DICTIONARY: baseUrl + "/dictionary",
+    UPLOAD: baseUrl + "/upload/",
     GAMES: {
-        ROOT: "/games",
-        TWIN_QUEST: "/games/twin-quest",
+        ROOT: baseUrl + "/games",
+        TWIN_QUEST: baseUrl + "/games/twin-quest",
     },
 };
