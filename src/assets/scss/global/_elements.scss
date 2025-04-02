@@ -90,3 +90,12 @@ svg {
     display: block;
     height: auto;
 }
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: $primary;
+    text-shadow: 0 0 1rem $secondary_70;
+    margin-bottom: 1rem;
+}

@@ -8,9 +8,9 @@ import "@/assets/scss/global/index.scss";
 import type {LocalStorage} from "@/types/dictionary-types";
 
 import Home from "@/pages/Home";
-import FileUploader from "@/pages/FileUploader";
 import Dictionary from "@/pages/Dictionary";
 import TwinQuest from "@/pages/TwinQuest";
+import Settings from "@/pages/Settings";
 import Novbar from "@/components/Novbar";
 import UpButton from "@/components/UpButton";
 import RouteWrapper from "@/components/RouteWrapper";
@@ -59,10 +59,10 @@ const App: React.FC = () => {
                         }
                     />
                     <Route
-                        path={ROUTES.UPLOAD}
+                        path={ROUTES.SETTINGS}
                         element={
                             <RouteWrapper>
-                                <FileUploader setExcelData={setExcelData} />
+                                <Settings setExcelData={setExcelData} />
                             </RouteWrapper>
                         }
                     />

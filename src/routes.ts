@@ -3,7 +3,7 @@ const baseUrl = "";
 export const ROUTES = {
     HOME: baseUrl + "/",
     DICTIONARY: baseUrl + "/dictionary",
-    UPLOAD: baseUrl + "/upload/",
+    SETTINGS: baseUrl + "/settings/",
     GAMES: {
         ROOT: baseUrl + "/games",
         TWIN_QUEST: baseUrl + "/games/twin-quest",

@@ -6,8 +6,8 @@ import "@/assets/scss/components/novbar.scss";
 
 import HomeIcon from "@/assets/icons/home.svg?react";
 import BookIcon from "@/assets/icons/book.svg?react";
-import ClipIcon from "@/assets/icons/clip.svg?react";
 import GameIcon from "@/assets/icons/game.svg?react";
+import SlidersIcon from "@/assets/icons/sliders.svg?react";
 import logo from "@/assets/images/logo-transformed.webp";
 
 const Novbar: React.FC = () => {
@@ -78,17 +78,17 @@ const Novbar: React.FC = () => {
                 </li>
                 <li className="page">
                     <Link
-                        to={ROUTES.UPLOAD}
+                        to={ROUTES.SETTINGS}
                         className={`page-box ${
-                            location.pathname === ROUTES.UPLOAD
+                            location.pathname === ROUTES.SETTINGS
                                 ? "active-link"
                                 : ""
                         }`}
                     >
                         <span className="icon-box">
-                            <ClipIcon />
+                            <SlidersIcon />
                         </span>
-                        Upload file
+                        Settings
                     </Link>
                 </li>
             </ul>

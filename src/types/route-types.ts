@@ -1,3 +1,3 @@
-export type RouteWrapperProps = {
+export type SlotProps = {
     children: React.ReactNode;
 };

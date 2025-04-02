@@ -3,10 +3,11 @@ import * as XLSX from "xlsx";
 import {useNavigate} from "react-router-dom";
 import {ROUTES} from "@/routes";
 
-import type {FileUploader} from "@/types/file-uploader-types";
-import type {LocalStorage, DictionaryProps} from "@/types/dictionary-types";
-
 import "@/assets/scss/pages/file-uploader.scss";
+
+import type {FileUploader} from "@/types/file-uploader-types";
+import type {LocalStorage} from "@/types/dictionary-types";
+
 import ClipIcon from "@/assets/icons/clip.svg?react";
 
 import {setItem} from "@/helpers/persistance-storage";
@@ -122,7 +123,7 @@ const FileUploader: React.FC<FileUploader> = ({setExcelData}) => {
     return (
         <>
             <div className="upload-file">
-                <h2>Please, upload Excel file</h2>
+                <h2>Please, upload Your Excel file</h2>
                 <label className="button">
                     <ClipIcon />
                     Upload file
