@@ -16,59 +16,43 @@ import UpButton from "@/components/UpButton";
 import RouteWrapper from "@/components/RouteWrapper";
 
 import {getItem} from "@/helpers/persistance-storage";
+const EXCEL_DATA = import.meta.env.VITE_EXCEL_DATA_KEY;
 
 const App: React.FC = () => {
     const [excelData, setExcelData] = useState<LocalStorage[]>([]);
 
     useEffect(() => {
-        const storedData = getItem("excelData");
+        const storedData = getItem(EXCEL_DATA);
         if (storedData) {
             setExcelData(storedData as LocalStorage[]);
         }
     }, []);
 
     return (
-        <Router basename="/">
-            <>
-                <Novbar />
-                <UpButton />
+        <RouteWrapper>
+            <Router basename="/">
+                <>
+                    <Novbar />
+                    <UpButton />
 
-                <Routes>
-                    <Route
-                        path={ROUTES.HOME}
-                        element={
-                            <RouteWrapper>
-                                <Home />
-                            </RouteWrapper>
-                        }
-                    />
-                    <Route
-                        path={ROUTES.DICTIONARY}
-                        element={
-                            <RouteWrapper>
-                                <Dictionary data={excelData} />
-                            </RouteWrapper>
-                        }
-                    />
-                    <Route
-                        path={ROUTES.GAMES.ROOT}
-                        element={
-                            <RouteWrapper>
-                                <TwinQuest localstorData={excelData} />
-                            </RouteWrapper>
-                        }
-                    />
-                    <Route
-                        path={ROUTES.SETTINGS}
-                        element={
-                            <RouteWrapper>
-                                <Settings setExcelData={setExcelData} />
-                            </RouteWrapper>
-                        }
-                    />
-                </Routes>
-            </>
-        </Router>
+                    <Routes>
+                        <Route path={ROUTES.HOME} element={<Home />} />
+                        <Route
+                            path={ROUTES.DICTIONARY}
+                            element={<Dictionary data={excelData} />}
+                        />
+                        <Route
+                            path={ROUTES.GAMES.ROOT}
+                            element={<TwinQuest localstorData={excelData} />}
+                        />
+                        <Route
+                            path={ROUTES.SETTINGS}
+                            element={<Settings setExcelData={setExcelData} />}
+                        />
+                    </Routes>
+                </>
+            </Router>
+        </RouteWrapper>
     );
 };
 

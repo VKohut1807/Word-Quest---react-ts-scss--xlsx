@@ -5,14 +5,18 @@ import {ROUTES} from "@/routes";
 
 import "@/assets/scss/pages/file-uploader.scss";
 
-import type {FileUploader} from "@/types/file-uploader-types";
 import type {LocalStorage} from "@/types/dictionary-types";
+import type {FileUploaderDataType} from "@/types/settings-types";
 
 import ClipIcon from "@/assets/icons/clip.svg?react";
 
 import {setItem} from "@/helpers/persistance-storage";
+const EXCEL_DATA = import.meta.env.VITE_EXCEL_DATA_KEY;
 
-const FileUploader: React.FC<FileUploader> = ({setExcelData}) => {
+const FileUploader: React.FC<FileUploaderDataType> = ({
+    setExcelData,
+    requiredFields,
+}) => {
     const navigate = useNavigate();
 
     const [fileName, setFileName] = useState<string>("");
@@ -22,17 +26,6 @@ const FileUploader: React.FC<FileUploader> = ({setExcelData}) => {
         mess: string;
         class: string;
     } | null>(null);
-
-    const requiredFields: (keyof LocalStorage)[] = [
-        "id",
-        "eng-word",
-        "ukr-word",
-        "part-of-speech",
-        "singular-and-plural-forms",
-        "transcription-word",
-        "url-image",
-        "url-dictionary-cambridge",
-    ];
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event?.target?.files?.[0];
@@ -50,8 +43,8 @@ const FileUploader: React.FC<FileUploader> = ({setExcelData}) => {
             };
 
             reader.onload = (e) => {
-                const ab = e.target?.result;
-                if (!ab) {
+                const arrayBuffer = e.target?.result;
+                if (!arrayBuffer) {
                     setMessage({
                         mess: "Error reading the file",
                         class: "error",
@@ -60,7 +53,7 @@ const FileUploader: React.FC<FileUploader> = ({setExcelData}) => {
                     return;
                 }
 
-                const workbook = XLSX.read(ab, {type: "array"});
+                const workbook = XLSX.read(arrayBuffer, {type: "array"});
                 if (!workbook || workbook.SheetNames.length === 0) {
                     setMessage({
                         mess: "Invalid Excel file",
@@ -99,7 +92,7 @@ const FileUploader: React.FC<FileUploader> = ({setExcelData}) => {
                 }
 
                 setExcelData(jsonData);
-                setItem("excelData", jsonData);
+                setItem(EXCEL_DATA, jsonData);
                 setIsLoading(false);
                 setProgress(100);
                 setMessage({
@@ -121,47 +114,44 @@ const FileUploader: React.FC<FileUploader> = ({setExcelData}) => {
     };
 
     return (
-        <>
-            <div className="upload-file">
-                <h2>Please, upload Your Excel file</h2>
-                <label className="button">
-                    <ClipIcon />
-                    Upload file
-                    <input
-                        type="file"
-                        accept=".xlsx,.xls"
-                        onChange={handleFileChange}
-                        className="input"
+        <div className="upload-file">
+            <h2>Please, upload Your Excel file</h2>
+            <label className="button">
+                <ClipIcon />
+                Upload file
+                <input
+                    type="file"
+                    accept=".xlsx,.xls"
+                    onChange={handleFileChange}
+                    className="input"
+                />
+            </label>
+
+            {isLoading && (
+                <div className="progress">
+                    <div
+                        className="progress-bar"
+                        style={{width: `${progress}%`}}
                     />
-                </label>
+                </div>
+            )}
 
-                {isLoading && (
-                    <div className="progress">
-                        <div
-                            className="progress-bar"
-                            style={{width: `${progress}%`}}
-                        />
-                    </div>
-                )}
+            {fileName && !isLoading && !message?.mess && (
+                <p className="file-name">File: {fileName}</p>
+            )}
 
-                {fileName && !isLoading && !message?.mess && (
-                    <p className="file-name">File: {fileName}</p>
-                )}
-
-                {message?.mess && (
-                    <p
-                        className={`message ${isLoading ? "loading" : message?.class}`}
-                    >
-                        {message?.mess}
-                    </p>
-                )}
-
-                <p className="hint">
-                    Supported formats: <strong>.xlsx</strong>,{" "}
-                    <strong>.xls</strong>
+            {message?.mess && (
+                <p
+                    className={`message ${isLoading ? "loading" : message?.class}`}
+                >
+                    {message?.mess}
                 </p>
-            </div>
-        </>
+            )}
+
+            <p className="hint">
+                Supported formats: <strong>.xlsx</strong>, <strong>.xls</strong>
+            </p>
+        </div>
     );
 };
 

@@ -3,23 +3,58 @@ import React, {useState, useEffect} from "react";
 import "@/assets/scss/pages/settings.scss";
 
 import type {FileUploader as FileUploaderType} from "@/types/file-uploader-types";
+import type {LocalStorage} from "@/types/dictionary-types";
 
 import ModalWindow from "@/components/ModalWindow";
 import FileUploader from "@/components/FileUploader";
+import PublicFileUploader from "@/components/PublicFileUploader";
 
 const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
     const [selected, setSelected] = useState<string>("def-file");
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    const onOpenModal = () => {
+    const onOpenModal = (type: string) => {
+        setSelected(type);
         setIsModalOpen(true);
     };
 
+    const requiredFields: (keyof LocalStorage)[] = [
+        "id",
+        "eng-word",
+        "ukr-word",
+        "part-of-speech",
+        "singular-and-plural-forms",
+        "transcription-word",
+        "url-image",
+        "url-dictionary-cambridge",
+    ];
+
     return (
         <>
-            <ModalWindow openModal={isModalOpen} setOpenModal={setIsModalOpen}>
-                <FileUploader setExcelData={setExcelData} />
-            </ModalWindow>
+            {isModalOpen && selected === "def-file" && (
+                <ModalWindow
+                    openModal={isModalOpen}
+                    setOpenModal={setIsModalOpen}
+                >
+                    <PublicFileUploader
+                        setExcelData={setExcelData}
+                        requiredFields={requiredFields}
+                    />
+                </ModalWindow>
+            )}
+
+            {isModalOpen && selected === "my-file" && (
+                <ModalWindow
+                    openModal={isModalOpen}
+                    setOpenModal={setIsModalOpen}
+                >
+                    <FileUploader
+                        setExcelData={setExcelData}
+                        requiredFields={requiredFields}
+                    />
+                </ModalWindow>
+            )}
+
             <section className="settings">
                 <h1>Settings</h1>
                 <ul className="settings-box">
@@ -27,6 +62,7 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
                         <h3>Data from:</h3>
                         <div className="radio-group">
                             <label
+                                onClick={() => onOpenModal("def-file")}
                                 className={`label ${selected === "def-file" ? "active" : ""}`}
                             >
                                 <input
@@ -40,7 +76,7 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
                             </label>
 
                             <label
-                                onClick={onOpenModal}
+                                onClick={() => onOpenModal("my-file")}
                                 className={`label ${selected === "my-file" ? "active" : ""}`}
                             >
                                 <input
