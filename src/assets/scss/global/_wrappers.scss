@@ -4,6 +4,14 @@
     width: 85%;
     margin: 7rem auto 2rem;
 
+    @include break("lg") {
+        width: 90%;
+    }
+
+    @include break("xxs") {
+        width: 97%;
+    }
+
     &-75 {
         width: 75%;
         margin: 0 auto;

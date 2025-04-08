@@ -12,19 +12,45 @@
     border-radius: 1rem;
     box-shadow: 0 0.1rem 0.3rem $secondary_40;
 
+    @include break('lg') {
+        padding: 0.5rem;
+    }
+
     .up {
         grid-area: up;
         margin: 0 0 0 auto;
 
-        .transcription {
-            font-size: 1.25rem;
+        @include break('lg') {
+            max-width: 75%;
+        }
+
+        .transcription-box {
             display: flex;
             align-items: center;
 
-            code {
-                padding: 0 0.5rem;
+            .bracket {}
+
+            .transcription {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                gap: 0.25rem;
+                width: fit-content;
+                font-size: 1.25rem;
+                padding: 0 0.25rem;
                 color: $secondary;
                 letter-spacing: 0.25rem;
+
+                @include break('lg') {
+                    letter-spacing: 0.1rem;
+                    font-size: 0.9rem;
+                }
+
+                @include break('sm') {
+                    letter-spacing: 0.25rem;
+                    font-size: 1.25rem;
+                }
             }
         }
     }
@@ -35,6 +61,11 @@
         align-items: center;
         gap: 2rem;
         margin-top: -1.5rem;
+
+        @include break('lg') {
+            margin-top: -1.25rem;
+            gap: 1rem;
+        }
 
         .image-box {
             background-color: $third_60;
@@ -78,15 +109,35 @@
             flex-direction: column;
             column-gap: 1rem;
 
+            @include break('lg') {
+                column-gap: 0.5rem;
+            }
+
             h2 {
                 font-size: 2rem;
                 color: $third_120;
+
+                @include break('lg') {
+                    font-size: 1.25rem;
+                }
+
+                @include break('sm') {
+                    font-size: 1.75rem;
+                }
             }
 
             h5 {
                 font-size: 1rem;
                 font-style: italic;
                 color: $third_90;
+
+                @include break('lg') {
+                    font-size: 0.86rem;
+                }
+
+                @include break('sm') {
+                    font-size: 1rem;
+                }
             }
         }
     }
@@ -103,6 +154,14 @@
             font-size: 1rem;
             font-style: italic;
             color: $fourth;
+
+            @include break('lg') {
+                font-size: 0.86rem;
+            }
+
+            @include break('sm') {
+                font-size: 1rem;
+            }
         }
 
         .readmore {

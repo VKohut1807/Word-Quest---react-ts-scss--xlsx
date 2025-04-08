@@ -6,11 +6,20 @@ import "@/assets/scss/pages/dictionary-page/dictionary-row.scss";
 import type {LocalStorage} from "@/types/dictionary-types";
 
 const DictionaryRow: React.FC<{row: LocalStorage}> = ({row}) => {
+    const transcriptionWords = row["transcription-word"].split(" ");
+
     return (
         <li className="row">
             <div className="up">
-                <div className="transcription">
-                    [<code>{row["transcription-word"]}</code>]
+                <div className="transcription-box">
+                    <span className="bracket">[</span>
+
+                    <div className="transcription">
+                        {transcriptionWords.map((word, index) => (
+                            <span key={index}>{word} </span>
+                        ))}
+                    </div>
+                    <span className="bracket">]</span>
                 </div>
             </div>
             <div className="left">
