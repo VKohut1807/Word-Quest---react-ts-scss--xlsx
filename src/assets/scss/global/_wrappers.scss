@@ -4,6 +4,10 @@
     width: 85%;
     margin: 7rem auto 2rem;
 
+    &.margin-sero {
+        margin: 0 auto;
+    }
+
     @include break("lg") {
         width: 90%;
     }
