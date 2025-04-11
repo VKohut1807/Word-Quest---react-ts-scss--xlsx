@@ -3,7 +3,6 @@
 .navbar {
     border-radius: 0 0 1rem 1rem;
     background-color: $secondary_30;
-    padding: 1.5rem 0;
     border-bottom: 0.0625rem solid $secondary_80;
     position: fixed;
     top: 0;
@@ -13,222 +12,237 @@
     z-index: 100;
     overflow: hidden;
 
-    .pages {
+    .navbar-box {
         display: flex;
         align-items: center;
-        justify-content: flex-end;
-        gap: 2rem;
 
-        @include break("xl") {
-            gap: 1.5rem;
+        @include break("xs") {
+            flex-direction: column;
+            align-items: normal;
+            padding-bottom: 1rem;
         }
 
-        @include break("xxs") {
-            gap: 0.5rem;
-        }
-
-        .page {
+        .logo {
+            display: flex;
             align-items: center;
-            width: fit-content;
+            margin-right: auto;
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: $third_120;
+            position: relative;
+            user-select: none;
 
-            &.left {
-                margin-right: auto;
+            @include break("xs") {
+                margin: 0 auto;
             }
 
-            .logo {
+            .wordquest {
                 display: flex;
-                align-items: center;
-                height: 3rem;
-                position: relative;
-                margin-right: auto;
-                padding-left: 5rem;
                 font-size: 2rem;
                 font-weight: 700;
-                text-transform: uppercase;
-                color: $third_120;
+                gap: 0.5rem;
 
-                .wordquest {
-                    display: flex;
-                    font-size: 2rem;
-                    font-weight: 700;
-                    gap: 0.5rem;
-
-                    @include break("xl") {
-                        font-size: 1.5rem;
-                    }
-
-                    @include break("md") {
-                        display: none;
-                    }
-
-                    .letter {
-                        user-select: none;
-                        text-transform: uppercase;
-                        position: relative;
-                        transform: translateX(-0.5rem);
-                        animation: bounceWave 3s infinite ease-in-out;
-                        transition: transform 0.3s ease-in-out;
-
-                        &-1 {
-                            animation-delay: 0s;
-                        }
-
-                        &-2 {
-                            animation-delay: 0.5s;
-                        }
-
-                        &-3 {
-                            animation-delay: 1s;
-                        }
-
-                        &-4 {
-                            animation-delay: 1.5s;
-                        }
-
-                        &-5 {
-                            animation-delay: 2s;
-                        }
-
-                        &-6 {
-                            animation-delay: 2.5s;
-                        }
-
-                        &-7 {
-                            animation-delay: 3s;
-                        }
-
-                        &-8 {
-                            animation-delay: 3.5s;
-                        }
-
-                        &-9 {
-                            animation-delay: 4s;
-                        }
-
-                        @keyframes bounceWave {
-
-                            0%,
-                            100% {
-                                transform: translateX(-0.5rem) scale(1);
-                            }
-
-                            50% {
-                                transform: translateX(0.5rem) scale(1.2);
-                            }
-                        }
-                    }
+                @include break("xl") {
+                    font-size: 1.5rem;
                 }
 
-                img {
+                @include break("md") {
                     position: absolute;
-                    top: 50%;
-                    left: -0.5rem;
-                    width: 6rem;
-                    height: 6rem;
-                    transform: translateY(-50%);
-                    z-index: 1;
+                    top: 0.75rem;
+                    left: 3.5rem;
+                    font-size: 0.5rem;
+                }
 
-                    @include break("md") {
-                        width: 5rem;
-                        height: 5rem;
+                @include break("xs") {
+                    position: static;
+                    font-size: 2rem;
+                }
+
+                .letter {
+                    user-select: none;
+                    text-transform: uppercase;
+                    position: relative;
+                    transform: translateX(-0.5rem);
+                    animation: bounceWave 3s infinite ease-in-out;
+                    transition: transform 0.3s ease-in-out;
+
+                    &-1 {
+                        animation-delay: 0s;
+                    }
+
+                    &-2 {
+                        animation-delay: 0.5s;
+                    }
+
+                    &-3 {
+                        animation-delay: 1s;
+                    }
+
+                    &-4 {
+                        animation-delay: 1.5s;
+                    }
+
+                    &-5 {
+                        animation-delay: 2s;
+                    }
+
+                    &-6 {
+                        animation-delay: 2.5s;
+                    }
+
+                    &-7 {
+                        animation-delay: 3s;
+                    }
+
+                    &-8 {
+                        animation-delay: 3.5s;
+                    }
+
+                    &-9 {
+                        animation-delay: 4s;
+                    }
+
+                    @keyframes bounceWave {
+
+                        0%,
+                        100% {
+                            transform: translateX(-0.5rem) scale(1);
+                        }
+
+                        50% {
+                            transform: translateX(0.5rem) scale(1.2);
+                        }
                     }
                 }
             }
 
-            .page-box {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                font-size: 1.35rem;
-                font-weight: 700;
-                text-transform: uppercase;
-                color: $third_120;
-                transition:
-                    gap 0.3s ease-in-out,
-                    color 0.3s ease-in-out;
+            img {
+                margin-left: -1rem;
+                width: 6rem;
+                height: 6rem;
 
-                @include break("xl") {
-                    gap: 0rem;
-                    font-size: 1.15rem;
+                @include break("md") {
+                    width: 5rem;
+                    height: 5rem;
                 }
+            }
+        }
 
-                &:hover {
+        .pages {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 2rem;
+
+            @include break("xl") {
+                gap: 1.5rem;
+            }
+
+            @include break("xs") {
+                justify-content: center;
+            }
+
+            @include break("xxs") {
+                gap: 0.5rem;
+            }
+
+            .page {
+                align-items: center;
+                width: fit-content;
+
+                .page-box {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    font-size: 1.35rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    color: $third_120;
+                    transition:
+                        gap 0.3s ease-in-out,
+                        color 0.3s ease-in-out;
+
                     @include break("xl") {
-                        gap: 0.5rem;
+                        gap: 0rem;
+                        font-size: 1.15rem;
+                    }
+
+                    &:hover,
+                    &.active-link {
+                        @include break("xl") {
+                            gap: 0.5rem;
+                        }
+
+                        .name {
+                            @include break("xl") {
+                                grid-template-columns: 1fr;
+                                visibility: visible;
+                                opacity: 1;
+                            }
+                        }
                     }
 
                     .name {
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        visibility: visible;
+                        opacity: 1;
+                        transition:
+                            grid-template-columns 0.3s ease-in-out,
+                            opacity 0.3s ease-in-out,
+                            visibility 0.3s ease-in-out;
+
                         @include break("xl") {
-                            grid-template-columns: 1fr;
-                            visibility: visible;
-                            opacity: 1;
+                            grid-template-columns: 0fr;
+                            visibility: hidden;
+                            opacity: 0;
+                        }
+
+                        .text {
+                            @include break("xl") {
+                                overflow: hidden;
+                            }
                         }
                     }
-                }
-
-                .name {
-                    display: grid;
-                    grid-template-columns: 1fr;
-                    visibility: visible;
-                    opacity: 1;
-                    transition:
-                        grid-template-columns 0.3s ease-in-out,
-                        opacity 0.3s ease-in-out,
-                        visibility 0.3s ease-in-out;
-
-                    @include break("xl") {
-                        grid-template-columns: 0fr;
-                        visibility: hidden;
-                        opacity: 0;
-                    }
-
-                    @include break("xl") {
-                        // display: none;
-                    }
-
-                    .text {
-                        @include break("xl") {
-                            overflow: hidden;
-                        }
-                    }
-                }
-
-                .icon-box {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: 50%;
-                    border: 0.0625rem solid $third_120;
-                    padding: 0.35rem;
-                    transition: border 0.3s ease-in-out;
-                    background-color: #fff;
-                    box-shadow: 0.1rem 0.2rem 3rem #fff;
-
-                    svg {
-                        height: 1.5rem;
-                        width: 1.5rem;
-
-                        path {
-                            fill: $third_120;
-                            transition: fill 0.3s ease-in-out;
-                        }
-                    }
-                }
-
-                &.active-link {
-                    pointer-events: none;
-                }
-
-                &.active-link,
-                &:hover {
-                    color: $primary_30;
 
                     .icon-box {
-                        border: 0.0625rem solid $primary_30;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        border: 0.0625rem solid $third_120;
+                        padding: 0.35rem;
+                        transition: border 0.3s ease-in-out;
+                        background-color: #fff;
+                        box-shadow: 0.1rem 0.2rem 3rem #fff;
 
                         svg {
+                            height: 1.5rem;
+                            width: 1.5rem;
+
                             path {
-                                fill: $primary_30;
+                                fill: $third_120;
+                                transition: fill 0.3s ease-in-out;
+                            }
+                        }
+                    }
+
+                    &.active-link {
+                        pointer-events: none;
+                    }
+
+                    &.active-link,
+                    &:hover {
+                        color: $primary_30;
+
+                        .icon-box {
+                            border: 0.0625rem solid $primary_30;
+
+                            svg {
+                                path {
+                                    fill: $primary_30;
+                                }
                             }
                         }
                     }

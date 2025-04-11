@@ -11,6 +11,11 @@
     background-color: transparent;
     z-index: 100;
 
+    @include break("md") {
+        width: 4rem;
+        height: 4rem;
+    }
+
     .circle-box {
         display: block;
         cursor: pointer;
@@ -35,6 +40,10 @@
             aspect-ratio: 1;
             user-select: none;
             z-index: 1;
+
+            @include break("md") {
+                width: 2rem;
+            }
 
             path {
                 animation: scroll-top 4s linear infinite;

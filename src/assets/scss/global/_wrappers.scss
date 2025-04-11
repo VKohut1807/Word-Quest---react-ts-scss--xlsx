@@ -2,7 +2,7 @@
 
 .wrapper {
     width: 85%;
-    margin: 7rem auto 2rem;
+    margin: 7rem auto;
 
     &.margin-sero {
         margin: 0 auto;
@@ -10,6 +10,10 @@
 
     @include break("lg") {
         width: 90%;
+    }
+
+    @include break("xs") {
+        margin: 9.5rem auto 7rem;
     }
 
     @include break("xxs") {

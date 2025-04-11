@@ -2,12 +2,12 @@
 
 .modal-window {
     position: fixed;
-    top: 50%;
+    top: 0%;
     left: 50%;
     width: 75%;
     height: fit-content;
-    min-height: 50%;
-    transform: translate(-50%, -50%);
+    min-height: 30%;
+    transform: translate(-50%, 50%);
     display: none;
     padding: 5rem 2rem;
     border-radius: 1rem;
