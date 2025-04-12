@@ -169,22 +169,22 @@ const TwinQuest: React.FC<TwinQuestProps> = ({localstorData}) => {
                                 </div>
                                 <div className="card back">
                                     <img
-                                        src={item["url-image"]}
-                                        alt={item["eng-word"]}
+                                        src={item["imageUrl"]}
+                                        alt={item["englishWord"]}
                                     />
                                     <div className="backdrop"></div>
                                     <div className="text">
                                         <h4>
                                             {type === "eng"
-                                                ? item["eng-word"]
-                                                : item["ukr-word"]}
+                                                ? item["englishWord"]
+                                                : item["ukrainianWord"]}
                                         </h4>
                                         <u>
                                             {type === "eng"
-                                                ? item["part-of-speech"]
+                                                ? item["partOfSpeech"]
                                                 : translatePartOfSpeech(
                                                       item[
-                                                          "part-of-speech"
+                                                          "partOfSpeech"
                                                       ] as PartOfSpeech,
                                                   )}
                                         </u>

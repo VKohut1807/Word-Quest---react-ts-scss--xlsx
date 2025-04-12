@@ -6,7 +6,7 @@ import "@/assets/scss/pages/dictionary-page/dictionary-row.scss";
 import type {LocalStorage} from "@/types/dictionary-types";
 
 const DictionaryRow: React.FC<{row: LocalStorage}> = ({row}) => {
-    const transcriptionWords = row["transcription-word"].split(" ");
+    const transcriptionWords = row["transcription"].split(" ");
 
     return (
         <li className="row">
@@ -24,18 +24,18 @@ const DictionaryRow: React.FC<{row: LocalStorage}> = ({row}) => {
             </div>
             <div className="left">
                 <div className="image-box" data-number={row["id"]}>
-                    <img src={row["url-image"]} alt={row["eng-word"]} />
+                    <img src={row["imageUrl"]} alt={row["englishWord"]} />
                 </div>
                 <div className="text-box">
-                    <h2>{row["eng-word"]}</h2>
-                    <h5>{row["ukr-word"]}</h5>
+                    <h2>{row["englishWord"]}</h2>
+                    <h5>{row["ukrainianWord"]}</h5>
                 </div>
             </div>
             <div className="right">
-                <u>{row["part-of-speech"]}</u>
+                <u>{row["partOfSpeech"]}</u>
                 <Link
                     className="readmore"
-                    to={row["url-dictionary-cambridge"]}
+                    to={row["cambridgeUrl"]}
                     target="_blank"
                     rel="noopener noreferrer"
                 >

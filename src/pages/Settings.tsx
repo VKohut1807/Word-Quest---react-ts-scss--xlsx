@@ -32,13 +32,13 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
 
     const requiredFields: (keyof LocalStorage)[] = [
         "id",
-        "eng-word",
-        "ukr-word",
-        "part-of-speech",
-        "singular-and-plural-forms",
-        "transcription-word",
-        "url-image",
-        "url-dictionary-cambridge",
+        "englishWord",
+        "ukrainianWord",
+        "partOfSpeech",
+        "wordForms",
+        "transcription",
+        "imageUrl",
+        "cambridgeUrl",
     ];
 
     return (
