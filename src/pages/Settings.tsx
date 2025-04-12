@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 
 import "@/assets/scss/pages/settings.scss";
 
@@ -8,15 +8,27 @@ import type {LocalStorage} from "@/types/dictionary-types";
 import ModalWindow from "@/components/ModalWindow";
 import FileUploader from "@/components/FileUploader";
 import PublicFileUploader from "@/components/PublicFileUploader";
+import InputButton from "@/components/inputs/InputButton";
+
+import {getItem} from "@/helpers/persistance-storage";
+
+const DEFAULT_FILE_NAME = import.meta.env.VITE_DEFAULT_FILE_NAME_KEY;
+const FILE_NAME = import.meta.env.VITE_FILE_NAME_KEY;
+const EXCEL_DATA = import.meta.env.VITE_EXCEL_DATA_KEY;
 
 const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
-    const [selected, setSelected] = useState<string>("def-file");
+    const [selected, setSelected] = useState<string>("");
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const onOpenModal = (type: string) => {
         setSelected(type);
         setIsModalOpen(true);
     };
+
+    const isDefFile = DEFAULT_FILE_NAME === getItem(FILE_NAME);
+    const isMyFile =
+        DEFAULT_FILE_NAME !== getItem(FILE_NAME) && getItem(FILE_NAME) !== null;
+    getItem(EXCEL_DATA) !== null;
 
     const requiredFields: (keyof LocalStorage)[] = [
         "id",
@@ -61,33 +73,29 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
                     <li className="settings-box">
                         <h3>Data from:</h3>
                         <div className="radio-group">
-                            <label
-                                onClick={() => onOpenModal("def-file")}
-                                className={`label ${selected === "def-file" ? "active" : ""}`}
-                            >
-                                <input
-                                    type="radio"
-                                    name="toggle"
-                                    value="def-file"
-                                    checked={selected === "def-file"}
-                                    onChange={() => setSelected("def-file")}
-                                />
-                                Load default file
-                            </label>
+                            <InputButton
+                                label={
+                                    isDefFile
+                                        ? "Default file is already uploaded"
+                                        : "Load default file"
+                                }
+                                selected={isDefFile}
+                                additionalText="Upload the file again?"
+                                buttonKey="def-file"
+                                onSelect={onOpenModal}
+                            />
 
-                            <label
-                                onClick={() => onOpenModal("my-file")}
-                                className={`label ${selected === "my-file" ? "active" : ""}`}
-                            >
-                                <input
-                                    type="radio"
-                                    name="toggle"
-                                    value="my-file"
-                                    checked={selected === "my-file"}
-                                    onChange={() => setSelected("my-file")}
-                                />
-                                Load my file
-                            </label>
+                            <InputButton
+                                label={
+                                    isMyFile
+                                        ? "My file is already uploaded"
+                                        : "Load my file"
+                                }
+                                selected={isMyFile}
+                                additionalText="Upload the file again?"
+                                buttonKey="my-file"
+                                onSelect={onOpenModal}
+                            />
                         </div>
                     </li>
                 </ul>

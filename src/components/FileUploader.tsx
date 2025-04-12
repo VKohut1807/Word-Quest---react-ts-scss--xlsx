@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import * as XLSX from "xlsx";
 import {useNavigate} from "react-router-dom";
 import {ROUTES} from "@/routes";
@@ -11,7 +11,9 @@ import type {FileUploaderDataType} from "@/types/settings-types";
 import ClipIcon from "@/assets/icons/clip.svg?react";
 
 import {setItem} from "@/helpers/persistance-storage";
+
 const EXCEL_DATA = import.meta.env.VITE_EXCEL_DATA_KEY;
+const FILE_NAME = import.meta.env.VITE_FILE_NAME_KEY;
 
 const FileUploader: React.FC<FileUploaderDataType> = ({
     setExcelData,
@@ -19,7 +21,6 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
 }) => {
     const navigate = useNavigate();
 
-    const [fileName, setFileName] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [progress, setProgress] = useState<number>(0);
     const [message, setMessage] = useState<{
@@ -30,12 +31,12 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event?.target?.files?.[0];
         if (file) {
-            setFileName(file.name);
-            setIsLoading(true);
             setProgress(0);
+            setIsLoading(true);
             setMessage(null);
 
             const reader = new FileReader();
+
             reader.onprogress = (event) => {
                 if (event.loaded && event.total) {
                     setProgress(Math.round((event.loaded / event.total) * 100));
@@ -49,6 +50,7 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
                         mess: "Error reading the file",
                         class: "error",
                     });
+                    setProgress(0);
                     setIsLoading(false);
                     return;
                 }
@@ -59,6 +61,7 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
                         mess: "Invalid Excel file",
                         class: "error",
                     });
+                    setProgress(0);
                     setIsLoading(false);
                     return;
                 }
@@ -69,6 +72,7 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
                         mess: "Excel file is empty or has no sheets.",
                         class: "error",
                     });
+                    setProgress(100);
                     setIsLoading(false);
                     return;
                 }
@@ -86,21 +90,23 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
                         mess: "File structure is invalid or missing required fields.",
                         class: "error",
                     });
-                    setIsLoading(false);
                     setProgress(0);
+                    setIsLoading(false);
                     return;
                 }
 
                 setExcelData(jsonData);
                 setItem(EXCEL_DATA, jsonData);
-                setIsLoading(false);
+                setItem(FILE_NAME, file.name);
                 setProgress(100);
+                setIsLoading(false);
                 setMessage({
-                    mess: "File successfully uploaded!",
+                    mess: `File "${file.name}" successfully uploaded!`,
                     class: "success",
                 });
                 navigate(ROUTES.DICTIONARY);
             };
+
             reader.onerror = () => {
                 setIsLoading(false);
                 setMessage({
@@ -127,20 +133,11 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
                 />
             </label>
 
-            {isLoading && (
-                <div className="progress">
-                    <div
-                        className="progress-bar"
-                        style={{width: `${progress}%`}}
-                    />
-                </div>
-            )}
+            <div className="progress">
+                <div className="progress-bar" style={{width: `${progress}%`}} />
+            </div>
 
-            {fileName && !isLoading && !message?.mess && (
-                <p className="file-name">File: {fileName}</p>
-            )}
-
-            {message?.mess && (
+            {message?.mess && !isLoading && (
                 <p
                     className={`message ${isLoading ? "loading" : message?.class}`}
                 >

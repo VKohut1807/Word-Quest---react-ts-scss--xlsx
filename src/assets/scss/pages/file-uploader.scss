@@ -56,26 +56,26 @@
         }
     }
 
-    .file-name {
-        font-size: 1.1rem;
-        color: $third_120;
-        margin-top: 1rem;
-    }
-
     .progress {
+        color: red;
         margin: 1.25rem 0;
-        background-color: $third_30;
         border-radius: 0.6rem;
         overflow: hidden;
         height: 0.5rem;
         width: 100%;
+        position: relative;
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: $primary_100;
+            transition: width 0.3s ease-in-out;
+        }
     }
 
-    .progress-bar {
-        height: 100%;
-        background-color: $primary_100;
-        transition: width 0.3s ease-in-out;
-    }
 
     .message {
         margin-top: 0.6rem;
