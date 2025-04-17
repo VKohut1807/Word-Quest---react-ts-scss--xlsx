@@ -11,9 +11,15 @@
     margin: 0;
     border-radius: 1rem;
     box-shadow: 0 0.1rem 0.3rem $secondary_40;
+    transition: box-shadow 0.3s ease-in-out;
 
     @include break('lg') {
         padding: 0.5rem;
+    }
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0.3rem 0.3rem 1rem $secondary_50;
     }
 
     .up {
@@ -81,6 +87,10 @@
             border: 0.0625rem solid $secondary_40;
             position: relative;
             box-shadow: 0.3rem 0.3rem 0.75rem $third_60;
+
+            &:hover {
+                cursor: zoom-in;
+            }
 
             &::after {
                 content: attr(data-number);

@@ -5,7 +5,10 @@ import "@/assets/scss/pages/dictionary-page/dictionary-row.scss";
 
 import type {LocalStorage} from "@/types/dictionary-types";
 
-const DictionaryRow: React.FC<{row: LocalStorage}> = ({row}) => {
+const DictionaryRow: React.FC<{
+    row: LocalStorage;
+    onImageClick: (row: LocalStorage) => void;
+}> = ({row, onImageClick}) => {
     const transcriptionWords = row["transcription"].split(" ");
 
     return (
@@ -23,8 +26,16 @@ const DictionaryRow: React.FC<{row: LocalStorage}> = ({row}) => {
                 </div>
             </div>
             <div className="left">
-                <div className="image-box" data-number={row["id"]}>
-                    <img src={row["imageUrl"]} alt={row["englishWord"]} />
+                <div
+                    onClick={() => onImageClick(row)}
+                    className="image-box"
+                    data-number={row["id"]}
+                >
+                    <img
+                        loading="lazy"
+                        src={row["imageUrl"]}
+                        alt={row["englishWord"]}
+                    />
                 </div>
                 <div className="text-box">
                     <h2>{row["englishWord"]}</h2>

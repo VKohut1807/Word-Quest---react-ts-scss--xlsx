@@ -12,3 +12,12 @@ export type LocalStorage = {
 export type DictionaryProps = {
     data: LocalStorage[];
 };
+
+export type ModalImageProps = Omit<
+    LocalStorage,
+    | "ukrainianWord"
+    | "partOfSpeech"
+    | "wordForms"
+    | "transcription"
+    | "cambridgeUrl"
+>;

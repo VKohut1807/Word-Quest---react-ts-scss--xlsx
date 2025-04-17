@@ -18,7 +18,7 @@ const RouteWrapper: React.FC<ModalWindowType> = ({
     return (
         <div className={`modal-window ${openModal ? "active" : ""}`}>
             <ShutdownIcon className="close-icon" onClick={closeModal} />
-            {children}
+            <div className="box">{children}</div>
         </div>
     );
 };
