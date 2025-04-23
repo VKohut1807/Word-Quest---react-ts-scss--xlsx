@@ -3,16 +3,17 @@ import {Link} from "react-router-dom";
 
 import "@/assets/scss/pages/dictionary-page/dictionary-row.scss";
 
-import type {LocalStorage} from "@/types/dictionary-types";
+import type {LocalStorage, ModalImageProps} from "@/types/dictionary-types";
 
 const DictionaryRow: React.FC<{
     row: LocalStorage;
-    onImageClick: (row: LocalStorage) => void;
-}> = ({row, onImageClick}) => {
+    onImageClick: (row: ModalImageProps) => void;
+    onSlideClick: (id: number) => void;
+}> = ({row, onImageClick, onSlideClick}) => {
     const transcriptionWords = row["transcription"].split(" ");
 
     return (
-        <li className="row">
+        <li className="row" onClick={() => onSlideClick(row.id)}>
             <div className="up">
                 <div className="transcription-box">
                     <span className="bracket">[</span>
@@ -27,13 +28,16 @@ const DictionaryRow: React.FC<{
             </div>
             <div className="left">
                 <div
-                    onClick={() => onImageClick(row)}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        onImageClick(row);
+                    }}
                     className="image-box"
                     data-number={row["id"]}
                 >
                     <img
-                        loading="lazy"
                         src={row["imageUrl"]}
+                        loading="lazy"
                         alt={row["englishWord"]}
                     />
                 </div>

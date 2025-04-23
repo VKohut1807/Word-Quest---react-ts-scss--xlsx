@@ -1,0 +1,253 @@
+@use "../config/index.scss" as *;
+
+.bg-swiper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.5;
+    z-index: 101;
+}
+
+.mySwiper {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 102;
+
+    --swiperWidth: 40rem;
+    --swiperHeight: 17rem;
+    width: var(--swiperWidth);
+    height: var(--swiperHeight);
+
+    .swiper-wrapper {
+        width: fit-content;
+        height: fit-content;
+
+        .swiper-slide {
+            width: var(--swiperWidth);
+            height: var(--swiperHeight);
+            border-radius: 1rem;
+            box-shadow: 0 0.1rem 0.3rem $secondary_40;
+            border: 0.0625rem solid $secondary_40;
+            background-color: #fff;
+
+            .slide-box {
+                box-sizing: border-box;
+                padding: 1rem;
+                width: 100%;
+                height: 100%;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+                color: $third_120;
+                cursor: grab;
+
+                .left-box {
+                    display: flex;
+                    flex-direction: column;
+                    margin: 1rem 0 0;
+                    height: fit-content;
+
+                    h3 {
+                        font-size: 2rem;
+                        color: $third_120;
+                        text-align: center;
+                        margin: 2rem 0 0;
+
+                        @include break('lg') {
+                            font-size: 1.25rem;
+                        }
+
+                        @include break('sm') {
+                            font-size: 1.75rem;
+                        }
+                    }
+
+                    h4 {
+                        text-align: center;
+                        margin: 0.5rem 0 0;
+                    }
+
+                    .transcription-box {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+
+                        .transcription {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-around;
+                            flex-wrap: wrap;
+                            gap: 0.25rem;
+                            width: fit-content;
+                            font-size: 1.25rem;
+                            padding: 0 0.25rem;
+                            color: $secondary;
+                            letter-spacing: 0.25rem;
+
+                            @include break('lg') {
+                                letter-spacing: 0.1rem;
+                                font-size: 0.9rem;
+                            }
+
+                            @include break('sm') {
+                                letter-spacing: 0.25rem;
+                                font-size: 1.25rem;
+                            }
+                        }
+                    }
+
+                    u {
+                        font-size: 1rem;
+                        font-style: italic;
+                        color: $fourth;
+                        text-align: end;
+                        margin: 0.25rem 0 0;
+
+                        @include break('lg') {
+                            font-size: 0.86rem;
+                        }
+
+                        @include break('sm') {
+                            font-size: 1rem;
+                        }
+                    }
+                }
+
+                .right-box {
+                    position: relative;
+                    height: fit-content;
+                    width: 100%;
+
+                    .image-box {
+                        height: 15rem;
+                        aspect-ratio: 1;
+                        margin: 0 auto;
+                        box-shadow: 0.1rem 0.1rem 1rem $third_120;
+                        border: 0.0625rem solid $primary_40;
+                        overflow: hidden;
+                        border-radius: 50%;
+
+                        .image {
+                            object-fit: cover;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        box-shadow: 0.1rem 0.1rem 1rem $third_120;
+        border: 0.0625rem solid $primary_40;
+        background-color: $third_40;
+        border-radius: 1rem;
+        width: 3rem;
+        height: 4rem;
+        color: $primary;
+        transition:
+            color 0.3s ease-in-out,
+            background-color 0.3s ease-in-out,
+            transform 0.3s ease-in-out;
+
+        &:hover {
+            color: $primary_50;
+            transform: translateY(0.15rem);
+            background-color: $secondary_20;
+        }
+    }
+
+    .swiper-button-next {
+        top: 15%;
+        right: -20%;
+    }
+
+    .swiper-button-prev {
+        top: 45%;
+        left: 112%;
+    }
+
+    .swiper-autoplay {
+        position: absolute;
+        top: 75%;
+        left: 112%;
+        z-index: 1;
+    }
+
+    .swiper-pagination {
+        left: 0 !important;
+        transform: translateX(7.5rem) !important;
+
+        .swiper-pagination-bullet {
+            background-color: $secondary_90;
+
+            &.swiper-pagination-bullet-active {
+                background-color: $primary;
+            }
+        }
+    }
+
+    .autoplay-progress {
+        position: absolute;
+        bottom: 0.5rem;
+        right: 0.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 100%;
+
+            circle {
+                fill: none;
+                stroke: $primary;
+                stroke-width: 4;
+                stroke-dasharray: 126;
+                stroke-dashoffset: calc(126 * (1 - var(--progress, 0)));
+                transition: stroke-dashoffset 0.1s linear;
+                transform: rotate(-90deg);
+                transform-origin: 50% 50%;
+            }
+        }
+
+        span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: fit-content;
+            height: fit-content;
+            transform: translate(-50%, -50%);
+            font-size: 0.90rem;
+            font-weight: 700;
+            color: $third_100;
+        }
+    }
+
+    .close-icon {
+        position: absolute;
+        top: -4rem;
+        right: -8rem;
+        width: 3rem;
+        z-index: 1;
+        cursor: pointer;
+        transition:
+            transform 0.3s ease-in-out;
+        padding: 0.25rem;
+        border-radius: 50%;
+        background-color: #fff;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}

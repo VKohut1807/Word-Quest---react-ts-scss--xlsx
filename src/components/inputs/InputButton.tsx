@@ -10,11 +10,14 @@ const InputButton: React.FC<InputButtonProps> = ({
     additionalText,
     buttonKey,
     onSelect,
+    secondaryButton = false,
+    classesName = "",
 }) => {
     return (
         <label
+            {...(secondaryButton ? {"secondary-button": ""} : {})}
             data-additional-text={additionalText}
-            className={`label ${selected ? "active" : ""}`}
+            className={`label ${selected ? "active" : ""} ${classesName}`}
         >
             <input type="button" onClick={() => onSelect(buttonKey)} />
             {label}
