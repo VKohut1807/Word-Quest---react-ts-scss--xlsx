@@ -34,15 +34,17 @@ const Dictionary: React.FC<DictionaryProps> = ({data}) => {
                 />
             )}
 
-            <ModalWindow openModal={isModalOpen} setOpenModal={setIsModalOpen}>
-                {selectedImg && (
-                    <img
-                        data-number={selectedImg.id}
-                        src={selectedImg.imageUrl}
-                        alt={selectedImg.englishWord}
-                    />
-                )}
-            </ModalWindow>
+            {isModalOpen && (
+                <ModalWindow setOpenModal={setIsModalOpen}>
+                    {selectedImg && (
+                        <img
+                            data-number={selectedImg.id}
+                            src={selectedImg.imageUrl}
+                            alt={selectedImg.englishWord}
+                        />
+                    )}
+                </ModalWindow>
+            )}
 
             {data.length > 0 ? (
                 <div className="container">

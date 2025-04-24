@@ -44,10 +44,7 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
     return (
         <>
             {isModalOpen && selected === "def-file" && (
-                <ModalWindow
-                    openModal={isModalOpen}
-                    setOpenModal={setIsModalOpen}
-                >
+                <ModalWindow setOpenModal={setIsModalOpen}>
                     <PublicFileUploader
                         setExcelData={setExcelData}
                         requiredFields={requiredFields}
@@ -56,10 +53,7 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
             )}
 
             {isModalOpen && selected === "my-file" && (
-                <ModalWindow
-                    openModal={isModalOpen}
-                    setOpenModal={setIsModalOpen}
-                >
+                <ModalWindow setOpenModal={setIsModalOpen}>
                     <FileUploader
                         setExcelData={setExcelData}
                         requiredFields={requiredFields}
