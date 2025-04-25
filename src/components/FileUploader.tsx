@@ -78,9 +78,9 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
                 }
 
                 const sheet = workbook.Sheets[sheetName];
-                const jsonData = XLSX.utils.sheet_to_json(
-                    sheet,
-                ) as LocalStorage[];
+                const jsonData = XLSX.utils
+                    .sheet_to_json(sheet)
+                    .reverse() as LocalStorage[];
                 const isValid = jsonData.every((item) =>
                     requiredFields.every((field) => field in item),
                 );

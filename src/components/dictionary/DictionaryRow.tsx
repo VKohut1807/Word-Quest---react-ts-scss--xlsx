@@ -7,9 +7,10 @@ import type {LocalStorage, ModalImageProps} from "@/types/dictionary-types";
 
 const DictionaryRow: React.FC<{
     row: LocalStorage;
+    idx: number;
     onImageClick: (row: ModalImageProps) => void;
     onSlideClick: (id: number) => void;
-}> = ({row, onImageClick, onSlideClick}) => {
+}> = ({row, idx, onImageClick, onSlideClick}) => {
     const transcriptionWords = row["transcription"].split(" ");
 
     return (
@@ -33,7 +34,7 @@ const DictionaryRow: React.FC<{
                         onImageClick(row);
                     }}
                     className="image-box"
-                    data-number={row["id"]}
+                    data-number={idx + 1}
                 >
                     <img
                         src={row["imageUrl"]}

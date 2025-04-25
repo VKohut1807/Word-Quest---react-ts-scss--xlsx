@@ -52,6 +52,7 @@ const Dictionary: React.FC<DictionaryProps> = ({data}) => {
                         {data.map((row, idx) => (
                             <DictionaryRow
                                 key={idx}
+                                idx={idx}
                                 row={row}
                                 onImageClick={openModal}
                                 onSlideClick={initSwiper}
