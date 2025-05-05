@@ -2,36 +2,23 @@ import React, {useState} from "react";
 
 import "@/assets/scss/pages/settings.scss";
 
-import type {FileUploader as FileUploaderType} from "@/types/file-uploader-types";
-import type {LocalStorage} from "@/types/dictionary-types";
-
 import ModalWindow from "@/components/ModalWindow";
 import FileUploader from "@/components/FileUploader";
 import PublicFileUploader from "@/components/PublicFileUploader";
 import InputButton from "@/components/inputs/InputButton";
+import InputRadio from "@/components/inputs/InputRadio";
+
+import type {FileUploader as FileUploaderType, LocalStorage} from "@/types";
 
 import {getItem} from "@/helpers/persistance-storage";
+import {useItemsPerPage} from "@/context";
 
 const DEFAULT_FILE_NAME = import.meta.env.VITE_DEFAULT_FILE_NAME_KEY;
 const FILE_NAME = import.meta.env.VITE_FILE_NAME_KEY;
 const EXCEL_DATA = import.meta.env.VITE_EXCEL_DATA_KEY;
 
 const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
-    const [selected, setSelected] = useState<string>("");
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-    const onOpenModal = (type: string) => {
-        setSelected(type);
-        setIsModalOpen(true);
-    };
-
-    const isDefFile = DEFAULT_FILE_NAME === getItem(FILE_NAME);
-    const isMyFile =
-        DEFAULT_FILE_NAME !== getItem(FILE_NAME) && getItem(FILE_NAME) !== null;
-    getItem(EXCEL_DATA) !== null;
-
-    const requiredFields: (keyof LocalStorage)[] = [
-        "id",
+    const requiredFields: (keyof Omit<LocalStorage, "id">)[] = [
         "englishWord",
         "ukrainianWord",
         "partOfSpeech",
@@ -40,6 +27,25 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
         "imageUrl",
         "cambridgeUrl",
     ];
+
+    const isDefFile = DEFAULT_FILE_NAME === getItem(FILE_NAME);
+    const isMyFile =
+        DEFAULT_FILE_NAME !== getItem(FILE_NAME) && getItem(FILE_NAME) !== null;
+    getItem(EXCEL_DATA) !== null;
+
+    const [selected, setSelected] = useState<string>("");
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const onOpenModal = (type: string) => {
+        setSelected(type);
+        setIsModalOpen(true);
+    };
+
+    const {itemsPerPage, setItemsPerPage} = useItemsPerPage();
+    const handleSelect = (value: string) => {
+        setItemsPerPage(Number(value));
+    };
+
+    console.debug("itemsPerPage", itemsPerPage);
 
     return (
         <>
@@ -63,10 +69,10 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
 
             <section className="settings">
                 <h1>Settings</h1>
-                <ul className="settings-box">
+                <ul className="settings-group">
                     <li className="settings-box">
                         <h3>Data from:</h3>
-                        <div className="radio-group">
+                        <div className="button-group">
                             <InputButton
                                 label={
                                     isDefFile
@@ -89,6 +95,29 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
                                 additionalText="Upload the file again?"
                                 buttonKey="my-file"
                                 onSelect={onOpenModal}
+                            />
+                        </div>
+                    </li>
+                    <li className="settings-box">
+                        <h3>Items per page:</h3>
+                        <div className="radio-group">
+                            <InputRadio
+                                value="10"
+                                nameGroup="per-page"
+                                selected={String(itemsPerPage)}
+                                onSelect={handleSelect}
+                            />
+                            <InputRadio
+                                value="20"
+                                nameGroup="per-page"
+                                selected={String(itemsPerPage)}
+                                onSelect={handleSelect}
+                            />
+                            <InputRadio
+                                value="30"
+                                nameGroup="per-page"
+                                selected={String(itemsPerPage)}
+                                onSelect={handleSelect}
                             />
                         </div>
                     </li>

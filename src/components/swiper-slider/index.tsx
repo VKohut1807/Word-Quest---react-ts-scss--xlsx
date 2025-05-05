@@ -9,7 +9,11 @@ import "swiper/css/navigation";
 
 import "@/assets/scss/components/swiper-slider.scss";
 
-import type {DictionaryProps} from "@/types/dictionary-types";
+import type {
+    DictionaryProps,
+    LocalStorage,
+    SwiperProps,
+} from "@/types/dictionary-types";
 import type {SwiperRef} from "swiper/react";
 
 import InputButton from "@/components/inputs/InputButton";
@@ -19,32 +23,20 @@ import ShutdownIcon from "@/assets/icons/shutdown.svg?react";
 import StopButtonIcon from "@/assets/icons/stop-button.svg?react";
 import PlayButtonIcon from "@/assets/icons/play-button.svg?react";
 
-const SwiperSlider: React.FC<
-    DictionaryProps & {
-        initialSlide: number;
-        setIsShowSwiper: React.Dispatch<React.SetStateAction<boolean>>;
-    }
-> = ({data, initialSlide, setIsShowSwiper}) => {
-    const [visibleSlides, setVisibleSlides] = useState(
-        data.slice(initialSlide > 2 ? initialSlide - 3 : 0, initialSlide + 3),
-    );
+const SwiperSlider: React.FC<SwiperProps> = ({
+    data,
+    initialSlide,
+    setIsShowSwiper,
+}) => {
+    const closeModal = () => {
+        setIsShowSwiper(false);
+    };
+
     const [isAutoplay, setIsAutoplay] = useState<boolean>(false);
     const [swiperDelay, setSwiperDelay] = useState<number>(7000);
     const progressCircle = useRef<SVGSVGElement>(null);
     const progressContent = useRef<HTMLSpanElement>(null);
     const swiperInstance = useRef<SwiperRef>(null);
-
-    const closeModal = () => {
-        setIsShowSwiper(false);
-    };
-
-    const handleReachEnd = () => {
-        setVisibleSlides((prev) => {
-            const next = data.slice(prev.length, prev.length + 3);
-            return [...prev, ...next];
-        });
-    };
-
     const onAutoplayTimeLeft = (
         swiper: object,
         time: number,
@@ -61,7 +53,6 @@ const SwiperSlider: React.FC<
             progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
         }
     };
-
     const toggleAutoplay = () => {
         if (swiperInstance.current) {
             const swiper = swiperInstance.current.swiper;
@@ -75,14 +66,45 @@ const SwiperSlider: React.FC<
         }
     };
 
+    const [visibleSlides, setVisibleSlides] = useState<LocalStorage[]>(
+        data.slice(initialSlide > 3 ? initialSlide - 4 : 0, initialSlide + 3),
+    );
+    const [pendingSlideShift, setPendingSlideShift] = useState<number | null>(
+        null,
+    );
+    const loadMoreSlides = (direction: "next" | "prev") => {
+        if (direction === "next") {
+            const lastId = visibleSlides[visibleSlides.length - 1]?.id ?? 0;
+            const nextSlides = data
+                .filter((item) => item.id > lastId)
+                .slice(0, 3);
+
+            if (nextSlides.length > 0) {
+                setVisibleSlides((prev) => [...prev, ...nextSlides]);
+            }
+        } else if (direction === "prev") {
+            const firstId = visibleSlides[0]?.id ?? 0;
+            const prevSlides = data
+                .filter((item) => item.id < firstId)
+                .slice(-3);
+
+            if (prevSlides.length > 0 && swiperInstance.current) {
+                const swiper = swiperInstance.current.swiper;
+                const currentIndex = swiper.activeIndex;
+
+                setVisibleSlides((prev) => {
+                    setPendingSlideShift(currentIndex + prevSlides.length);
+                    return [...prevSlides, ...prev];
+                });
+            }
+        }
+    };
     useEffect(() => {
-        setVisibleSlides(
-            data.slice(
-                initialSlide > 2 ? initialSlide - 3 : 0,
-                initialSlide + 3,
-            ),
-        );
-    }, [data]);
+        if (pendingSlideShift !== null && swiperInstance.current) {
+            swiperInstance.current.swiper.slideTo(pendingSlideShift - 1, 0);
+            setPendingSlideShift(null);
+        }
+    }, [pendingSlideShift]);
 
     return (
         <>
@@ -91,15 +113,12 @@ const SwiperSlider: React.FC<
                 ref={swiperInstance}
                 modules={[EffectCards, Pagination, Navigation, Autoplay]}
                 effect={"cards"}
-                initialSlide={initialSlide > 2 ? 2 : initialSlide == 1 ? 0 : 1}
                 grabCursor={true}
                 pagination={{
                     dynamicBullets: true,
                 }}
                 navigation={true}
                 slidesPerView={1}
-                lazyPreloadPrevNext={2}
-                onReachEnd={handleReachEnd}
                 autoplay={
                     isAutoplay
                         ? {
@@ -110,11 +129,19 @@ const SwiperSlider: React.FC<
                 }
                 onAutoplayTimeLeft={onAutoplayTimeLeft}
                 className="mySwiper"
+                initialSlide={initialSlide > 3 ? 3 : initialSlide - 1}
+                onReachEnd={() => loadMoreSlides("next")}
+                onReachBeginning={() => loadMoreSlides("prev")}
             >
-                {visibleSlides?.map((row, idx) => (
-                    <SwiperSlide key={idx} data-swiper-autoplay={swiperDelay}>
+                {visibleSlides.map((row, idx) => (
+                    <SwiperSlide
+                        key={idx}
+                        data-swiper-autoplay={swiperDelay}
+                        className={String(row.id)}
+                    >
                         <div className="slide-box">
                             <div className="left-box">
+                                <div className="idx">{row.id}</div>
                                 <div className="transcription-box">
                                     <span className="bracket">[</span>
 
@@ -134,10 +161,9 @@ const SwiperSlider: React.FC<
                             <div className="right-box">
                                 <div className="image-box">
                                     <img
+                                        className="swiper-lazy image"
                                         src={row.imageUrl}
-                                        loading="lazy"
                                         alt={row.englishWord}
-                                        className="image"
                                     />
                                 </div>
                             </div>

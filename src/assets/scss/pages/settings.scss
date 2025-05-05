@@ -1,16 +1,23 @@
 @use "../config/index.scss" as *;
 
 .settings {
-    .settings-box {
+    .settings-group {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 1rem;
+        gap: 2rem;
 
-        .radio-group {
+        .settings-box {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
+
+            .button-group,
+            .radio-group {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
         }
     }
 }

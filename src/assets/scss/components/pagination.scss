@@ -1,0 +1,89 @@
+@use "../config/index.scss" as *;
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 2rem auto 1rem;
+    position: relative;
+
+    @include break("sm") {
+        min-height: 5rem;
+    }
+
+    .prev,
+    .next {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+        background: $secondary_30;
+        border: none;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        color: $primary_80;
+        font-weight: 700;
+
+        @include break("sm") {
+            position: absolute;
+            right: 0;
+        }
+
+
+        &:disabled {
+            opacity: 0.5;
+            background: $third_30;
+            cursor: not-allowed;
+        }
+    }
+
+    .prev {
+        @include break("sm") {
+            top: 0;
+        }
+    }
+
+    .next {
+        @include break("sm") {
+            top: 55%;
+        }
+    }
+
+    .buttons-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+
+        @include break("sm") {
+            flex-wrap: wrap;
+            margin-right: 7rem;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            background: $primary_10;
+            border: none;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            color: $secondary_120;
+            font-weight: 700;
+            font-size: 1rem;
+
+            &.active {
+                background: $primary_80;
+                color: #fff;
+                font-size: 1.35rem;
+            }
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
+    }
+}

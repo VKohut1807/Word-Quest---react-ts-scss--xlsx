@@ -3,14 +3,13 @@ import {Link} from "react-router-dom";
 
 import "@/assets/scss/pages/dictionary-page/dictionary-row.scss";
 
-import type {LocalStorage, ModalImageProps} from "@/types/dictionary-types";
+import type {DictionaryRowProps} from "@/types";
 
-const DictionaryRow: React.FC<{
-    row: LocalStorage;
-    idx: number;
-    onImageClick: (row: ModalImageProps) => void;
-    onSlideClick: (id: number) => void;
-}> = ({row, idx, onImageClick, onSlideClick}) => {
+const DictionaryRow: React.FC<DictionaryRowProps> = ({
+    row,
+    onImageClick,
+    onSlideClick,
+}) => {
     const transcriptionWords = row["transcription"].split(" ");
 
     return (
@@ -34,7 +33,7 @@ const DictionaryRow: React.FC<{
                         onImageClick(row);
                     }}
                     className="image-box"
-                    data-number={idx + 1}
+                    data-number={row.id}
                 >
                     <img
                         src={row["imageUrl"]}

@@ -56,6 +56,9 @@
             transform: rotate(-90deg);
             border-radius: 50%;
             overflow: hidden;
+            stroke-width: 4;
+            stroke-dasharray: 126;
+            stroke-dashoffset: calc(126 * (1 - var(--progress, 0)));
 
             path {
                 fill: #fff;

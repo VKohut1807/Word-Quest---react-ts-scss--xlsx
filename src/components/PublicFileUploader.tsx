@@ -5,8 +5,7 @@ import {ROUTES} from "@/routes";
 
 import "@/assets/scss/pages/file-uploader.scss";
 
-import type {LocalStorage} from "@/types/dictionary-types";
-import type {FileUploaderDataType} from "@/types/settings-types";
+import type {LocalStorage, FileUploaderDataType} from "@/types";
 
 import {setItem} from "@/helpers/persistance-storage";
 
@@ -78,9 +77,11 @@ const PublicFileUploader: React.FC<FileUploaderDataType> = ({
                 }
 
                 const sheet = workbook.Sheets[sheetName];
-                const jsonData = XLSX.utils
-                    .sheet_to_json(sheet)
-                    .reverse() as LocalStorage[];
+                const jsonData = XLSX.utils.sheet_to_json(sheet) as Omit<
+                    LocalStorage,
+                    "id"
+                >[];
+
                 const isValid = jsonData.every((item) =>
                     requiredFields.every((field) => field in item),
                 );
@@ -94,8 +95,15 @@ const PublicFileUploader: React.FC<FileUploaderDataType> = ({
                     return;
                 }
 
-                setExcelData(jsonData);
-                setItem(EXCEL_DATA, jsonData);
+                const jsonDataWithIds: LocalStorage[] = jsonData
+                    .reverse()
+                    .map((item, index) => ({
+                        ...item,
+                        id: index + 1,
+                    }));
+
+                setExcelData(jsonDataWithIds);
+                setItem(EXCEL_DATA, jsonDataWithIds);
                 setItem(FILE_NAME, DEFAULT_FILE_NAME);
                 setProgress(100);
                 setIsLoading(false);

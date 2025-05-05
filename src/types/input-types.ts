@@ -7,3 +7,11 @@ export type InputButtonProps = {
     secondaryButton?: boolean;
     classesName?: string;
 };
+
+export type InputRadioProps = {
+    value: string;
+    nameGroup: string;
+    selected: string;
+    classesName?: string;
+    onSelect: (value: string) => void;
+};

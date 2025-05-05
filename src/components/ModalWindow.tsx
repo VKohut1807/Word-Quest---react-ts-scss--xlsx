@@ -2,7 +2,7 @@ import React from "react";
 
 import "@/assets/scss/components/modal-window.scss";
 
-import type {ModalWindowType} from "@/types/settings-types";
+import type {ModalWindowType} from "@/types";
 
 import ShutdownIcon from "@/assets/icons/shutdown.svg?react";
 

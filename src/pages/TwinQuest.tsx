@@ -1,10 +1,9 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import {getRndInteger, shuffleArray} from "@/helpers/randoms";
 
 import "@/assets/scss/pages/twin-quest.scss";
 
-import type {LocalStorage} from "@/types/dictionary-types";
-import type {TwinQuestProps, PartOfSpeech} from "@/types/games-types";
+import type {LocalStorage, TwinQuestProps, PartOfSpeech} from "@/types";
 
 const TwinQuest: React.FC<TwinQuestProps> = ({localstorData}) => {
     // for now

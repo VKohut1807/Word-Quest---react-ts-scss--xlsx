@@ -21,3 +21,22 @@ export type ModalImageProps = Omit<
     | "transcription"
     | "cambridgeUrl"
 >;
+
+export type DictionaryRowProps = {
+    row: LocalStorage;
+    onImageClick: (row: ModalImageProps) => void;
+    onSlideClick: (id: number) => void;
+};
+
+export type SwiperProps = DictionaryProps & {
+    initialSlide: number;
+    setIsShowSwiper: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type PartOfSpeech =
+    | "noun"
+    | "idiom"
+    | "phrase"
+    | "verb"
+    | "adjective"
+    | "adverb";
