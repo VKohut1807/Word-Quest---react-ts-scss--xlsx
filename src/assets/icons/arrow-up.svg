@@ -1,14 +1,3 @@
-<svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-    transform="rotate(90)matrix(1, 0, 0, 1, 0, 0)">
-
-    <g id="SVGRepo_bgCarrier" stroke-width="0" />
-
-    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-
-    <g id="SVGRepo_iconCarrier">
-        <path
-            d="M13 8L9 12M9 12L13 16M9 12H21M19.4845 7C17.8699 4.58803 15.1204 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C15.1204 21 17.8699 19.412 19.4845 17"
-            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-    </g>
-
+<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M29.6667 16.3333L19 27M19 27L29.6667 37.6667M19 27H51M46.9587 13.6667C42.6531 7.23475 35.3211 3 27 3C13.7452 3 3 13.7452 3 27C3 40.2549 13.7452 51 27 51C35.3211 51 42.6531 46.7653 46.9587 40.3333" stroke="black" stroke-width="5.33333" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

@@ -12,6 +12,10 @@
         min-height: 5rem;
     }
 
+    &.bottom {
+        margin: 5rem auto 1rem;
+    }
+
     .prev,
     .next {
         display: flex;

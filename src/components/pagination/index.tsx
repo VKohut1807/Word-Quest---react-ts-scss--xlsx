@@ -10,6 +10,7 @@ const Pagination: React.FC<PaginationProps> = ({
     currentPage,
     totalPages,
     onPageChange,
+    otherClasses,
 }) => {
     const handlePrev = () => {
         if (currentPage > 1) onPageChange(currentPage - 1);
@@ -20,7 +21,7 @@ const Pagination: React.FC<PaginationProps> = ({
     };
 
     return (
-        <div className="pagination">
+        <div className={`pagination ${otherClasses || ""}`}>
             <button
                 className="prev"
                 onClick={handlePrev}

@@ -87,6 +87,7 @@ const Dictionary: React.FC<DictionaryProps> = ({data}) => {
                             currentPage={currentPage}
                             totalPages={totalPages}
                             onPageChange={handlePageChange}
+                            otherClasses={"bottom"}
                         />
                     )}
                 </div>
