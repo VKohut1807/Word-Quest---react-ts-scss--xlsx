@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import "@/assets/scss/pages/settings.scss";
 
@@ -40,12 +40,14 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
         setIsModalOpen(true);
     };
 
-    const {itemsPerPage, setItemsPerPage} = useItemsPerPage();
+    const {itemsPerPage, setItemsPerPage, ascOrder, setAscOrder} =
+        useItemsPerPage();
     const handleSelect = (value: string) => {
         setItemsPerPage(Number(value));
     };
-
-    console.debug("itemsPerPage", itemsPerPage);
+    const handleSelectOrder = (value: string) => {
+        setAscOrder(value === "forward");
+    };
 
     return (
         <>
@@ -70,6 +72,23 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
             <section className="settings">
                 <h1>Settings</h1>
                 <ul className="settings-group">
+                    <li className="settings-box">
+                        <h3>Load data in file order:</h3>
+                        <div className="radio-group">
+                            <InputRadio
+                                value="forward"
+                                nameGroup="order-data"
+                                selected={ascOrder ? "forward" : "backward"}
+                                onSelect={handleSelectOrder}
+                            />
+                            <InputRadio
+                                value="backward"
+                                nameGroup="order-data"
+                                selected={ascOrder ? "forward" : "backward"}
+                                onSelect={handleSelectOrder}
+                            />
+                        </div>
+                    </li>
                     <li className="settings-box">
                         <h3>Data from:</h3>
                         <div className="button-group">

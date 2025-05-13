@@ -9,6 +9,8 @@ export type LocalStorage = {
     cambridgeUrl: string;
 };
 
+export type LocalStorageNoId = Omit<LocalStorage, "id">[];
+
 export type DictionaryProps = {
     data: LocalStorage[];
 };

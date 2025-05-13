@@ -22,7 +22,7 @@ const InputRadio: React.FC<InputRadioProps> = ({
                 checked={selected === value}
                 onChange={() => onSelect(value)}
             />
-            {value}
+            <span className="label-name">{value}</span>
         </label>
     );
 };

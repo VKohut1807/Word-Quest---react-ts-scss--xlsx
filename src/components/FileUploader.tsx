@@ -5,11 +5,16 @@ import {ROUTES} from "@/routes";
 
 import "@/assets/scss/pages/file-uploader.scss";
 
-import type {LocalStorage, FileUploaderDataType} from "@/types";
+import type {
+    LocalStorage,
+    LocalStorageNoId,
+    FileUploaderDataType,
+} from "@/types";
 
 import ClipIcon from "@/assets/icons/clip.svg?react";
 
 import {setItem} from "@/helpers/persistance-storage";
+import {useItemsPerPage} from "@/context";
 
 const EXCEL_DATA = import.meta.env.VITE_EXCEL_DATA_KEY;
 const FILE_NAME = import.meta.env.VITE_FILE_NAME_KEY;
@@ -19,6 +24,7 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
     requiredFields,
 }) => {
     const navigate = useNavigate();
+    const {ascOrder} = useItemsPerPage();
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [progress, setProgress] = useState<number>(0);
@@ -77,10 +83,9 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
                 }
 
                 const sheet = workbook.Sheets[sheetName];
-                const jsonData = XLSX.utils.sheet_to_json(sheet) as Omit<
-                    LocalStorage,
-                    "id"
-                >[];
+                const jsonData = XLSX.utils.sheet_to_json(
+                    sheet,
+                ) as LocalStorageNoId;
                 const isValid = jsonData.every((item) =>
                     requiredFields.every((field) => field in item),
                 );
@@ -95,12 +100,12 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
                     return;
                 }
 
-                const jsonDataWithIds: LocalStorage[] = jsonData
-                    .reverse()
-                    .map((item, index) => ({
-                        ...item,
-                        id: index + 1,
-                    }));
+                const jsonDataWithIds: LocalStorage[] = (
+                    ascOrder ? [...jsonData] : [...jsonData].reverse()
+                ).map((item, index) => ({
+                    ...item,
+                    id: index + 1,
+                }));
 
                 setExcelData(jsonDataWithIds);
                 setItem(EXCEL_DATA, jsonDataWithIds);

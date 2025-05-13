@@ -13,7 +13,7 @@ import Novbar from "@/components/Novbar";
 import UpButton from "@/components/UpButton";
 import RouteWrapper from "@/components/RouteWrapper";
 
-import {ItemsPerPageProvider} from "@/context";
+import {ContextSettingsProvider} from "@/context";
 
 import type {LocalStorage} from "@/types";
 
@@ -31,7 +31,7 @@ const App: React.FC = () => {
     }, []);
 
     return (
-        <ItemsPerPageProvider>
+        <ContextSettingsProvider>
             <RouteWrapper>
                 <Router basename="/">
                     <>
@@ -60,7 +60,7 @@ const App: React.FC = () => {
                     </>
                 </Router>
             </RouteWrapper>
-        </ItemsPerPageProvider>
+        </ContextSettingsProvider>
     );
 };
 

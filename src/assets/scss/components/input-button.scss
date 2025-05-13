@@ -20,6 +20,15 @@
         color 0.3s ease-in-out,
         transform 0.3s ease-in-out;
 
+    .label-name {
+        text-transform: lowercase;
+
+        &::first-letter {
+            text-transform: uppercase;
+        }
+    }
+
+
     svg {
         width: 2rem;
 
