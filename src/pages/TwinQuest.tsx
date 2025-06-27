@@ -3,6 +3,8 @@ import {getRndInteger, shuffleArray} from "@/helpers/randoms";
 
 import "@/assets/scss/pages/twin-quest.scss";
 
+import FlipCard from "@/components/FlipCard";
+
 import type {LocalStorage, TwinQuestProps, PartOfSpeech} from "@/types";
 
 const TwinQuest: React.FC<TwinQuestProps> = ({localstorData}) => {
@@ -29,7 +31,7 @@ const TwinQuest: React.FC<TwinQuestProps> = ({localstorData}) => {
     const [canClick, setCanClick] = useState<boolean>(true);
     const [countdown, setCountdown] = useState<number>(0.0);
     const [shuffledCards, setShuffledCards] = useState<
-        {id: number; type: "eng" | "ukr"; item: LocalStorage}[]
+        {id: number; type?: "eng" | "ukr"; item: LocalStorage}[]
     >([]);
 
     const translatePartOfSpeech = (part: PartOfSpeech): string => {
@@ -155,41 +157,51 @@ const TwinQuest: React.FC<TwinQuestProps> = ({localstorData}) => {
                 {!isWin ? (
                     <div className="gallery">
                         {shuffledCards.map(({id, type, item}, idx) => (
-                            <div
-                                onClick={() => handleClick(id, type)}
+                            <FlipCard
+                                onFlip={() => handleClick(id, (type = "eng"))}
                                 key={`${type}-${id}`}
-                                className={`card-box ${activeIds.includes(`${type}-${id}`) ? "active" : ""} ${hiddenIds.includes(String(id)) ? "hidden" : ""}`}
-                            >
-                                <div className="card front">
-                                    <img
-                                        src={gameSettings.frontImg}
-                                        alt="image"
-                                    />
-                                </div>
-                                <div className="card back">
-                                    <img
-                                        src={item["imageUrl"]}
-                                        alt={item["englishWord"]}
-                                    />
-                                    <div className="backdrop"></div>
-                                    <div className="text">
-                                        <h4>
-                                            {type === "eng"
-                                                ? item["englishWord"]
-                                                : item["ukrainianWord"]}
-                                        </h4>
-                                        <u>
-                                            {type === "eng"
-                                                ? item["partOfSpeech"]
-                                                : translatePartOfSpeech(
-                                                      item[
-                                                          "partOfSpeech"
-                                                      ] as PartOfSpeech,
-                                                  )}
-                                        </u>
-                                    </div>
-                                </div>
-                            </div>
+                                className={[
+                                    activeIds.includes(`${type}-${id}`)
+                                        ? "active"
+                                        : "",
+                                    hiddenIds.includes(String(id))
+                                        ? "hidden"
+                                        : "",
+                                ].join(" ")}
+                                front={
+                                    <>
+                                        <img
+                                            src={gameSettings.frontImg}
+                                            alt="image"
+                                        />
+                                    </>
+                                }
+                                back={
+                                    <>
+                                        <img
+                                            src={item["imageUrl"]}
+                                            alt={item["englishWord"]}
+                                        />
+                                        <div className="backdrop"></div>
+                                        <div className="text">
+                                            <h4>
+                                                {type === "eng"
+                                                    ? item["englishWord"]
+                                                    : item["ukrainianWord"]}
+                                            </h4>
+                                            <u>
+                                                {type === "eng"
+                                                    ? item["partOfSpeech"]
+                                                    : translatePartOfSpeech(
+                                                          item[
+                                                              "partOfSpeech"
+                                                          ] as PartOfSpeech,
+                                                      )}
+                                            </u>
+                                        </div>
+                                    </>
+                                }
+                            />
                         ))}
                     </div>
                 ) : (

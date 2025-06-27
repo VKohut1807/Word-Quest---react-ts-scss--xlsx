@@ -1,4 +1,5 @@
 @use "../config/index.scss" as *;
+@use "../animations/index.scss" as *;
 
 .scroll-progress {
     position: fixed;
@@ -67,18 +68,6 @@
                 fill: transparent;
                 stroke: $primary;
             }
-        }
-    }
-
-    @keyframes scroll-top {
-
-        0%,
-        100% {
-            stroke: $primary_10;
-        }
-
-        50% {
-            stroke: $primary;
         }
     }
 }

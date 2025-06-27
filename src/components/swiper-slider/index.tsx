@@ -17,6 +17,7 @@ import type {
 import type {SwiperRef} from "swiper/react";
 
 import InputButton from "@/components/inputs/InputButton";
+import FlipCard from "@/components/FlipCard";
 
 import ProgressIcon from "@/assets/icons/progress.svg?react";
 import ShutdownIcon from "@/assets/icons/shutdown.svg?react";
@@ -139,35 +140,52 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                         data-swiper-autoplay={swiperDelay}
                         className={String(row.id)}
                     >
-                        <div className="slide-box">
-                            <div className="left-box">
-                                <div className="idx">{row.id}</div>
-                                <div className="transcription-box">
-                                    <span className="bracket">[</span>
+                        <FlipCard
+                            front={
+                                <>
+                                    <div className="slide-box">
+                                        <div className="left-box">
+                                            <div className="idx">{row.id}</div>
+                                            <div className="transcription-box">
+                                                <span className="bracket">
+                                                    [
+                                                </span>
 
-                                    <div className="transcription">
-                                        {row["transcription"]
-                                            .split(" ")
-                                            .map((word, index) => (
-                                                <span key={index}>{word} </span>
-                                            ))}
+                                                <div className="transcription">
+                                                    {row["transcription"]
+                                                        .split(" ")
+                                                        .map((word, index) => (
+                                                            <span key={index}>
+                                                                {word}{" "}
+                                                            </span>
+                                                        ))}
+                                                </div>
+                                                <span className="bracket">
+                                                    ]
+                                                </span>
+                                            </div>
+                                            <u>{row.partOfSpeech}</u>
+                                            <h3>{row.englishWord}</h3>
+                                            <h4>{row.ukrainianWord}</h4>
+                                        </div>
+                                        <div className="right-box">
+                                            <div className="image-box">
+                                                <img
+                                                    className="swiper-lazy image"
+                                                    src={row.imageUrl}
+                                                    alt={row.englishWord}
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <span className="bracket">]</span>
-                                </div>
-                                <u>{row.partOfSpeech}</u>
-                                <h3>{row.englishWord}</h3>
-                                <h4>{row.ukrainianWord}</h4>
-                            </div>
-                            <div className="right-box">
-                                <div className="image-box">
-                                    <img
-                                        className="swiper-lazy image"
-                                        src={row.imageUrl}
-                                        alt={row.englishWord}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                                </>
+                            }
+                            back={
+                                <>
+                                    <div>aaaaaaaaaaaaaaaaaaa</div>
+                                </>
+                            }
+                        />
                     </SwiperSlide>
                 ))}
 

@@ -1,4 +1,5 @@
 @use "../config/index.scss" as *;
+@use "../animations/index.scss" as *;
 
 .navbar {
     border-radius: 0 0 1rem 1rem;
@@ -101,18 +102,6 @@
 
                     &-9 {
                         animation-delay: 4s;
-                    }
-
-                    @keyframes bounceWave {
-
-                        0%,
-                        100% {
-                            transform: translateX(-0.5rem) scale(1);
-                        }
-
-                        50% {
-                            transform: translateX(0.5rem) scale(1.2);
-                        }
                     }
                 }
             }

@@ -1,0 +1,62 @@
+@use "../config/index.scss" as *;
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    25%,
+    75% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes countdown {
+    0% {
+        color: $fourth;
+    }
+
+    50% {
+        color: $secondary_60;
+    }
+
+    100% {
+        color: $fifth;
+    }
+}
+
+@keyframes bounceWave {
+
+    0%,
+    100% {
+        transform: translateX(-0.5rem) scale(1);
+    }
+
+    50% {
+        transform: translateX(0.5rem) scale(1.2);
+    }
+}
+
+@keyframes scroll-top {
+
+    0%,
+    100% {
+        stroke: $primary_10;
+    }
+
+    50% {
+        stroke: $primary;
+    }
+}
