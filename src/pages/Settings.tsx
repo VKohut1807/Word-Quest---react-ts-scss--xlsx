@@ -24,6 +24,9 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
         "partOfSpeech",
         "wordForms",
         "transcription",
+        "affirmativeSentence",
+        "negativeSentence",
+        "questionSentence",
         "imageUrl",
         "cambridgeUrl",
     ];

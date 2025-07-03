@@ -5,6 +5,9 @@ export type LocalStorage = {
     partOfSpeech: string;
     wordForms: string;
     transcription: string;
+    affirmativeSentence: string;
+    negativeSentence: string;
+    questionSentence: string;
     imageUrl: string;
     cambridgeUrl: string;
 };

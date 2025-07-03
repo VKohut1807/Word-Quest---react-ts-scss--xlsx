@@ -23,6 +23,7 @@ import ProgressIcon from "@/assets/icons/progress.svg?react";
 import ShutdownIcon from "@/assets/icons/shutdown.svg?react";
 import StopButtonIcon from "@/assets/icons/stop-button.svg?react";
 import PlayButtonIcon from "@/assets/icons/play-button.svg?react";
+import InfoIcon from "@/assets/icons/info.svg?react";
 
 const SwiperSlider: React.FC<SwiperProps> = ({
     data,
@@ -182,7 +183,49 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                             }
                             back={
                                 <>
-                                    <div>aaaaaaaaaaaaaaaaaaa</div>
+                                    <div className="back-slide-box">
+                                        <div className="title">
+                                            <h3>{row.englishWord}</h3>
+                                            <u>{row.partOfSpeech}</u>
+                                            <u className="form">
+                                                {row.wordForms !== "-" &&
+                                                    row.wordForms}
+                                            </u>
+                                            <div data-tooltip>
+                                                <InfoIcon />
+                                                <div className="tooltip-info">
+                                                    <div className="colors">
+                                                        <div className="color-box">
+                                                            <span className="color affirmative-sentance"></span>
+                                                            -&nbsp;affirmative
+                                                            sentence
+                                                        </div>
+                                                        <div className="color-box">
+                                                            <span className="color negative-sentance"></span>
+                                                            -&nbsp;negative
+                                                            sentence
+                                                        </div>
+                                                        <div className="color-box">
+                                                            <span className="color question-sentance"></span>
+                                                            -&nbsp;question
+                                                            sentence
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul className="sentences">
+                                            <li className="sentance affirmative-sentance gradient">
+                                                {row.affirmativeSentence}
+                                            </li>
+                                            <li className="sentance negative-sentance gradient">
+                                                {row.negativeSentence}
+                                            </li>
+                                            <li className="sentance question-sentance gradient">
+                                                {row.questionSentence}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </>
                             }
                         />
