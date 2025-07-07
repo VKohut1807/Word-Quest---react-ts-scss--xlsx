@@ -218,7 +218,7 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                                             <li className="sentance affirmative-sentance gradient">
                                                 {row.affirmativeSentence}
                                             </li>
-                                            <li className="sentance negative-sentance gradient">
+                                            <li className="sentance negative-sentance gradient ">
                                                 {row.negativeSentence}
                                             </li>
                                             <li className="sentance question-sentance gradient">
