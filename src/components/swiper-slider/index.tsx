@@ -141,94 +141,110 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                         data-swiper-autoplay={swiperDelay}
                         className={String(row.id)}
                     >
-                        <FlipCard
-                            front={
-                                <>
-                                    <div className="slide-box">
-                                        <div className="left-box">
-                                            <div className="idx">{row.id}</div>
-                                            <div className="transcription-box">
-                                                <span className="bracket">
-                                                    [
-                                                </span>
-
-                                                <div className="transcription">
-                                                    {row["transcription"]
-                                                        .split(" ")
-                                                        .map((word, index) => (
-                                                            <span key={index}>
-                                                                {word}{" "}
-                                                            </span>
-                                                        ))}
+                        {({isActive}) => (
+                            <FlipCard
+                                isActive={isActive}
+                                front={
+                                    <>
+                                        <div className="slide-box">
+                                            <div className="left-box">
+                                                <div className="idx">
+                                                    {row.id}
                                                 </div>
-                                                <span className="bracket">
-                                                    ]
-                                                </span>
+                                                <div className="transcription-box">
+                                                    <span className="bracket">
+                                                        [
+                                                    </span>
+
+                                                    <div className="transcription">
+                                                        {row["transcription"]
+                                                            .split(" ")
+                                                            .map(
+                                                                (
+                                                                    word,
+                                                                    index,
+                                                                ) => (
+                                                                    <span
+                                                                        key={
+                                                                            index
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            word
+                                                                        }{" "}
+                                                                    </span>
+                                                                ),
+                                                            )}
+                                                    </div>
+                                                    <span className="bracket">
+                                                        ]
+                                                    </span>
+                                                </div>
+                                                <u>{row.partOfSpeech}</u>
+                                                <h3>{row.englishWord}</h3>
+                                                <h4>{row.ukrainianWord}</h4>
                                             </div>
-                                            <u>{row.partOfSpeech}</u>
-                                            <h3>{row.englishWord}</h3>
-                                            <h4>{row.ukrainianWord}</h4>
-                                        </div>
-                                        <div className="right-box">
-                                            <div className="image-box">
-                                                <img
-                                                    className="swiper-lazy image"
-                                                    src={row.imageUrl}
-                                                    alt={row.englishWord}
-                                                />
+                                            <div className="right-box">
+                                                <div className="image-box">
+                                                    <img
+                                                        className="swiper-lazy image"
+                                                        src={row.imageUrl}
+                                                        alt={row.englishWord}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </>
-                            }
-                            back={
-                                <>
-                                    <div className="back-slide-box">
-                                        <div className="title">
-                                            <h3>{row.englishWord}</h3>
-                                            <u>{row.partOfSpeech}</u>
-                                            <u className="form">
-                                                {row.wordForms !== "-" &&
-                                                    row.wordForms}
-                                            </u>
-                                            <div data-tooltip>
-                                                <InfoIcon />
-                                                <div className="tooltip-info">
-                                                    <div className="colors">
-                                                        <div className="color-box">
-                                                            <span className="color affirmative-sentance"></span>
-                                                            -&nbsp;affirmative
-                                                            sentence
-                                                        </div>
-                                                        <div className="color-box">
-                                                            <span className="color negative-sentance"></span>
-                                                            -&nbsp;negative
-                                                            sentence
-                                                        </div>
-                                                        <div className="color-box">
-                                                            <span className="color question-sentance"></span>
-                                                            -&nbsp;question
-                                                            sentence
+                                    </>
+                                }
+                                back={
+                                    <>
+                                        <div className="back-slide-box">
+                                            <div className="title">
+                                                <h3>{row.englishWord}</h3>
+                                                <u>{row.partOfSpeech}</u>
+                                                <u className="form">
+                                                    {row.wordForms !== "-" &&
+                                                        row.wordForms}
+                                                </u>
+                                                <div data-tooltip>
+                                                    <InfoIcon />
+                                                    <div className="tooltip-info">
+                                                        <div className="colors">
+                                                            <div className="color-box">
+                                                                <span className="color affirmative-sentance"></span>
+                                                                -&nbsp;affirmative
+                                                                sentence
+                                                            </div>
+                                                            <div className="color-box">
+                                                                <span className="color negative-sentance"></span>
+                                                                -&nbsp;negative
+                                                                sentence
+                                                            </div>
+                                                            <div className="color-box">
+                                                                <span className="color question-sentance"></span>
+                                                                -&nbsp;question
+                                                                sentence
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <ul className="sentences">
+                                                <li className="sentance affirmative-sentance gradient">
+                                                    {row.affirmativeSentence}
+                                                </li>
+                                                <li className="sentance negative-sentance gradient">
+                                                    {row.negativeSentence}
+                                                </li>
+                                                <li className="sentance question-sentance gradient">
+                                                    {row.questionSentence}
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <ul className="sentences">
-                                            <li className="sentance affirmative-sentance gradient">
-                                                {row.affirmativeSentence}
-                                            </li>
-                                            <li className="sentance negative-sentance gradient ">
-                                                {row.negativeSentence}
-                                            </li>
-                                            <li className="sentance question-sentance gradient">
-                                                {row.questionSentence}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </>
-                            }
-                        />
+                                    </>
+                                }
+                            />
+                        )}
                     </SwiperSlide>
                 ))}
 

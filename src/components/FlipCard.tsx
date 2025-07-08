@@ -1,16 +1,30 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import "@/assets/scss/components/flip-card.scss";
 
 import type {FlipCardProps} from "@/types";
 
-const FlipCard: React.FC<FlipCardProps> = ({className = "", front, back}) => {
+const FlipCard: React.FC<FlipCardProps> = ({
+    className = "",
+    front,
+    back,
+    isActive,
+}) => {
     const [flipCard, setFlipCard] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (!isActive) {
+            setFlipCard(false);
+        }
+    }, [isActive]);
 
     return (
         <section
-            onClick={() => setFlipCard((prev) => !prev)}
-            onTouchStart={() => setFlipCard((prev) => !prev)}
+            onClick={() => {
+                if (isActive) {
+                    setFlipCard((prev) => !prev);
+                }
+            }}
             className={`flip-card-box ${flipCard ? "active" : ""} ${className}`}
         >
             <div className="card-front">{front}</div>
