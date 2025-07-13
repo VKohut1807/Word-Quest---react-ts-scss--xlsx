@@ -5,6 +5,8 @@ import "@/assets/scss/pages/dictionary-page/dictionary-row.scss";
 
 import type {DictionaryRowProps} from "@/types";
 
+const ITEM_CARD_ID = import.meta.env.VITE_ITEM_CARD_ID_KEY;
+
 const DictionaryRow: React.FC<DictionaryRowProps> = ({
     row,
     onImageClick,
@@ -13,7 +15,11 @@ const DictionaryRow: React.FC<DictionaryRowProps> = ({
     const transcriptionWords = row["transcription"].split(" ");
 
     return (
-        <li className="row" onClick={() => onSlideClick(row.id)}>
+        <li
+            id={ITEM_CARD_ID + String(row.id)}
+            className="row"
+            onClick={() => onSlideClick(row.id)}
+        >
             <div className="up">
                 <div className="transcription-box">
                     <span className="bracket">[</span>

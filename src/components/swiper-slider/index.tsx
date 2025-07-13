@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {EffectCards, Pagination, Navigation, Autoplay} from "swiper/modules";
-
+import {useNavigate} from "react-router-dom";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import "swiper/css/pagination";
@@ -9,11 +9,7 @@ import "swiper/css/navigation";
 
 import "@/assets/scss/components/swiper-slider.scss";
 
-import type {
-    DictionaryProps,
-    LocalStorage,
-    SwiperProps,
-} from "@/types/dictionary-types";
+import type {LocalStorage, SwiperProps} from "@/types/dictionary-types";
 import type {SwiperRef} from "swiper/react";
 
 import InputButton from "@/components/inputs/InputButton";
@@ -25,11 +21,18 @@ import StopButtonIcon from "@/assets/icons/stop-button.svg?react";
 import PlayButtonIcon from "@/assets/icons/play-button.svg?react";
 import InfoIcon from "@/assets/icons/info.svg?react";
 
+import {useItemsPerPage} from "@/context";
+
+const ITEM_CARD_ID = import.meta.env.VITE_ITEM_CARD_ID_KEY;
+
 const SwiperSlider: React.FC<SwiperProps> = ({
     data,
     initialSlide,
     setIsShowSwiper,
 }) => {
+    const navigate = useNavigate();
+    const {itemsPerPage} = useItemsPerPage();
+
     const closeModal = () => {
         setIsShowSwiper(false);
     };
@@ -101,6 +104,43 @@ const SwiperSlider: React.FC<SwiperProps> = ({
             }
         }
     };
+
+    const [lastPage, setLastPage] = useState<number>(
+        Math.floor(initialSlide / itemsPerPage) + 1,
+    );
+    const handleSlideChange = () => {
+        const swiper = swiperInstance.current?.swiper;
+        if (!swiper) return;
+
+        const activeIndex = swiper.activeIndex;
+        const activeSlide = visibleSlides[activeIndex];
+        if (!activeSlide) return;
+
+        const globalIndex = data.findIndex(
+            (item) => item.id === activeSlide.id,
+        );
+        if (globalIndex === -1) return;
+
+        const currentPage = Math.floor(globalIndex / itemsPerPage) + 1;
+
+        if (currentPage !== lastPage) {
+            setLastPage(currentPage);
+            navigate(`/dictionary?page=${currentPage}`);
+
+            setTimeout(() => {
+                const targetElement = document.getElementById(
+                    ITEM_CARD_ID + String(activeSlide.id),
+                );
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                    });
+                }
+            }, 150);
+        }
+    };
+
     useEffect(() => {
         if (pendingSlideShift !== null && swiperInstance.current) {
             swiperInstance.current.swiper.slideTo(pendingSlideShift - 1, 0);
@@ -134,6 +174,7 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                 initialSlide={initialSlide > 3 ? 3 : initialSlide - 1}
                 onReachEnd={() => loadMoreSlides("next")}
                 onReachBeginning={() => loadMoreSlides("prev")}
+                onSlideChange={handleSlideChange}
             >
                 {visibleSlides.map((row, idx) => (
                     <SwiperSlide
