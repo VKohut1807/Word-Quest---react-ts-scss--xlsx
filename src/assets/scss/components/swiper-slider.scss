@@ -280,56 +280,27 @@
 
                     svg {
                         width: 1rem;
-                        cursor: help;
+
+                        path {
+                            fill: $fifth;
+                        }
                     }
 
-                    [data-tooltip] {
-                        width: fit-content;
-                        height: fit-content;
-                        position: relative;
+                    .colors {
+                        .color-box {
+                            position: relative;
+                            padding-left: 1.25rem;
 
-                        .slot {}
-
-                        .tooltip-info {
-                            text-align: start;
-                            z-index: 1;
-                            opacity: 0;
-                            visibility: hidden;
-                            position: absolute;
-                            top: 100%;
-                            right: 100%;
-                            width: 11rem;
-                            height: fit-content;
-                            padding: 0.5rem;
-                            background-color: #fff;
-                            box-shadow: 0.1rem 0.1rem 3.5rem $primary_100;
-                            border-radius: 1rem;
-                            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-
-                            .colors {
-                                .color-box {
-                                    position: relative;
-                                    padding-left: 1.25rem;
-
-                                    .color {
-                                        display: flex;
-                                        align-items: center;
-                                        position: absolute;
-                                        top: 50%;
-                                        left: 0.25rem;
-                                        transform: translateY(-35%);
-                                        width: 0.75rem;
-                                        height: 0.75rem;
-                                        border-radius: 50%;
-                                    }
-                                }
-                            }
-                        }
-
-                        &:hover {
-                            .tooltip-info {
-                                opacity: 1;
-                                visibility: visible;
+                            .color {
+                                display: flex;
+                                align-items: center;
+                                position: absolute;
+                                top: 50%;
+                                left: 0.25rem;
+                                transform: translateY(-35%);
+                                width: 0.75rem;
+                                height: 0.75rem;
+                                border-radius: 50%;
                             }
                         }
                     }

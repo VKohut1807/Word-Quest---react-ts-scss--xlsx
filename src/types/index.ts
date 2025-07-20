@@ -6,3 +6,4 @@ export * from "./route-types";
 export * from "./modal-types";
 export * from "./context-types";
 export * from "./pagination-types";
+export * from "./parts-stats-types";

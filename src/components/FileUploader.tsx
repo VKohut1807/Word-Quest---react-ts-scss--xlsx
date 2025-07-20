@@ -17,6 +17,8 @@ import {setItem} from "@/helpers/persistance-storage";
 import {useItemsPerPage} from "@/context";
 
 const EXCEL_DATA = import.meta.env.VITE_EXCEL_DATA_KEY;
+const TOTAL_WORDS = import.meta.env.VITE_TOTAL_WORDS_KEY;
+const PARTS_COUNT_ARRAY = import.meta.env.VITE_PARTS_COUNT_ARRAY_KEY;
 const FILE_NAME = import.meta.env.VITE_FILE_NAME_KEY;
 
 const FileUploader: React.FC<FileUploaderDataType> = ({
@@ -100,6 +102,18 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
                     return;
                 }
 
+                const partsMap = new Map<string, number>();
+                jsonData.forEach((item) => {
+                    const part = item.partOfSpeech;
+                    partsMap.set(part, (partsMap.get(part) || 0) + 1);
+                });
+
+                const partsArray = Array.from(partsMap, ([part, count]) => ({
+                    part,
+                    count,
+                }));
+                setItem(PARTS_COUNT_ARRAY, partsArray);
+
                 const jsonDataWithIds: LocalStorage[] = (
                     ascOrder ? [...jsonData] : [...jsonData].reverse()
                 ).map((item, index) => ({
@@ -109,6 +123,7 @@ const FileUploader: React.FC<FileUploaderDataType> = ({
 
                 setExcelData(jsonDataWithIds);
                 setItem(EXCEL_DATA, jsonDataWithIds);
+                setItem(TOTAL_WORDS, jsonDataWithIds.length);
                 setItem(FILE_NAME, file.name);
                 setProgress(100);
                 setIsLoading(false);

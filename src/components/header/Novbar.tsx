@@ -4,6 +4,8 @@ import {ROUTES} from "@/routes";
 
 import "@/assets/scss/components/novbar.scss";
 
+import WordStatsBar from "@/components/WordStatsBar";
+
 import HomeIcon from "@/assets/icons/home.svg?react";
 import BookIcon from "@/assets/icons/book.svg?react";
 import GameIcon from "@/assets/icons/game.svg?react";
@@ -101,6 +103,8 @@ const Novbar: React.FC = () => {
                         </li>
                     </ul>
                 </div>
+
+                <WordStatsBar />
             </div>
         </nav>
     );

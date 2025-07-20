@@ -9,8 +9,7 @@ import Home from "@/pages/Home";
 import Dictionary from "@/pages/Dictionary";
 import TwinQuest from "@/pages/TwinQuest";
 import Settings from "@/pages/Settings";
-import Novbar from "@/components/Novbar";
-import UpButton from "@/components/UpButton";
+import Header from "@/components/header";
 import RouteWrapper from "@/components/RouteWrapper";
 
 import {ContextSettingsProvider} from "@/context";
@@ -34,10 +33,8 @@ const App: React.FC = () => {
         <ContextSettingsProvider>
             <RouteWrapper>
                 <Router basename="/">
+                    <Header />
                     <>
-                        <Novbar />
-                        <UpButton />
-
                         <Routes>
                             <Route path={ROUTES.HOME} element={<Home />} />
                             <Route
