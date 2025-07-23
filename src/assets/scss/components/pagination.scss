@@ -4,11 +4,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 0.75rem;
     margin: 2rem auto 1rem;
     position: relative;
 
-    @include break("sm") {
+    @include break("lg") {
         min-height: 5rem;
     }
 
@@ -29,7 +30,7 @@
         color: $primary_80;
         font-weight: 700;
 
-        @include break("sm") {
+        @include break("lg") {
             position: absolute;
             right: 0;
         }
@@ -43,13 +44,13 @@
     }
 
     .prev {
-        @include break("sm") {
+        @include break("lg") {
             top: 0;
         }
     }
 
     .next {
-        @include break("sm") {
+        @include break("lg") {
             top: 55%;
         }
     }
@@ -60,7 +61,7 @@
         justify-content: center;
         gap: 0.5rem;
 
-        @include break("sm") {
+        @include break("lg") {
             flex-wrap: wrap;
             margin-right: 7rem;
         }
