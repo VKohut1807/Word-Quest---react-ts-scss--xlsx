@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 
+import "@/assets/scss/components/parts-stats-box.scss";
 import type {PartStat} from "@/types";
 
 import {getItem} from "@/helpers/persistance-storage";
@@ -13,7 +14,7 @@ const PartsStatsBox: React.FC = () => {
         <div className="parts-stats-box">
             {parts.map(({part, count}) => (
                 <div className="part-row" key={part}>
-                    <span className="title">{part}</span>
+                    <span className="title">{part}s</span>
                     <span className="total">{count}</span>
                 </div>
             ))}

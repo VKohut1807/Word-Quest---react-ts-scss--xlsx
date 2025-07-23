@@ -35,7 +35,7 @@
     }
 
     @include break('xs') {
-        --swiperWidth: 22rem;
+        --swiperWidth: 23rem;
     }
 
     .swiper-wrapper {
@@ -255,6 +255,7 @@
                         }
 
                         @include break('xs') {
+                            font-size: 1.25rem;
                             z-index: 1;
                         }
                     }

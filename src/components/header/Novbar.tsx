@@ -10,7 +10,7 @@ import HomeIcon from "@/assets/icons/home.svg?react";
 import BookIcon from "@/assets/icons/book.svg?react";
 import GameIcon from "@/assets/icons/game.svg?react";
 import SlidersIcon from "@/assets/icons/sliders.svg?react";
-import logo from "@/assets/images/logo-transformed.webp";
+import DiceLightIcon from "@/assets/icons/dice-light.svg?react";
 
 const Novbar: React.FC = () => {
     const location = useLocation();
@@ -19,7 +19,7 @@ const Novbar: React.FC = () => {
             <div className="wrapper margin-sero">
                 <div className="navbar-box">
                     <Link to={ROUTES.HOME} className="logo">
-                        <img src={logo} alt="logo" />
+                        <DiceLightIcon className="logo-icon" />
                         <div className="wordquest">
                             <span className="letter letter-1">W</span>
                             <span className="letter letter-2">o</span>

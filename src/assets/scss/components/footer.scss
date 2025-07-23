@@ -1,0 +1,65 @@
+@use "../config/index.scss" as *;
+
+
+.footer {
+    margin: 3rem 3rem 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    @include break("s") {
+        flex-direction: column;
+        // width: fit-content;
+        margin: 3rem 0 0;
+        gap: 3rem;
+    }
+
+    .vocabulary-info {
+        position: relative;
+        width: fit-content;
+
+        @include break("s") {
+            margin: 0 auto 0 3rem;
+        }
+
+        .vocabulary-box {
+            font-size: 0.75rem;
+            position: relative;
+            padding: 1rem 2rem;
+            z-index: 1;
+        }
+    }
+
+    .personal-info-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        position: relative;
+        width: fit-content;
+
+        @include break("s") {
+            margin: 0 0 0 auto;
+        }
+
+        .icon-svg,
+        .my-github {
+            z-index: 1;
+        }
+
+        .icon-svg {
+            width: 2.5rem;
+        }
+
+        .my-github {
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            .name {
+                font-style: italic;
+            }
+        }
+    }
+}

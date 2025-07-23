@@ -105,14 +105,16 @@
                 }
             }
 
-            img {
-                margin-left: -1rem;
-                width: 6rem;
-                height: 6rem;
+            .logo-icon {
+                margin-left: -0.25rem;
+                width: 5rem;
+
+                path {
+                    fill: $primary;
+                }
 
                 @include break("md") {
-                    width: 5rem;
-                    height: 5rem;
+                    width: 4rem;
                 }
             }
         }

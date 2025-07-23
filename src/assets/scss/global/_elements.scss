@@ -47,6 +47,7 @@ body {
     #root {
         min-height: 100dvh;
         background-color: $secondary_10;
+        position: relative;
     }
 }
 
@@ -132,4 +133,23 @@ h1 {
             visibility: visible;
         }
     }
+}
+
+[data-cloud] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-25%);
+    width: 100%;
+    height: 100%;
+    background: $third_10;
+    border-radius: 50%;
+    box-shadow:
+        $third_10 4.0625rem -0.9375rem 0 -0.3125rem,
+        $third_10 1.5625rem -1.5625rem 0 0,
+        $third_10 1.875rem 0.625rem 0 0,
+        $third_10 3.75rem 0.9375rem 0 -0.625rem,
+        $third_10 5.3125rem 0.3125rem 0 -0.3125rem,
+        $third_10 6.5rem 0.5rem 0 -0.3rem,
+        $third_10 7.5rem -0.8rem 0 -0.5rem;
 }

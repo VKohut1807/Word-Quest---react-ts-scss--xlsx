@@ -65,25 +65,5 @@
             text-transform: uppercase;
             font-size: 0.75rem;
         }
-
-        .parts-stats-box {
-            margin-top: 0.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-
-            .part-row {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 1rem;
-
-                .title {}
-
-                .total {
-                    margin-right: 0.75rem;
-                }
-            }
-        }
     }
 }

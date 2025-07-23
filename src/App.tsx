@@ -10,6 +10,7 @@ import Dictionary from "@/pages/Dictionary";
 import TwinQuest from "@/pages/TwinQuest";
 import Settings from "@/pages/Settings";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 import RouteWrapper from "@/components/RouteWrapper";
 
 import {ContextSettingsProvider} from "@/context";
@@ -55,6 +56,7 @@ const App: React.FC = () => {
                             />
                         </Routes>
                     </>
+                    <Footer />
                 </Router>
             </RouteWrapper>
         </ContextSettingsProvider>
