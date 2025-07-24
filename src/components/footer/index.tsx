@@ -7,17 +7,35 @@ import "@/assets/scss/components/footer.scss";
 
 import DiceLightIcon from "@/assets/icons/dice-light.svg?react";
 
+import type {PartStat} from "@/types";
+
+import {getItem} from "@/helpers/persistance-storage";
+
+const PARTS_COUNT_ARRAY = import.meta.env.VITE_PARTS_COUNT_ARRAY_KEY;
+
+const parts = getItem<PartStat[]>(PARTS_COUNT_ARRAY) || [];
+
 const Footer: React.FC = () => {
     return (
         <>
-            <section className="footer">
-                <div className="vocabulary-info">
-                    <div data-cloud></div>
-                    <div className="vocabulary-box">
-                        <h4>My vocabulary stats</h4>
-                        <PartsStatsBox />
+            <section
+                className={`footer ${parts.length <= 0 ? "without-info" : ""}`}
+            >
+                {parts.length > 0 && (
+                    <div className="vocabulary-info">
+                        <div data-cloud></div>
+                        <div className="vocabulary-box">
+                            <PartsStatsBox
+                                header={
+                                    <>
+                                        <h4>My vocabulary stats</h4>
+                                    </>
+                                }
+                                parts={parts}
+                            />
+                        </div>
                     </div>
-                </div>
+                )}
                 <div className="personal-info-group">
                     <div data-cloud></div>
                     <DiceLightIcon className="icon-svg" />

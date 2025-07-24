@@ -9,9 +9,12 @@
 
     @include break("s") {
         flex-direction: column;
-        // width: fit-content;
         margin: 3rem 0 0;
         gap: 3rem;
+    }
+
+    &.without-info {
+        justify-content: flex-end;
     }
 
     .vocabulary-info {

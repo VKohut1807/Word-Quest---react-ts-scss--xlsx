@@ -1,17 +1,14 @@
 import React from "react";
 
 import "@/assets/scss/components/parts-stats-box.scss";
-import type {PartStat} from "@/types";
+import type {PartsStatsBoxProps} from "@/types";
 
-import {getItem} from "@/helpers/persistance-storage";
-
-const PARTS_COUNT_ARRAY = import.meta.env.VITE_PARTS_COUNT_ARRAY_KEY;
-
-const PartsStatsBox: React.FC = () => {
-    const parts = getItem<PartStat[]>(PARTS_COUNT_ARRAY) || [];
-
+const PartsStatsBox: React.FC<PartsStatsBoxProps> = ({header, parts}) => {
     return (
         <div className="parts-stats-box">
+            <div className="header">
+                <h4>{header}</h4>
+            </div>
             {parts.map(({part, count}) => (
                 <div className="part-row" key={part}>
                     <span className="title">{part}s</span>
