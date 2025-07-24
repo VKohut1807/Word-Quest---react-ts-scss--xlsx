@@ -33,16 +33,12 @@ const WordStatsBar: React.FC = () => {
                             <div className="part-of-speech">
                                 <PartsStatsBox
                                     header={
-                                        <>
-                                            <div className="titles">
-                                                <span className="title">
-                                                    Part of speech
-                                                </span>
-                                                <span className="title">
-                                                    Total
-                                                </span>
-                                            </div>
-                                        </>
+                                        <div className="titles">
+                                            <span className="title">
+                                                Part of speech
+                                            </span>
+                                            <span className="title">Total</span>
+                                        </div>
                                     }
                                     parts={parts}
                                 />

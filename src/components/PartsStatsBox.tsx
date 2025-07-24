@@ -6,9 +6,7 @@ import type {PartsStatsBoxProps} from "@/types";
 const PartsStatsBox: React.FC<PartsStatsBoxProps> = ({header, parts}) => {
     return (
         <div className="parts-stats-box">
-            <div className="header">
-                <h4>{header}</h4>
-            </div>
+            <div className="header">{header}</div>
             {parts.map(({part, count}) => (
                 <div className="part-row" key={part}>
                     <span className="title">{part}s</span>

@@ -26,11 +26,7 @@ const Footer: React.FC = () => {
                         <div data-cloud></div>
                         <div className="vocabulary-box">
                             <PartsStatsBox
-                                header={
-                                    <>
-                                        <h4>My vocabulary stats</h4>
-                                    </>
-                                }
+                                header={<h4>My vocabulary stats</h4>}
                                 parts={parts}
                             />
                         </div>
