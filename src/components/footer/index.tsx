@@ -13,9 +13,9 @@ import {getItem} from "@/helpers/persistance-storage";
 
 const PARTS_COUNT_ARRAY = import.meta.env.VITE_PARTS_COUNT_ARRAY_KEY;
 
-const parts = getItem<PartStat[]>(PARTS_COUNT_ARRAY) || [];
-
 const Footer: React.FC = () => {
+    const parts = getItem<PartStat[]>(PARTS_COUNT_ARRAY) || [];
+
     return (
         <>
             <section
