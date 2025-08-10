@@ -2,7 +2,7 @@
 
 .wrapper {
     width: 85%;
-    margin: 11rem auto 0;
+    margin: 9rem auto 0;
 
     &.margin-sero {
         margin: 0 auto;
@@ -12,12 +12,16 @@
         width: 90%;
     }
 
+    @include break("xl") {
+        margin: 8rem auto 1rem;
+    }
+
     @include break("md") {
-        margin: 10rem auto 1rem;
+        margin: 7.5rem auto 1rem;
     }
 
     @include break("xs") {
-        margin: 12rem auto 1rem;
+        margin: 11rem auto 1rem;
     }
 
     @include break("xxs") {

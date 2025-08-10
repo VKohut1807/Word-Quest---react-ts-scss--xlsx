@@ -15,7 +15,7 @@ const InputText: React.FC<InputTextProps> = ({
     handleBlur,
 }) => {
     return (
-        <div className="input-box">
+        <div className={`input-box ${classesName}`}>
             <input
                 type={inputType}
                 id={inputKey}
@@ -24,10 +24,12 @@ const InputText: React.FC<InputTextProps> = ({
                 value={value || ""}
                 onBlur={handleBlur}
                 placeholder={label}
-                className={classesName}
                 required={inputRequired}
             />
-            <label htmlFor={inputKey}>{label}</label>
+            <label htmlFor={inputKey}>
+                {label}
+                {inputRequired && <span className="star">*</span>}
+            </label>
         </div>
     );
 };

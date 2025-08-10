@@ -169,6 +169,8 @@ h1 {
     text-transform: uppercase;
 
     &:disabled {
+        color: $third_10;
+        background-color: $third_30;
         cursor: no-drop;
     }
 }
