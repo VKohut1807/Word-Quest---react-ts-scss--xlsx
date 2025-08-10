@@ -3,26 +3,24 @@ import {createContext, useContext, useState, ReactNode, useEffect} from "react";
 import type {SettingsContextType} from "@/types";
 
 import {getItem, setItem} from "@/helpers/persistance-storage";
-
-const ITEMS_PER_PAGE = import.meta.env.VITE_ITEMS_PER_PAGE_KEY;
-const ORDER_ITEMS = import.meta.env.VITE_ORDER_ITEMS_KEY;
+import {ITEMS_PER_PAGE_KEY, ORDER_ITEMS_KEY} from "@/helpers/constants";
 
 const ItemsPerPageContext = createContext<SettingsContextType | null>(null);
 
 export const ContextSettingsProvider = ({children}: {children: ReactNode}) => {
     const [itemsPerPage, setItemsPerPage] = useState<number>(() => {
-        const stored = getItem(ITEMS_PER_PAGE);
+        const stored = getItem(ITEMS_PER_PAGE_KEY, "local");
         return stored ? Number(stored) : 10;
     });
 
     const [ascOrder, setAscOrder] = useState<boolean>(() => {
-        const stored = getItem(ORDER_ITEMS);
+        const stored = getItem(ORDER_ITEMS_KEY, "local");
         return stored === "true";
     });
 
     useEffect(() => {
-        setItem(ITEMS_PER_PAGE, String(itemsPerPage));
-        setItem(ORDER_ITEMS, String(ascOrder));
+        setItem(ITEMS_PER_PAGE_KEY, String(itemsPerPage), "local");
+        setItem(ORDER_ITEMS_KEY, String(ascOrder), "local");
     }, [itemsPerPage, ascOrder]);
 
     return (

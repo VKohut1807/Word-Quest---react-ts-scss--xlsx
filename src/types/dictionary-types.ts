@@ -12,7 +12,8 @@ export type LocalStorage = {
     cambridgeUrl: string;
 };
 
-export type LocalStorageNoId = Omit<LocalStorage, "id">[];
+export type LocalStorageNoId = Omit<LocalStorage, "id">;
+export type WordDraft = Omit<LocalStorage, "id">;
 
 export type DictionaryProps = {
     data: LocalStorage[];
@@ -27,10 +28,10 @@ export type ModalImageProps = Omit<
     | "cambridgeUrl"
 >;
 
-export type DictionaryRowProps = {
+export type WordCard = {
     row: LocalStorage;
-    onImageClick: (row: ModalImageProps) => void;
-    onSlideClick: (id: number) => void;
+    onImageClick?: (row: ModalImageProps) => void;
+    onSlideClick?: (id: number) => void;
 };
 
 export type SwiperProps = DictionaryProps & {

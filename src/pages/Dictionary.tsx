@@ -1,18 +1,22 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {useSearchParams} from "react-router-dom";
 
 import "@/assets/scss/pages/dictionary-page/index.scss";
 
-import type {DictionaryProps, ModalImageProps} from "@/types";
-
-import DictionaryRow from "@/components/dictionary/DictionaryRow";
+import WordCard from "@/components/dictionary/WordCard";
 import ModalWindow from "@/components/ModalWindow";
 import SwiperSlider from "@/components/swiper-slider";
 import Pagination from "@/components/pagination";
+import WordForm from "@/components/dictionary/WordForm";
 
 import {useItemsPerPage} from "@/context";
 
-const Dictionary: React.FC<DictionaryProps> = ({data}) => {
+import type {DictionaryProps, ModalImageProps, FileUploader} from "@/types";
+
+const Dictionary: React.FC<DictionaryProps & FileUploader> = ({
+    data,
+    setExcelData,
+}) => {
     const [selectedImg, setSelectedImg] = useState<ModalImageProps>();
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const openModal = (row: ModalImageProps) => {
@@ -62,35 +66,40 @@ const Dictionary: React.FC<DictionaryProps> = ({data}) => {
             )}
 
             {currentItems.length > 0 ? (
-                <div className="container">
-                    {totalPages > 1 && (
-                        <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={handlePageChange}
-                        />
-                    )}
+                <>
+                    <div className="container">
+                        <WordForm setExcelData={setExcelData} />
 
-                    <ul className="body">
-                        {currentItems.map((row, idx) => (
-                            <DictionaryRow
-                                key={idx}
-                                row={row}
-                                onImageClick={openModal}
-                                onSlideClick={initSwiper}
+                        {totalPages > 1 && (
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={handlePageChange}
                             />
-                        ))}
-                    </ul>
+                        )}
 
-                    {totalPages > 1 && (
-                        <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={handlePageChange}
-                            otherClasses={"bottom"}
-                        />
-                    )}
-                </div>
+                        <ul className="body">
+                            {currentItems?.map((row, idx) => (
+                                <li key={idx}>
+                                    <WordCard
+                                        row={row}
+                                        onImageClick={openModal}
+                                        onSlideClick={initSwiper}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+
+                        {totalPages > 1 && (
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={handlePageChange}
+                                otherClasses={"bottom"}
+                            />
+                        )}
+                    </div>
+                </>
             ) : (
                 <>
                     <h2>Oops...</h2>

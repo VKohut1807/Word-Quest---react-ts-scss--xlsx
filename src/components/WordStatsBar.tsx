@@ -4,17 +4,15 @@ import "@/assets/scss/components/word-stats-bar.scss";
 
 import PartsStatsBox from "@/components/PartsStatsBox";
 
-import type {PartStat} from "@/types";
-
 import InfoIcon from "@/assets/icons/info.svg?react";
 
-import {getItem} from "@/helpers/persistance-storage";
+import type {PartStat} from "@/types";
 
-const TOTAL_WORDS = import.meta.env.VITE_TOTAL_WORDS_KEY;
-const PARTS_COUNT_ARRAY = import.meta.env.VITE_PARTS_COUNT_ARRAY_KEY;
+import {getItem} from "@/helpers/persistance-storage";
+import {TOTAL_WORDS_KEY, PARTS_COUNT_ARRAY_KEY} from "@/helpers/constants";
 
 const WordStatsBar: React.FC = () => {
-    const parts = getItem<PartStat[]>(PARTS_COUNT_ARRAY) || [];
+    const parts: PartStat[] = getItem(PARTS_COUNT_ARRAY_KEY, "local") || [];
 
     return (
         <>
@@ -22,7 +20,7 @@ const WordStatsBar: React.FC = () => {
                 <div data-tooltip>
                     <div className="summ-box">
                         <span className="sum-number">
-                            {getItem(TOTAL_WORDS) || 0}{" "}
+                            {getItem(TOTAL_WORDS_KEY, "local") || 0}{" "}
                             <span className="wodrs">words</span>
                         </span>
 

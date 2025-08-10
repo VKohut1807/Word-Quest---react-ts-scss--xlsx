@@ -1,16 +1,14 @@
 import React, {useEffect, useRef, useState} from "react";
+import {useNavigate} from "react-router-dom";
+
 import {Swiper, SwiperSlide} from "swiper/react";
 import {EffectCards, Pagination, Navigation, Autoplay} from "swiper/modules";
-import {useNavigate} from "react-router-dom";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "@/assets/scss/components/swiper-slider.scss";
-
-import type {LocalStorage, SwiperProps} from "@/types/dictionary-types";
-import type {SwiperRef} from "swiper/react";
 
 import InputButton from "@/components/inputs/InputButton";
 import FlipCard from "@/components/FlipCard";
@@ -23,7 +21,10 @@ import InfoIcon from "@/assets/icons/info.svg?react";
 
 import {useItemsPerPage} from "@/context";
 
-const ITEM_CARD_ID = import.meta.env.VITE_ITEM_CARD_ID_KEY;
+import type {LocalStorage, SwiperProps} from "@/types/dictionary-types";
+import type {SwiperRef} from "swiper/react";
+
+import {ITEM_CARD_ID_KEY} from "@/helpers/constants";
 
 const SwiperSlider: React.FC<SwiperProps> = ({
     data,
@@ -129,7 +130,7 @@ const SwiperSlider: React.FC<SwiperProps> = ({
 
             setTimeout(() => {
                 const targetElement = document.getElementById(
-                    ITEM_CARD_ID + String(activeSlide.id),
+                    ITEM_CARD_ID_KEY + String(activeSlide.id),
                 );
                 if (targetElement) {
                     targetElement.scrollIntoView({

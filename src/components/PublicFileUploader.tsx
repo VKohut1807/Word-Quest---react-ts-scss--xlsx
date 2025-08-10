@@ -1,29 +1,28 @@
 import React, {useState, useEffect} from "react";
-import * as XLSX from "xlsx";
 import {useNavigate} from "react-router-dom";
+
 import {ROUTES} from "@/routes";
+
+import * as XLSX from "xlsx";
 
 import "@/assets/scss/pages/file-uploader.scss";
 
-import type {
-    LocalStorage,
-    LocalStorageNoId,
-    FileUploaderDataType,
-} from "@/types";
-
-import {setItem} from "@/helpers/persistance-storage";
 import {useItemsPerPage} from "@/context";
 
-const EXCEL_DATA = import.meta.env.VITE_EXCEL_DATA_KEY;
-const TOTAL_WORDS = import.meta.env.VITE_TOTAL_WORDS_KEY;
-const PARTS_COUNT_ARRAY = import.meta.env.VITE_PARTS_COUNT_ARRAY_KEY;
-const FILE_NAME = import.meta.env.VITE_FILE_NAME_KEY;
-const DEFAULT_FILE_NAME = import.meta.env.VITE_DEFAULT_FILE_NAME_KEY;
+import type {LocalStorage, LocalStorageNoId, FileUploader} from "@/types";
 
-const PublicFileUploader: React.FC<FileUploaderDataType> = ({
-    setExcelData,
-    requiredFields,
-}) => {
+import {setItem} from "@/helpers/persistance-storage";
+
+import {
+    EXCEL_DATA_KEY,
+    TOTAL_WORDS_KEY,
+    PARTS_COUNT_ARRAY_KEY,
+    FILE_NAME_KEY,
+    DEFAULT_FILE_NAME,
+    REQUIRED_WORD_FIELDS,
+} from "@/helpers/constants";
+
+const PublicFileUploader: React.FC<FileUploader> = ({setExcelData}) => {
     const navigate = useNavigate();
     const {ascOrder} = useItemsPerPage();
 
@@ -87,10 +86,10 @@ const PublicFileUploader: React.FC<FileUploaderDataType> = ({
                 const sheet = workbook.Sheets[sheetName];
                 const jsonData = XLSX.utils.sheet_to_json(
                     sheet,
-                ) as LocalStorageNoId;
+                ) as LocalStorageNoId[];
 
                 const isValid = jsonData.every((item) =>
-                    requiredFields.every((field) => field in item),
+                    REQUIRED_WORD_FIELDS.every((field) => field in item),
                 );
                 if (!isValid) {
                     setMessage({
@@ -112,8 +111,9 @@ const PublicFileUploader: React.FC<FileUploaderDataType> = ({
                     part,
                     count,
                 }));
-                setItem(PARTS_COUNT_ARRAY, partsArray);
+                setItem(PARTS_COUNT_ARRAY_KEY, partsArray, "local");
 
+                // !!! change it, id create only 1time at entrance
                 const jsonDataWithIds: LocalStorage[] = (
                     ascOrder ? [...jsonData] : [...jsonData].reverse()
                 ).map((item, index) => ({
@@ -122,9 +122,9 @@ const PublicFileUploader: React.FC<FileUploaderDataType> = ({
                 }));
 
                 setExcelData(jsonDataWithIds);
-                setItem(EXCEL_DATA, jsonDataWithIds);
-                setItem(TOTAL_WORDS, jsonDataWithIds.length);
-                setItem(FILE_NAME, DEFAULT_FILE_NAME);
+                setItem(EXCEL_DATA_KEY, jsonDataWithIds, "local");
+                setItem(TOTAL_WORDS_KEY, jsonDataWithIds.length, "local");
+                setItem(FILE_NAME_KEY, DEFAULT_FILE_NAME, "local");
                 setProgress(100);
                 setIsLoading(false);
                 setMessage({

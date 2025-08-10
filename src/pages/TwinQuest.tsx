@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react";
-import {getRndInteger, shuffleArray} from "@/helpers/randoms";
 
 import "@/assets/scss/pages/twin-quest.scss";
 
 import FlipCard from "@/components/FlipCard";
 
 import type {LocalStorage, TwinQuestProps, PartOfSpeech} from "@/types";
+
+import {getRndInteger, shuffleArray} from "@/helpers/randoms";
 
 const TwinQuest: React.FC<TwinQuestProps> = ({localstorData}) => {
     // for now

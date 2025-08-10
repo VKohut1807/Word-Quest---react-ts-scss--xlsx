@@ -1,17 +1,42 @@
-export const getItem = <T>(key: string): T | null => {
+export const getItem = <T>(
+    key: string,
+    storageType: "local" | "session" = "local",
+): T | null => {
     try {
-        const item = localStorage.getItem(key);
+        const storage =
+            storageType === "session" ? sessionStorage : localStorage;
+        const item = storage.getItem(key);
         return item ? JSON.parse(item) : null;
     } catch (error) {
-        console.error("Error in getting data from localStorage", error);
+        console.error(`Error getting data from ${storageType}Storage:`, error);
         return null;
     }
 };
 
-export const setItem = <T>(key: string, data: T): void => {
+export const setItem = <T>(
+    key: string,
+    data: T,
+    storageType: "local" | "session" = "local",
+): void => {
+    const storage = storageType === "session" ? sessionStorage : localStorage;
+
     try {
-        localStorage.setItem(String(key), JSON.stringify(data));
+        storage.setItem(String(key), JSON.stringify(data));
     } catch (error) {
-        console.error("Error in setting data to localStorage", error);
+        console.error(`Error setting data from ${storageType}Storage:`, error);
+    }
+};
+
+export const removeItem = <T>(
+    key: string,
+    storageType: "local" | "session" = "local",
+) => {
+    try {
+        const storage =
+            storageType === "session" ? sessionStorage : localStorage;
+        storage.removeItem(key);
+    } catch (error) {
+        console.error(`Error removing data from ${storageType}Storage:`, error);
+        return null;
     }
 };

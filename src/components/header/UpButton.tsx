@@ -1,4 +1,5 @@
 import React, {useEffect, useRef} from "react";
+
 import "@/assets/scss/components/up-button.scss";
 
 import ProgressIcon from "@/assets/icons/progress.svg?react";

@@ -2,9 +2,9 @@ import React from "react";
 
 import "@/assets/scss/components/modal-window.scss";
 
-import type {ModalWindowType} from "@/types";
-
 import ShutdownIcon from "@/assets/icons/shutdown.svg?react";
+
+import type {ModalWindowType} from "@/types";
 
 const RouteWrapper: React.FC<ModalWindowType> = ({children, setOpenModal}) => {
     const closeModal = () => {

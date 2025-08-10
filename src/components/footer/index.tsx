@@ -1,20 +1,19 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-import PartsStatsBox from "@/components/PartsStatsBox";
-
 import "@/assets/scss/components/footer.scss";
+
+import PartsStatsBox from "@/components/PartsStatsBox";
 
 import DiceLightIcon from "@/assets/icons/dice-light.svg?react";
 
 import type {PartStat} from "@/types";
 
 import {getItem} from "@/helpers/persistance-storage";
-
-const PARTS_COUNT_ARRAY = import.meta.env.VITE_PARTS_COUNT_ARRAY_KEY;
+import {PARTS_COUNT_ARRAY_KEY} from "@/helpers/constants";
 
 const Footer: React.FC = () => {
-    const parts = getItem<PartStat[]>(PARTS_COUNT_ARRAY) || [];
+    const parts: PartStat[] = getItem(PARTS_COUNT_ARRAY_KEY, "local") || [];
 
     return (
         <>

@@ -9,6 +9,7 @@ import Home from "@/pages/Home";
 import Dictionary from "@/pages/Dictionary";
 import TwinQuest from "@/pages/TwinQuest";
 import Settings from "@/pages/Settings";
+
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import RouteWrapper from "@/components/RouteWrapper";
@@ -18,13 +19,13 @@ import {ContextSettingsProvider} from "@/context";
 import type {LocalStorage} from "@/types";
 
 import {getItem} from "@/helpers/persistance-storage";
-const EXCEL_DATA = import.meta.env.VITE_EXCEL_DATA_KEY;
+import {EXCEL_DATA_KEY} from "@/helpers/constants";
 
 const App: React.FC = () => {
     const [excelData, setExcelData] = useState<LocalStorage[]>([]);
 
     useEffect(() => {
-        const storedData = getItem(EXCEL_DATA);
+        const storedData = getItem(EXCEL_DATA_KEY, "local");
         if (storedData) {
             setExcelData(storedData as LocalStorage[]);
         }
@@ -40,7 +41,12 @@ const App: React.FC = () => {
                             <Route path={ROUTES.HOME} element={<Home />} />
                             <Route
                                 path={ROUTES.DICTIONARY}
-                                element={<Dictionary data={excelData} />}
+                                element={
+                                    <Dictionary
+                                        data={excelData}
+                                        setExcelData={setExcelData}
+                                    />
+                                }
                             />
                             <Route
                                 path={ROUTES.GAMES.ROOT}

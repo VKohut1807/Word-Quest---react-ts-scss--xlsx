@@ -1,6 +1,6 @@
 import React from "react";
 
-import "@/assets/scss/components/input-button.scss";
+import "@/assets/scss/components/inputs/input-button.scss";
 
 import {InputButtonProps} from "@/types/input-types";
 

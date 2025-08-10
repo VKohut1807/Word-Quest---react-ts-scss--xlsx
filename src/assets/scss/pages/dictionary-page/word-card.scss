@@ -1,6 +1,6 @@
 @use "../../config/index.scss" as *;
 
-.row {
+.word-card {
     display: grid;
     grid-template-areas:
         "up up"

@@ -1,6 +1,7 @@
 import React from "react";
 
 import "@/assets/scss/components/parts-stats-box.scss";
+
 import type {PartsStatsBoxProps} from "@/types";
 
 const PartsStatsBox: React.FC<PartsStatsBoxProps> = ({header, parts}) => {

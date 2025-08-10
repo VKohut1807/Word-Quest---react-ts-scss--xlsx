@@ -1,0 +1,62 @@
+@use "../../config/index.scss" as *;
+
+.input-box {
+    position: relative;
+    padding: 1.1rem 0 0;
+    width: 100%;
+
+    input {
+        font-family: inherit;
+        width: 100%;
+        outline: 0;
+        border: 0;
+        border-bottom: 0.0625rem solid $third_80;
+        font-size: 1.25rem;
+        padding: 0.25rem 0 0;
+        background: transparent;
+        transition: border-color 0.3s ease-in-out;
+
+        &::placeholder {
+            color: transparent;
+        }
+
+        &:placeholder-shown~label {
+            font-size: 1.1rem;
+            cursor: text;
+            transform: translateY(1rem);
+            color: $third_80;
+        }
+
+        &:focus {
+            font-weight: 700;
+            border-width: 0.0625rem;
+            border-image: linear-gradient(to right, $primary, $secondary);
+            border-image-slice: 1;
+
+            ~label {
+                font-size: 0.75rem;
+                font-weight: 700;
+                color: $primary;
+                transform: translateY(0.5rem);
+            }
+        }
+
+        &:required,
+        &:invalid {
+            box-shadow: none;
+        }
+    }
+
+    label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateY(0.5rem);
+        font-size: 0.75rem;
+        color: $third_80;
+        pointer-events: none;
+        transition:
+            transform 0.3s ease-in-out,
+            font-size 0.3s ease-in-out;
+    }
+}
