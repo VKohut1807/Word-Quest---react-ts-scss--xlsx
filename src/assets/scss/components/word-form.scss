@@ -1,8 +1,20 @@
 @use "../config/index.scss" as *;
 
+
 .new-word-box {
     width: fit-content;
     margin: 0 0 0 auto;
+
+    .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        opacity: 0.8;
+        z-index: 101;
+    }
 
     .main-form {
         position: fixed;
@@ -12,7 +24,7 @@
         display: flex;
         flex-direction: column;
         min-width: 82%;
-        z-index: 2;
+        z-index: 102;
         border: 0.0625rem solid $primary;
         border-radius: 1rem;
         padding: 0.5rem 1rem;
@@ -23,8 +35,8 @@
             min-width: 87%;
         }
 
-        @include break("xs") {
-            top: 11rem;
+        @include break("s") {
+            top: 10rem;
         }
 
         .top-box {
@@ -43,9 +55,9 @@
             @include break("xs") {
                 display: grid;
                 grid-template-areas:
-                    "title title buttons"
-                    "title title buttons"
-                    "exemple exemple exemple";
+                    "title buttons buttons buttons buttons"
+                    "title buttons buttons buttons buttons"
+                    "exemple exemple exemple exemple exemple";
                 gap: 0.5rem;
             }
 
@@ -78,9 +90,15 @@
                 grid-area: buttons;
 
                 @include break("xs") {
+                    flex-direction: row;
                     gap: 1rem;
                     height: fit-content;
                     margin: 0 0 0 auto;
+                    width: 100%;
+                }
+
+                .close-window {
+                    order: 2;
                 }
 
                 .hide-form {
@@ -88,11 +106,20 @@
                     padding: 0.25rem;
                     margin: 0 0 0 auto;
 
+                    @include break("xs") {
+                        order: 1;
+                        margin: auto 0;
+                    }
+
                     .eye-open,
                     .eye-close {
                         path {
                             fill: $third;
                             transition: fill 0.3s ease-in-out;
+
+                            @include break("xs") {
+                                fill: $secondary;
+                            }
                         }
 
                         &:hover {
@@ -125,6 +152,11 @@
                 display: flex;
                 flex-direction: column;
                 gap: 0.25rem;
+
+                @include break("s") {
+                    max-height: 25rem;
+                    overflow-y: auto;
+                }
 
                 .inputs-row {
                     display: flex;

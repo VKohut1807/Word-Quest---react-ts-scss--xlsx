@@ -81,6 +81,14 @@ const WordForm: React.FC<FileUploader> = ({setExcelData}) => {
         setIsComplete(isWordDataComplete(word));
     }, [word]);
 
+    useEffect(() => {
+        if (showWordWindow && showForm) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+    }, [showWordWindow, showForm]);
+
     function isWordDataComplete(word: Partial<WordDraft>): word is WordDraft {
         return (
             Object.keys(word).length > 0 &&
@@ -103,6 +111,9 @@ const WordForm: React.FC<FileUploader> = ({setExcelData}) => {
                     onSelect={onOpenModal}
                 />
 
+                {showWordWindow && showForm && (
+                    <div className="background"></div>
+                )}
                 {showWordWindow && (
                     <div className="main-form">
                         <div className="top-box">
