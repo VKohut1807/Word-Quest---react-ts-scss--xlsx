@@ -6,13 +6,22 @@
     padding: 0;
 }
 
-html {
+html,
+body {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-
+    overflow-y: auto;
     font-size: clamp(0.75rem, 0.4651rem + 0.5935vw, 1rem);
+    font-family:
+        "Bradley Hand",
+        "Segoe Script",
+        "Lucida Handwriting",
+        "Comic Sans MS",
+        cursive;
+    scrollbar-width: thin;
+    scrollbar-color: $primary $secondary_10;
 
     @include break("lg") {
         font-size: 14px;
@@ -21,33 +30,16 @@ html {
     @include break("sm") {
         font-size: 12px;
     }
-
-    &::-webkit-scrollbar {
-        width: 0.5rem;
-    }
-
-    &::-webkit-scrollbar-track {
-        background-color: $third_20;
-        border-radius: 0.9rem;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        border-radius: 0.9rem;
-        background: linear-gradient(180deg, $primary, $secondary, $primary);
-    }
 }
 
 body {
     display: flex;
     flex-direction: column;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 100%;
+    min-height: 100dvh;
+    background-color: $secondary_10;
 
     #root {
-        min-height: 100dvh;
-        background-color: $secondary_10;
-        position: relative;
+        flex: 1;
     }
 }
 
@@ -100,109 +92,4 @@ h1 {
     color: $primary;
     text-shadow: 0 0 1rem $secondary_70;
     margin-bottom: 2rem;
-}
-
-[data-tooltip] {
-    width: fit-content;
-    height: fit-content;
-    position: relative;
-    cursor: help;
-    user-select: none;
-
-    .slot {}
-
-    .tooltip-info {
-        text-align: start;
-        z-index: 1;
-        opacity: 0;
-        visibility: hidden;
-        position: absolute;
-        top: 100%;
-        right: 100%;
-        width: 11rem;
-        height: fit-content;
-        padding: 0.5rem;
-        background-color: #fff;
-        box-shadow: 0.1rem 0.1rem 3.5rem $primary_100;
-        border-radius: 1rem;
-        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-    }
-
-    &:hover {
-        .tooltip-info {
-            opacity: 1;
-            visibility: visible;
-        }
-    }
-}
-
-[data-cloud] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translateX(-25%);
-    width: 100%;
-    height: 100%;
-    background: $third_10;
-    border-radius: 50%;
-    box-shadow:
-        $third_10 4.0625rem -0.9375rem 0 -0.3125rem,
-        $third_10 1.5625rem -1.5625rem 0 0,
-        $third_10 1.875rem 0.625rem 0 0,
-        $third_10 3.75rem 0.9375rem 0 -0.625rem,
-        $third_10 5.3125rem 0.3125rem 0 -0.3125rem,
-        $third_10 6.5rem 0.5rem 0 -0.3rem,
-        $third_10 7.5rem -0.8rem 0 -0.5rem;
-}
-
-[data-button] {
-    width: fit-content;
-    height: fit-content;
-    display: block;
-    padding: 0.5rem 1rem;
-    background-color: $third_30;
-    border: 0.0625rem solid $third;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    font-size: 1rem;
-    color: #000;
-    text-transform: uppercase;
-
-    &:disabled {
-        color: $third_10;
-        background-color: $third_30;
-        cursor: no-drop;
-    }
-}
-
-[data-button-icon] {
-    width: fit-content;
-    height: fit-content;
-    display: block;
-    background-color: transparent;
-    border: none;
-    border-radius: 50%;
-    overflow: hidden;
-    cursor: pointer;
-    transition:
-        transform 0.3s ease-in-out;
-
-    &[data-button-icon="close"] {
-        width: 4rem;
-        z-index: 1;
-        padding: 0.25rem;
-        background-color: #fff;
-
-        @include break('md') {
-            width: 3rem;
-        }
-    }
-
-    &:hover {
-        transform: scale(1.05);
-    }
-
-    &:disabled {
-        cursor: no-drop;
-    }
 }

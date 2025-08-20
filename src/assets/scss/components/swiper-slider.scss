@@ -141,6 +141,7 @@
                             gap: 0.25rem;
                             width: fit-content;
                             font-size: 1.25rem;
+                            font-family: 'Times New Roman', Times, serif;
                             padding: 0 0.25rem;
                             color: $secondary;
                             letter-spacing: 0.25rem;
@@ -378,39 +379,39 @@
         }
     }
 
-    .swiper-button-next,
-    .swiper-button-prev {
-        margin: 0;
-        box-shadow: 0.1rem 0.1rem 1rem $third_120;
-        border: 0.0625rem solid $primary_40;
-        background-color: $third_40;
-        border-radius: 1rem;
-        width: 3rem;
-        height: 4rem;
-        color: $primary;
-        transition:
-            color 0.3s ease-in-out,
-            background-color 0.3s ease-in-out,
-            transform 0.3s ease-in-out;
+    .swiper-next,
+    .swiper-prev {
+        position: absolute;
+        top: 0;
+        left: 112%;
+        z-index: 1;
 
-        &:hover {
-            color: $primary_50;
-            transform: translateY(0.15rem);
-            background-color: $secondary_20;
+        svg {
+            width: 1.25rem;
         }
     }
 
-    .swiper-button-next {
+    .swiper-next {
         top: 15%;
         right: -20%;
 
         @include break('md') {
             top: 110%;
-            right: 0%;
+            left: 91%;
+        }
+
+        @include break('sm') {
+            top: 110%;
+            left: 89.5%;
+        }
+
+        @include break('xs') {
+            top: 110%;
+            left: 84.5%;
         }
     }
 
-    .swiper-button-prev {
+    .swiper-prev {
         top: 45%;
         left: 112%;
 
@@ -504,18 +505,12 @@
         }
     }
 
-    .close-icon {
+    .close-window {
         position: absolute;
         top: -4rem;
-        right: -8.25rem;
+        right: -8rem;
         width: 3rem;
         z-index: 1;
-        cursor: pointer;
-        transition:
-            transform 0.3s ease-in-out;
-        padding: 0.25rem;
-        border-radius: 50%;
-        background-color: #fff;
 
         @include break('md') {
             top: -4rem;
@@ -523,8 +518,8 @@
             width: 2rem;
         }
 
-        &:hover {
-            transform: scale(1.05);
+        @include break('xxs') {
+            right: -1.75rem;
         }
     }
 }

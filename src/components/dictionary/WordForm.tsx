@@ -9,6 +9,7 @@ import InputButton from "@/components/inputs/InputButton";
 import ShutdownIcon from "@/assets/icons/shutdown.svg?react";
 import EyeOpenIcon from "@/assets/icons/eye-open.svg?react";
 import EyeCloseIcon from "@/assets/icons/eye-close.svg?react";
+import ScrollIcon from "@/assets/icons/scroll.svg?react";
 
 import type {FileUploader, LocalStorage, WordDraft} from "@/types";
 
@@ -30,6 +31,14 @@ const WordForm: React.FC<FileUploader> = ({setExcelData}) => {
 
     const onOpenModal = (type: string) => {
         setShowWordWindow(true);
+    };
+
+    const onCloseModal = (type: string) => {
+        setShowWordWindow(false);
+    };
+
+    const onShowForm = (type: string) => {
+        setShowForm((prev) => !prev);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,8 +115,7 @@ const WordForm: React.FC<FileUploader> = ({setExcelData}) => {
                 <InputButton
                     label="Create new word"
                     selected={false}
-                    additionalText="Upload the file again?"
-                    buttonKey="my-file"
+                    buttonKey="new-file"
                     onSelect={onOpenModal}
                 />
 
@@ -122,31 +130,33 @@ const WordForm: React.FC<FileUploader> = ({setExcelData}) => {
                             </div>
                             <h3 className="title">New word</h3>
                             <div className="group-buttons">
-                                <button
-                                    type="button"
-                                    onClick={() => setShowWordWindow(false)}
-                                    data-button-icon="close"
-                                    className="close-window"
-                                >
-                                    <ShutdownIcon />
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => setShowForm((prev) => !prev)}
-                                    data-button-icon
-                                    className="hide-form"
-                                >
-                                    {showForm ? (
-                                        <EyeCloseIcon className="eye-close" />
-                                    ) : (
-                                        <EyeOpenIcon className="eye-open" />
-                                    )}
-                                </button>
+                                <InputButton
+                                    label={<ShutdownIcon />}
+                                    variant="secondary"
+                                    selected={false}
+                                    buttonKey="close-window"
+                                    classesName="close-window"
+                                    onSelect={onCloseModal}
+                                />
+                                <InputButton
+                                    label={
+                                        showForm ? (
+                                            <EyeCloseIcon className="eye-close" />
+                                        ) : (
+                                            <EyeOpenIcon className="eye-open" />
+                                        )
+                                    }
+                                    variant="secondary"
+                                    selected={false}
+                                    buttonKey="eye-form"
+                                    onSelect={onShowForm}
+                                />
                             </div>
                         </div>
                         {showForm && (
                             <div className="bottom-box">
                                 <form className="inputs-box">
+                                    <ScrollIcon className="patrol-scroll" />
                                     <div className="inputs-row">
                                         <InputText
                                             inputKey="englishWord"
@@ -235,26 +245,22 @@ const WordForm: React.FC<FileUploader> = ({setExcelData}) => {
                                     </div>
                                 </form>
                                 <div className="group-buttons">
-                                    <button
-                                        type="button"
-                                        onClick={handleReset}
-                                        disabled={
+                                    <InputButton
+                                        label="Reset"
+                                        selected={false}
+                                        buttonKey="cancel-form"
+                                        disabledes={
                                             Object.keys(word).length === 0
                                         }
-                                        data-button
-                                        className="cancel"
-                                    >
-                                        Reset
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={handleAddWord}
-                                        disabled={!isComplete}
-                                        data-button
-                                        className="add-new-word"
-                                    >
-                                        add new word
-                                    </button>
+                                        onSelect={handleReset}
+                                    />
+                                    <InputButton
+                                        label="Add new word"
+                                        selected={false}
+                                        buttonKey="add-new-word"
+                                        disabledes={!isComplete}
+                                        onSelect={handleAddWord}
+                                    />
                                 </div>
                             </div>
                         )}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import "@/assets/scss/components/inputs/input-button.scss";
 
@@ -10,16 +10,31 @@ const InputButton: React.FC<InputButtonProps> = ({
     additionalText,
     buttonKey,
     onSelect,
-    secondaryButton = false,
+    variant = "",
     classesName = "",
+    disabledes = false,
 }) => {
+    const [canClick, setCanClick] = useState<boolean>(true);
+
+    const handleClick = (): void => {
+        if (!canClick || disabledes) return;
+
+        setCanClick(false);
+        onSelect(buttonKey);
+
+        setTimeout(() => {
+            setCanClick(true);
+        }, 500);
+    };
+
     return (
         <label
-            {...(secondaryButton ? {"secondary-button": ""} : {})}
             data-additional-text={additionalText}
+            data-variant={variant}
+            {...(disabledes ? {"disabled-button": ""} : {})}
             className={`label ${selected ? "active selected" : ""} ${classesName}`}
         >
-            <input type="button" onClick={() => onSelect(buttonKey)} />
+            <input disabled={disabledes} type="button" onClick={handleClick} />
             {label}
         </label>
     );

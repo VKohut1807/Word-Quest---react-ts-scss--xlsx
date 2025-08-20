@@ -1,59 +1,55 @@
 @use "../config/mixins" as *;
 @use "../config/colors" as *;
 
-.btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 0.5rem;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    font-weight: 600;
-    border: 0.0625rem solid;
-    cursor: pointer;
-    padding: 0.75rem 1.875rem;
+[data-tooltip] {
     width: fit-content;
-    border-radius: 0.5rem;
-    transition:
-        background-color 0.3s ease-in-out,
-        color 0.3s ease-in-out,
-        border-color 0.3s ease-in-out,
-        transform 0.3s ease-in-out;
+    height: fit-content;
+    position: relative;
+    cursor: help;
+    user-select: none;
 
-    &:not([variant]),
-    &[variant="primary"] {
-        background-color: $primary;
-        border-color: $primary;
-        color: #fff;
+    .slot {}
 
-        &:not(:disabled):hover {
-            background-color: $secondary;
-            border-color: $secondary_80;
-        }
-
-        &:disabled {
-            background-color: $third_50;
-            border-color: $third_70;
-            cursor: initial;
-            color: $third_90;
-        }
+    .tooltip-info {
+        text-align: start;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        top: 100%;
+        right: 100%;
+        width: 11rem;
+        height: fit-content;
+        padding: 0.5rem;
+        background-color: #fff;
+        box-shadow: 0.1rem 0.1rem 3.5rem $primary_100;
+        border-radius: 1rem;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     }
 
-    &[variant="secondary"] {
-        background-color: $primary_50;
-        border-color: $primary_50;
-        color: #fff;
-
-        &:not(:disabled):hover {
-            background-color: $secondary_30;
-            border-color: $secondary_40;
-        }
-
-        &:disabled {
-            background-color: $third_50;
-            border-color: $third_70;
-            cursor: initial;
-            color: $third_90;
+    &:hover {
+        .tooltip-info {
+            opacity: 1;
+            visibility: visible;
         }
     }
+}
+
+[data-cloud] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-25%);
+    width: 100%;
+    height: 100%;
+    background: $third_10;
+    border-radius: 50%;
+    box-shadow:
+        $third_10 4.0625rem -0.9375rem 0 -0.3125rem,
+        $third_10 1.5625rem -1.5625rem 0 0,
+        $third_10 1.875rem 0.625rem 0 0,
+        $third_10 3.75rem 0.9375rem 0 -0.625rem,
+        $third_10 5.3125rem 0.3125rem 0 -0.3125rem,
+        $third_10 6.5rem 0.5rem 0 -0.3rem,
+        $third_10 7.5rem -0.8rem 0 -0.5rem;
 }

@@ -17,6 +17,8 @@ import ProgressIcon from "@/assets/icons/progress.svg?react";
 import ShutdownIcon from "@/assets/icons/shutdown.svg?react";
 import StopButtonIcon from "@/assets/icons/stop-button.svg?react";
 import PlayButtonIcon from "@/assets/icons/play-button.svg?react";
+import NextButtonIcon from "@/assets/icons/next-button.svg?react";
+import PrevButtonIcon from "@/assets/icons/prev-button.svg?react";
 import InfoIcon from "@/assets/icons/info.svg?react";
 
 import {useItemsPerPage} from "@/context";
@@ -34,7 +36,7 @@ const SwiperSlider: React.FC<SwiperProps> = ({
     const navigate = useNavigate();
     const {itemsPerPage} = useItemsPerPage();
 
-    const closeModal = () => {
+    const onCloseModal = () => {
         setIsShowSwiper(false);
     };
 
@@ -142,6 +144,19 @@ const SwiperSlider: React.FC<SwiperProps> = ({
         }
     };
 
+    const lastClick = useRef(0);
+
+    const handleNavigation = (direction: "next" | "prev") => {
+        const now = Date.now();
+        if (now - lastClick.current < 500) return;
+        lastClick.current = now;
+
+        if (!swiperInstance.current) return;
+
+        if (direction === "next") swiperInstance.current.swiper.slideNext();
+        else swiperInstance.current.swiper.slidePrev();
+    };
+
     useEffect(() => {
         if (pendingSlideShift !== null && swiperInstance.current) {
             swiperInstance.current.swiper.slideTo(pendingSlideShift - 1, 0);
@@ -160,7 +175,11 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                 pagination={{
                     dynamicBullets: true,
                 }}
-                navigation={true}
+                // navigation={true}
+                navigation={{
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                }}
                 slidesPerView={1}
                 autoplay={
                     isAutoplay
@@ -298,7 +317,27 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                 )}
 
                 <InputButton
-                    secondaryButton={true}
+                    variant="secondary"
+                    buttonKey="swiper-prev"
+                    selected={false}
+                    additionalText=""
+                    label={<PrevButtonIcon />}
+                    onSelect={() => handleNavigation("prev")}
+                    classesName="swiper-prev"
+                />
+
+                <InputButton
+                    variant="secondary"
+                    buttonKey="swiper-next"
+                    selected={false}
+                    additionalText=""
+                    label={<NextButtonIcon />}
+                    onSelect={() => handleNavigation("next")}
+                    classesName="swiper-next"
+                />
+
+                <InputButton
+                    variant="secondary"
                     buttonKey="swiper-autoplay"
                     selected={false}
                     additionalText=""
@@ -307,7 +346,14 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                     classesName="swiper-autoplay"
                 />
 
-                <ShutdownIcon className="close-icon" onClick={closeModal} />
+                <InputButton
+                    label={<ShutdownIcon />}
+                    variant="secondary"
+                    selected={false}
+                    buttonKey="close-window"
+                    classesName="close-window"
+                    onSelect={onCloseModal}
+                />
             </Swiper>
         </>
     );

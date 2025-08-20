@@ -4,8 +4,9 @@ export type InputButtonProps = {
     additionalText?: string;
     buttonKey: string;
     onSelect: (buttonKey: string) => void;
-    secondaryButton?: boolean;
+    variant?: string;
     classesName?: string;
+    disabledes?: boolean;
 };
 
 export type InputRadioProps = {

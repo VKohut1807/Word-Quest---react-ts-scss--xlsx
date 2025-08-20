@@ -28,7 +28,6 @@
         }
     }
 
-
     svg {
         width: 2rem;
 
@@ -38,11 +37,14 @@
         }
     }
 
+    input {
+        display: none;
+    }
+
     &.active {
         color: $secondary_40;
         position: relative;
         overflow: hidden;
-
     }
 
     &.selected {
@@ -68,7 +70,7 @@
         }
     }
 
-    &:hover {
+    &:hover:not([disabled-button]) {
         transform: translateY(0.15rem);
 
         svg {
@@ -78,26 +80,87 @@
         }
     }
 
-    &[secondary-button] {
+    &:not([data-variant]),
+    &[data-variant="primary"] {}
+
+    &[data-variant="secondary"] {
         padding: 0;
         box-shadow: 0.1rem 0.1rem 1rem $third_120;
         border: 0.0625rem solid $primary_40;
         background-color: $third_40;
-        border-radius: 1rem;
-        width: 3rem;
-        height: 4rem;
+        width: fit-content;
+        min-width: 3rem;
+        height: fit-content;
+        min-height: 3rem;
         cursor: pointer;
         transition:
             background-color 0.3s ease-in-out,
             transform 0.3s ease-in-out;
 
-        &:hover {
-            transform: translateY(0.15rem);
-            background-color: $secondary_20;
+        &.close-window {
+            svg {
+                path {
+                    fill: #fff;
+
+                    &.path-red {
+                        fill: $fourth;
+                    }
+                }
+
+            }
         }
     }
 
-    input {
-        display: none;
+    &[data-variant="pager"] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 1rem;
+        background-color: $secondary_30;
+        border: none;
+        box-shadow: none;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        color: $primary_80;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+    &[data-variant="pagination"] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.3rem 0.8rem;
+        background: $primary_10;
+        border: none;
+        box-shadow: none;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        color: $secondary_120;
+        font-weight: 700;
+        font-size: 1rem;
+        height: fit-content;
+
+        &.active {
+            background: $primary_80;
+            color: #fff;
+            font-size: 1.15rem;
+        }
+
+        &:hover {
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    &[disabled-button] {
+        color: $third_10;
+        background-color: $third_30;
+        box-shadow: 0.3rem 0.3rem 1rem $third_90;
+        border-right: 0.0625rem solid $third_90;
+        border-bottom: 0.0625rem solid $third_90;
+        cursor: no-drop;
+        opacity: 0.5;
     }
 }

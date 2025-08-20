@@ -60,3 +60,22 @@
         stroke: $primary;
     }
 }
+
+@keyframes patrol-vertical {
+
+    0%,
+    100% {
+        transform: translateY(-200%) scale(1);
+        opacity: 0.2;
+    }
+
+    25%,
+    75% {
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(400%) scale(1.05);
+        opacity: 0.2;
+    }
+}

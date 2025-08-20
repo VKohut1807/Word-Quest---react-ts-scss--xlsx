@@ -1,5 +1,5 @@
 @use "../config/index.scss" as *;
-
+@use "../animations/index.scss" as *;
 
 .new-word-box {
     width: fit-content;
@@ -87,6 +87,7 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+                align-items: center;
                 grid-area: buttons;
 
                 @include break("xs") {
@@ -98,13 +99,16 @@
                 }
 
                 .close-window {
-                    order: 2;
+
+                    @include break("xs") {
+                        order: 2;
+                    }
                 }
 
                 .hide-form {
                     max-width: 3rem;
                     padding: 0.25rem;
-                    margin: 0 0 0 auto;
+                    margin: 0 auto;
 
                     @include break("xs") {
                         order: 1;
@@ -114,18 +118,7 @@
                     .eye-open,
                     .eye-close {
                         path {
-                            fill: $third;
-                            transition: fill 0.3s ease-in-out;
-
-                            @include break("xs") {
-                                fill: $secondary;
-                            }
-                        }
-
-                        &:hover {
-                            path {
-                                fill: $primary;
-                            }
+                            fill: $secondary;
                         }
                     }
                 }
@@ -152,10 +145,31 @@
                 display: flex;
                 flex-direction: column;
                 gap: 0.25rem;
+                position: relative;
 
                 @include break("s") {
                     max-height: 25rem;
                     overflow-y: auto;
+                }
+
+                .patrol-scroll {
+                    display: none;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    height: 1.5rem;
+                    min-height: 1.5rem;
+                    width: fit-content;
+                    z-index: 1;
+                    animation: patrol-vertical 7s ease-in-out infinite;
+
+                    path {
+                        fill: $secondary;
+                    }
+
+                    @include break("xs") {
+                        display: block;
+                    }
                 }
 
                 .inputs-row {

@@ -2,7 +2,7 @@ import React from "react";
 
 import "@/assets/scss/components/pagination.scss";
 
-import PageButton from "@/components/pagination/PageButton";
+import InputButton from "@/components/inputs/InputButton";
 
 import {PaginationProps} from "@/types";
 
@@ -22,34 +22,39 @@ const Pagination: React.FC<PaginationProps> = ({
 
     return (
         <div className={`pagination ${otherClasses || ""}`}>
-            <button
-                className="prev"
-                onClick={handlePrev}
-                disabled={currentPage === 1}
-            >
-                Back
-            </button>
-
+            <InputButton
+                label="Back"
+                selected={false}
+                buttonKey="pagination-back"
+                variant="pager"
+                disabledes={currentPage === 1}
+                onSelect={handlePrev}
+                classesName="prev"
+            />
             <div className="buttons-box">
                 {Array.from({length: totalPages}, (_, i) => {
                     const page = i + 1;
                     return (
-                        <PageButton
+                        <InputButton
                             key={page}
-                            pageNumber={page}
-                            isActive={currentPage === page}
-                            onClick={onPageChange}
+                            label={page}
+                            selected={currentPage === page}
+                            buttonKey={String(page)}
+                            variant="pagination"
+                            onSelect={(key) => onPageChange(Number(key))}
                         />
                     );
                 })}
             </div>
-            <button
-                className="next"
-                onClick={handleNext}
-                disabled={currentPage === totalPages}
-            >
-                Next
-            </button>
+            <InputButton
+                label="Next"
+                selected={false}
+                buttonKey="pagination-next"
+                variant="pager"
+                disabledes={currentPage === totalPages}
+                onSelect={handleNext}
+                classesName="next"
+            />
         </div>
     );
 };

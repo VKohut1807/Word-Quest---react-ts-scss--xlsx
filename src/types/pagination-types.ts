@@ -4,9 +4,3 @@ export type PaginationProps = {
     onPageChange: (page: number) => void;
     otherClasses?: string;
 };
-
-export type PageButtonProps = {
-    pageNumber: number;
-    isActive: boolean;
-    onClick: (page: number) => void;
-};
