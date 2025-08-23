@@ -8,10 +8,19 @@ import ModalWindow from "@/components/ModalWindow";
 import SwiperSlider from "@/components/swiper-slider";
 import Pagination from "@/components/pagination";
 import WordForm from "@/components/dictionary/WordForm";
+import InputButton from "@/components/inputs/InputButton";
 
 import {useItemsPerPage} from "@/context";
 
-import type {DictionaryProps, ModalImageProps, FileUploader} from "@/types";
+import type {
+    DictionaryProps,
+    ModalImageProps,
+    FileUploader,
+    LocalStorage,
+} from "@/types";
+
+import {getItem, setItem} from "@/helpers/persistance-storage";
+import {EXCEL_DATA_KEY, TOTAL_WORDS_KEY} from "@/helpers/constants";
 
 const Dictionary: React.FC<DictionaryProps & FileUploader> = ({
     data,
@@ -42,6 +51,17 @@ const Dictionary: React.FC<DictionaryProps & FileUploader> = ({
     const startIdx = (currentPage - 1) * itemsPerPage;
     const currentItems = data.slice(startIdx, startIdx + itemsPerPage);
     const totalPages = Math.ceil(data.length / itemsPerPage);
+
+    const wordList: LocalStorage[] = getItem(EXCEL_DATA_KEY, "local") ?? [];
+    const handleRemoveWord = (key: number) => {
+        const updatedList = wordList
+            .filter((item: {id: number}) => item.id !== key)
+            .map((item, index) => ({...item, id: index + 1}));
+
+        setItem(EXCEL_DATA_KEY, updatedList, "local");
+        setItem(TOTAL_WORDS_KEY, updatedList.length, "local");
+        setExcelData([...updatedList]);
+    };
 
     return (
         <>
@@ -80,12 +100,32 @@ const Dictionary: React.FC<DictionaryProps & FileUploader> = ({
 
                         <ul className="body">
                             {currentItems?.map((row, idx) => (
-                                <li key={idx}>
+                                <li key={idx} className="element-word-card">
                                     <WordCard
                                         row={row}
                                         onImageClick={openModal}
                                         onSlideClick={initSwiper}
                                     />
+                                    <div className="option-word-card">
+                                        <div className="option-container"></div>
+                                        <div className="dropdown-container">
+                                            <div className="hide-container">
+                                                <div className="box">
+                                                    <InputButton
+                                                        label="Remove word"
+                                                        selected={false}
+                                                        variant="tertiary"
+                                                        buttonKey="remove-word"
+                                                        onSelect={() =>
+                                                            handleRemoveWord(
+                                                                row.id,
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </li>
                             ))}
                         </ul>

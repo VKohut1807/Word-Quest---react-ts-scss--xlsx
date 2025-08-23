@@ -15,5 +15,54 @@
         @media (max-width: 600px) {
             grid-template-columns: repeat(1, 1fr);
         }
+
+        .element-word-card {
+            position: relative;
+
+            .option-word-card {
+                display: flex;
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 100%;
+                background-color: $primary_10;
+                border-radius: 0 1rem 1rem 0;
+                cursor: pointer;
+                overflow: hidden;
+
+                .option-container {
+                    width: 1rem;
+                }
+
+                &:hover {
+                    .dropdown-container {
+                        grid-template-columns: 1fr;
+                        pointer-events: all;
+                        opacity: 1;
+                    }
+
+                    .option-container {
+                        width: 1rem;
+                        opacity: 0;
+                    }
+                }
+
+                .dropdown-container {
+                    display: grid;
+                    grid-template-columns: 0fr;
+                    pointer-events: none;
+                    opacity: 0;
+                    transition: grid-template-columns 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+                    .hide-container {
+                        overflow: hidden;
+
+                        .box {
+                            padding: 0.5rem 1rem 0 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
