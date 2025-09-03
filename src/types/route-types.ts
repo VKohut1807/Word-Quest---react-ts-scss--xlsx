@@ -1,4 +1,5 @@
 export type SlotProps = {
+    title?: string;
     children: React.ReactNode;
 };
 

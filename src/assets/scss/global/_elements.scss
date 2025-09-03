@@ -21,6 +21,7 @@ body {
         "Comic Sans MS",
         cursive;
     scrollbar-width: thin;
+    scrollbar-gutter: stable;
     scrollbar-color: $primary $secondary_10;
 
     @include break("lg") {

@@ -1,4 +1,4 @@
-import {LocalStorage} from "@/types/dictionary-types";
+import {LocalStorage} from "@/types";
 
 export type TwinQuestProps = {
     localstorData: LocalStorage[];

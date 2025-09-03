@@ -8,7 +8,7 @@ import PublicFileUploader from "@/components/PublicFileUploader";
 import InputButton from "@/components/inputs/InputButton";
 import InputRadio from "@/components/inputs/InputRadio";
 
-import {useItemsPerPage} from "@/context";
+import {useItemsPerPage, useModalManager} from "@/context";
 
 import type {FileUploader as FileUploaderType} from "@/types";
 
@@ -26,12 +26,7 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
         getItem(FILE_NAME_KEY, "local") !== null;
     getItem(EXCEL_DATA_KEY, "local") !== null;
 
-    const [selected, setSelected] = useState<string>("");
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const onOpenModal = (type: string) => {
-        setSelected(type);
-        setIsModalOpen(true);
-    };
+    const {openModal} = useModalManager();
 
     const {itemsPerPage, setItemsPerPage, ascOrder, setAscOrder} =
         useItemsPerPage();
@@ -44,17 +39,13 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
 
     return (
         <>
-            {isModalOpen && selected === "def-file" && (
-                <ModalWindow setOpenModal={setIsModalOpen}>
-                    <PublicFileUploader setExcelData={setExcelData} />
-                </ModalWindow>
-            )}
+            <ModalWindow modalKey="load-def-file">
+                <PublicFileUploader setExcelData={setExcelData} />
+            </ModalWindow>
 
-            {isModalOpen && selected === "my-file" && (
-                <ModalWindow setOpenModal={setIsModalOpen}>
-                    <FileUploader setExcelData={setExcelData} />
-                </ModalWindow>
-            )}
+            <ModalWindow modalKey="load-my-file">
+                <FileUploader setExcelData={setExcelData} />
+            </ModalWindow>
 
             <section className="settings">
                 <h1>Settings</h1>
@@ -88,7 +79,7 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
                                 selected={isDefFile}
                                 additionalText="Upload the file again?"
                                 buttonKey="def-file"
-                                onSelect={onOpenModal}
+                                onSelect={() => openModal("load-def-file")}
                             />
 
                             <InputButton
@@ -100,7 +91,7 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
                                 selected={isMyFile}
                                 additionalText="Upload the file again?"
                                 buttonKey="my-file"
-                                onSelect={onOpenModal}
+                                onSelect={() => openModal("load-my-file")}
                             />
                         </div>
                     </li>

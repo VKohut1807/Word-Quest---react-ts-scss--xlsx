@@ -42,11 +42,13 @@ const WordCard: React.FC<WordCard> = ({
                         className="image-box"
                         data-number={row.id}
                     >
-                        <img
-                            src={row["imageUrl"]}
-                            loading="lazy"
-                            alt={row["englishWord"]}
-                        />
+                        {row["imageUrl"] && (
+                            <img
+                                src={row["imageUrl"]}
+                                loading="lazy"
+                                alt={row["englishWord"]}
+                            />
+                        )}
                     </div>
                     <div className="text-box">
                         <h2>{row["englishWord"]}</h2>

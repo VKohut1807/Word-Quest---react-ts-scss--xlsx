@@ -7,7 +7,7 @@ import * as XLSX from "xlsx";
 
 import "@/assets/scss/pages/file-uploader.scss";
 
-import {useItemsPerPage} from "@/context";
+import {useItemsPerPage, useModalManager} from "@/context";
 
 import type {LocalStorage, LocalStorageNoId, FileUploader} from "@/types";
 
@@ -23,6 +23,8 @@ import {
 } from "@/helpers/constants";
 
 const PublicFileUploader: React.FC<FileUploader> = ({setExcelData}) => {
+    const {closeModal} = useModalManager();
+
     const navigate = useNavigate();
     const {ascOrder} = useItemsPerPage();
 
@@ -131,6 +133,7 @@ const PublicFileUploader: React.FC<FileUploader> = ({setExcelData}) => {
                     mess: `File "${DEFAULT_FILE_NAME}" successfully uploaded!`,
                     class: "success",
                 });
+                closeModal("load-def-file");
                 navigate(ROUTES.DICTIONARY);
             } catch (error: any) {
                 setMessage({mess: error.message, class: "error"});

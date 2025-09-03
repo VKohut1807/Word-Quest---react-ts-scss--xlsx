@@ -82,7 +82,9 @@
     }
 
     &:not([data-variant]),
-    &[data-variant="primary"] {}
+    &[data-variant="primary"] {
+        width: fit-content;
+    }
 
     &[data-variant="secondary"] {
         padding: 0;

@@ -1,5 +1,6 @@
-import {SlotProps} from "@/types/route-types";
+import {SlotProps} from "@/types";
 
 export type ModalWindowType = SlotProps & {
-    setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+    modalKey: string;
+    onCloseModalOption?: () => void;
 };

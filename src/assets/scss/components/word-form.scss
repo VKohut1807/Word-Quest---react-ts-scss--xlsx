@@ -1,194 +1,106 @@
 @use "../config/index.scss" as *;
 @use "../animations/index.scss" as *;
 
-.new-word-box {
-    width: fit-content;
-    margin: 0 0 0 auto;
-
-    .background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #000;
-        opacity: 0.8;
-        z-index: 101;
-    }
-
-    .main-form {
-        position: fixed;
-        top: 8rem;
-        left: 50%;
-        transform: translateX(-50%);
+.word-form {
+    .top-box {
         display: flex;
-        flex-direction: column;
-        min-width: 82%;
-        z-index: 102;
-        border: 0.0625rem solid $primary;
-        border-radius: 1rem;
-        padding: 0.5rem 1rem;
-        box-shadow: 0.1rem 0.1rem 1rem $primary;
-        background-color: #fff;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 3rem;
+        padding: 0 1rem 1rem;
 
         @include break("lg") {
-            min-width: 87%;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1rem;
         }
 
-        @include break("s") {
-            top: 10rem;
+        .view-example {
+            width: 100%;
+            max-width: 45rem;
+
+            .row {
+                width: 100%;
+            }
+        }
+    }
+
+    .bottom-box {
+        display: grid;
+        grid-template-rows: 0fr;
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            grid-template-rows 0.3s ease-in-out,
+            opacity 0.3s ease-in-out,
+            visibility 0.3s ease-in-out;
+
+        &.show-inputs {
+            grid-template-rows: 1fr;
+            pointer-events: all;
+            opacity: 1;
+            visibility: visible;
+
+            .form {
+                overflow-y: overlay;
+            }
         }
 
-        .top-box {
+        .form {
+            overflow: hidden;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 0.25rem;
+            position: relative;
+            max-height: 20rem;
+            scrollbar-width: thin;
+            padding: 0 1rem;
+            scroll-padding: 10rem;
+            scrollbar-gutter: stable both-edges;
 
-            @include break("xl") {
-                display: grid;
-                grid-template-areas:
-                    "title title buttons"
-                    "exemple exemple buttons";
-                gap: 0.5rem;
-            }
-
-            @include break("xs") {
-                display: grid;
-                grid-template-areas:
-                    "title buttons buttons buttons buttons"
-                    "title buttons buttons buttons buttons"
-                    "exemple exemple exemple exemple exemple";
-                gap: 0.5rem;
-            }
-
-            .view-example {
-                min-width: 50%;
-                grid-area: exemple;
-
-                @include break("xl") {
-                    min-width: 35%;
-                }
-
-                .row {
-                    width: 100%;
-                }
-            }
-
-            .title {
-                font-size: 2rem;
-                color: $primary;
-                text-align: center;
-                grid-area: title;
-            }
-
-            .group-buttons {
+            .patrol-scroll {
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 20%;
+                height: 1.5rem;
+                min-height: 1.5rem;
                 width: fit-content;
-                height: 9rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-                grid-area: buttons;
+                z-index: 1;
+                animation: patrol-vertical 7s ease-in-out infinite;
 
-                @include break("xs") {
-                    flex-direction: row;
-                    gap: 1rem;
-                    height: fit-content;
-                    margin: 0 0 0 auto;
-                    width: 100%;
-                }
-
-                .close-window {
-
-                    @include break("xs") {
-                        order: 2;
-                    }
-                }
-
-                .hide-form {
-                    max-width: 3rem;
-                    padding: 0.25rem;
-                    margin: 0 auto;
-
-                    @include break("xs") {
-                        order: 1;
-                        margin: auto 0;
-                    }
-
-                    .eye-open,
-                    .eye-close {
-                        path {
-                            fill: $secondary;
-                        }
-                    }
+                path {
+                    fill: $secondary;
                 }
             }
-        }
 
-        .bottom-box {
-            height: fit-content;
+            .inputs-row {
+                display: flex;
+                gap: 5rem;
+
+                @include break("lg") {
+                    gap: 3rem;
+                }
+
+                @include break("md") {
+                    flex-direction: column;
+                    gap: 0.25rem;
+                }
+            }
 
             .group-buttons {
                 display: flex;
+                align-items: center;
                 gap: 3rem;
-                padding: 3rem 0 0;
                 width: fit-content;
                 height: fit-content;
-                margin: 0 0 0 auto;
+                margin: 1.5rem 0 1rem auto;
 
                 .add-new-word {}
 
                 .cancel {}
-            }
-
-            .inputs-box {
-                display: flex;
-                flex-direction: column;
-                gap: 0.25rem;
-                position: relative;
-
-                @include break("s") {
-                    max-height: 25rem;
-                    overflow-y: auto;
-                }
-
-                .patrol-scroll {
-                    display: none;
-                    position: absolute;
-                    right: 0;
-                    top: 50%;
-                    height: 1.5rem;
-                    min-height: 1.5rem;
-                    width: fit-content;
-                    z-index: 1;
-                    animation: patrol-vertical 7s ease-in-out infinite;
-
-                    path {
-                        fill: $secondary;
-                    }
-
-                    @include break("xs") {
-                        display: block;
-                    }
-                }
-
-                .inputs-row {
-                    display: flex;
-                    gap: 7rem;
-
-                    @include break("lg") {
-                        gap: 5rem;
-                    }
-
-                    @include break("md") {
-                        gap: 3rem;
-                    }
-
-                    @include break("xs") {
-                        flex-direction: column;
-                        gap: 0.25rem;
-                    }
-                }
             }
         }
     }

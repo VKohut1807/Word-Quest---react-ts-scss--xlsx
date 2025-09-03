@@ -1,3 +1,5 @@
+import {FileUploader} from "@/types";
+
 export type LocalStorage = {
     id: number;
     englishWord: string;
@@ -21,11 +23,7 @@ export type DictionaryProps = {
 
 export type ModalImageProps = Omit<
     LocalStorage,
-    | "ukrainianWord"
-    | "partOfSpeech"
-    | "wordForms"
-    | "transcription"
-    | "cambridgeUrl"
+    "partOfSpeech" | "wordForms" | "transcription" | "cambridgeUrl"
 >;
 
 export type WordCard = {
@@ -46,3 +44,8 @@ export type PartOfSpeech =
     | "verb"
     | "adjective"
     | "adverb";
+
+export type WordFormProps = FileUploader & {
+    editId?: number | null;
+    onClose: () => void;
+};
