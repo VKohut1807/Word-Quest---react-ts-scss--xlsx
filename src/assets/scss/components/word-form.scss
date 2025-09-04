@@ -2,18 +2,21 @@
 @use "../animations/index.scss" as *;
 
 .word-form {
+    width: 100%;
+
     .top-box {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         gap: 3rem;
-        padding: 0 1rem 1rem;
+        padding: 0 1.5rem 1rem;
 
         @include break("lg") {
             flex-direction: column;
             align-items: flex-end;
             gap: 1rem;
+            padding: 0 1.5rem;
         }
 
         .view-example {
