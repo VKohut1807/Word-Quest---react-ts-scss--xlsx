@@ -28,6 +28,15 @@ export type ModalImageProps = Omit<
 
 export type WordCard = {
     row: LocalStorage;
+    otherData?: Record<string, string>;
+    otherClasses?: string;
+    onImageClick?: (row: ModalImageProps) => void;
+    onSlideClick?: (id: number) => void;
+};
+
+export type WordCardFront = {
+    row: LocalStorage;
+    imageStyle?: "";
     onImageClick?: (row: ModalImageProps) => void;
     onSlideClick?: (id: number) => void;
 };

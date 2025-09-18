@@ -3,7 +3,7 @@ import {useSearchParams} from "react-router-dom";
 
 import "@/assets/scss/pages/dictionary-page/index.scss";
 
-import WordCard from "@/components/dictionary/WordCard";
+import FullWordCardFront from "@/components/dictionary/FullWordCardFront";
 import ModalWindow from "@/components/ModalWindow";
 import SwiperSlider from "@/components/swiper-slider";
 import Pagination from "@/components/pagination";
@@ -151,8 +151,12 @@ const Dictionary: React.FC<DictionaryProps & FileUploader> = ({
                         <ul className="body">
                             {currentItems?.map((row, idx) => (
                                 <li key={idx} className="element-word-card">
-                                    <WordCard
+                                    <FullWordCardFront
                                         row={row}
+                                        otherData={{
+                                            "data-card-frame": "",
+                                        }}
+                                        otherClasses="right-indent"
                                         onImageClick={handleShowPhoto}
                                         onSlideClick={initSwiper}
                                     />

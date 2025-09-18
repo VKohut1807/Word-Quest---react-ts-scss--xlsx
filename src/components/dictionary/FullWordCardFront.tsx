@@ -1,14 +1,16 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-import "@/assets/scss/pages/dictionary-page/word-card.scss";
+import "@/assets/scss/pages/dictionary-page/full-word-card-front.scss";
 
 import type {WordCard} from "@/types";
 
 import {ITEM_CARD_ID_KEY} from "@/helpers/constants";
 
-const WordCard: React.FC<WordCard> = ({
+const FullWordCardFront: React.FC<WordCard> = ({
     row,
+    otherData,
+    otherClasses,
     onImageClick = () => {},
     onSlideClick = () => {},
 }) => {
@@ -19,7 +21,8 @@ const WordCard: React.FC<WordCard> = ({
             <div
                 id={ITEM_CARD_ID_KEY + String(row.id)}
                 onClick={() => onSlideClick(row.id)}
-                className="word-card"
+                {...(otherData || {})}
+                className={`full-word-card-front ${otherClasses}`}
             >
                 <div className="up">
                     <div className="transcription-box">
@@ -71,4 +74,4 @@ const WordCard: React.FC<WordCard> = ({
     );
 };
 
-export default WordCard;
+export default FullWordCardFront;

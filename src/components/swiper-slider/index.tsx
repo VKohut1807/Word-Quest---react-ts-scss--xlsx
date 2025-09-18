@@ -12,6 +12,8 @@ import "@/assets/scss/components/swiper-slider.scss";
 
 import InputButton from "@/components/inputs/InputButton";
 import FlipCard from "@/components/FlipCard";
+import ShortWordCardFront from "@/components/dictionary/ShortWordCardFront";
+import WordCardBack from "@/components/dictionary/WordCardBack";
 
 import ProgressIcon from "@/assets/icons/progress.svg?react";
 import ShutdownIcon from "@/assets/icons/shutdown.svg?react";
@@ -19,7 +21,6 @@ import StopButtonIcon from "@/assets/icons/stop-button.svg?react";
 import PlayButtonIcon from "@/assets/icons/play-button.svg?react";
 import NextButtonIcon from "@/assets/icons/next-button.svg?react";
 import PrevButtonIcon from "@/assets/icons/prev-button.svg?react";
-import InfoIcon from "@/assets/icons/info.svg?react";
 
 import {useItemsPerPage} from "@/context";
 
@@ -167,6 +168,7 @@ const SwiperSlider: React.FC<SwiperProps> = ({
     return (
         <>
             <div className="bg-swiper"></div>
+            <div data-background-window onClick={onCloseModal}></div>
             <Swiper
                 ref={swiperInstance}
                 modules={[EffectCards, Pagination, Navigation, Autoplay]}
@@ -175,7 +177,6 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                 pagination={{
                     dynamicBullets: true,
                 }}
-                // navigation={true}
                 navigation={{
                     nextEl: ".swiper-button-next",
                     prevEl: ".swiper-button-prev",
@@ -204,106 +205,9 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                     >
                         {({isActive}) => (
                             <FlipCard
-                                isActive={isActive}
-                                front={
-                                    <>
-                                        <div className="slide-box">
-                                            <div className="left-box">
-                                                <div className="idx">
-                                                    {row.id}
-                                                </div>
-                                                <div className="transcription-box">
-                                                    <span className="bracket">
-                                                        [
-                                                    </span>
-
-                                                    <div className="transcription">
-                                                        {row["transcription"]
-                                                            .split(" ")
-                                                            .map(
-                                                                (
-                                                                    word,
-                                                                    index,
-                                                                ) => (
-                                                                    <span
-                                                                        key={
-                                                                            index
-                                                                        }
-                                                                    >
-                                                                        {
-                                                                            word
-                                                                        }{" "}
-                                                                    </span>
-                                                                ),
-                                                            )}
-                                                    </div>
-                                                    <span className="bracket">
-                                                        ]
-                                                    </span>
-                                                </div>
-                                                <u>{row.partOfSpeech}</u>
-                                                <h3>{row.englishWord}</h3>
-                                                <h4>{row.ukrainianWord}</h4>
-                                            </div>
-                                            <div className="right-box">
-                                                <div className="image-box">
-                                                    <img
-                                                        className="swiper-lazy image"
-                                                        src={row.imageUrl}
-                                                        alt={row.englishWord}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </>
-                                }
-                                back={
-                                    <>
-                                        <div className="back-slide-box">
-                                            <div className="title">
-                                                <h3>{row.englishWord}</h3>
-                                                <u>{row.partOfSpeech}</u>
-                                                <u className="form">
-                                                    {row.wordForms !== "-" &&
-                                                        row.wordForms}
-                                                </u>
-                                                <div data-tooltip>
-                                                    <InfoIcon />
-                                                    <div className="tooltip-info">
-                                                        <div className="colors">
-                                                            <div className="color-box">
-                                                                <span className="color affirmative-sentance"></span>
-                                                                -&nbsp;affirmative
-                                                                sentence
-                                                            </div>
-                                                            <div className="color-box">
-                                                                <span className="color negative-sentance"></span>
-                                                                -&nbsp;negative
-                                                                sentence
-                                                            </div>
-                                                            <div className="color-box">
-                                                                <span className="color question-sentance"></span>
-                                                                -&nbsp;question
-                                                                sentence
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <ul className="sentences">
-                                                <li className="sentance affirmative-sentance gradient">
-                                                    {row.affirmativeSentence}
-                                                </li>
-                                                <li className="sentance negative-sentance gradient">
-                                                    {row.negativeSentence}
-                                                </li>
-                                                <li className="sentance question-sentance gradient">
-                                                    {row.questionSentence}
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </>
-                                }
+                                resetOnSwiper={!isActive}
+                                front={<ShortWordCardFront row={row} />}
+                                back={<WordCardBack row={row} />}
                             />
                         )}
                     </SwiperSlide>

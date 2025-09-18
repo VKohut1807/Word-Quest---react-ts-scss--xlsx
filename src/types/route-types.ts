@@ -4,8 +4,7 @@ export type SlotProps = {
 };
 
 export type FlipCardProps = {
-    className?: string;
+    resetOnSwiper?: boolean;
     front: React.ReactNode;
     back: React.ReactNode;
-    isActive: boolean;
 };

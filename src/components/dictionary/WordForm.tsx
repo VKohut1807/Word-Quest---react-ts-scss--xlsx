@@ -2,7 +2,9 @@ import React, {useState, useEffect} from "react";
 
 import "@/assets/scss/components/word-form.scss";
 
-import WordCard from "@/components/dictionary/WordCard";
+import FlipCard from "@/components/FlipCard";
+import FullWordCardFront from "@/components/dictionary/FullWordCardFront";
+import WordCardBack from "@/components/dictionary/WordCardBack";
 import InputText from "@/components/inputs/InputText";
 import InputButton from "@/components/inputs/InputButton";
 import ModalWindow from "@/components/ModalWindow";
@@ -144,11 +146,12 @@ const WordForm: React.FC<WordFormProps> = ({
                 </h4>
             </ModalWindow>
 
-            <section className="word-form">
+            <div className="word-form">
                 <div className="top-box">
-                    <div className="view-example">
-                        <WordCard row={word as LocalStorage} />
-                    </div>
+                    <FlipCard
+                        front={<FullWordCardFront row={word as LocalStorage} />}
+                        back={<WordCardBack row={word as LocalStorage} />}
+                    />
                     <InputButton
                         label={
                             showInputsBox ? (
@@ -273,7 +276,7 @@ const WordForm: React.FC<WordFormProps> = ({
                         </div>
                     </form>
                 </div>
-            </section>
+            </div>
         </>
     );
 };

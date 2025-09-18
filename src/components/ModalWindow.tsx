@@ -37,7 +37,7 @@ const ModalWindow: React.FC<ModalWindowType> = ({
                         onSelect={handleClose}
                     />
                 </div>
-                <div className="box">{children}</div>
+                <>{children}</>
             </div>
         </>
     ) : null;

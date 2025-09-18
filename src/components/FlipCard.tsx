@@ -5,31 +5,34 @@ import "@/assets/scss/components/flip-card.scss";
 import type {FlipCardProps} from "@/types";
 
 const FlipCard: React.FC<FlipCardProps> = ({
-    className = "",
+    resetOnSwiper = false,
     front,
     back,
-    isActive,
 }) => {
-    const [flipCard, setFlipCard] = useState<boolean>(false);
+    const [isFlipped, setIsFlipped] = useState(false);
+
+    const toggleFlip = () => {
+        if (!resetOnSwiper) setIsFlipped((prev) => !prev);
+    };
 
     useEffect(() => {
-        if (!isActive) {
-            setFlipCard(false);
+        if (resetOnSwiper) {
+            setIsFlipped(false);
         }
-    }, [isActive]);
+    }, [resetOnSwiper]);
 
     return (
-        <section
-            onClick={() => {
-                if (isActive) {
-                    setFlipCard((prev) => !prev);
-                }
-            }}
-            className={`flip-card-box ${flipCard ? "active" : ""} ${className}`}
-        >
-            <div className="card-front">{front}</div>
-            <div className="card-back">{back}</div>
-        </section>
+        <>
+            <div
+                className={`flip-card-box ${isFlipped ? "active" : ""}`}
+                onClick={toggleFlip}
+            >
+                <div data-card-frame className="flip-card-inner">
+                    <div className="card-front">{front}</div>
+                    <div className="card-back">{back}</div>
+                </div>
+            </div>
+        </>
     );
 };
 
