@@ -1,29 +1,65 @@
 @use "../config/index.scss" as *;
 
 .mySwiper {
+    --swiperWidth: 17rem;
+    --swipperWrapper: 2.5rem;
+
     display: block;
     position: fixed;
     top: 50%;
-    left: 45%;
+    left: 50%;
+    min-width: var(--swiperWidth);
+    width: calc(100% - var(--swipperWrapper));
     transform: translate(-50%, -50%);
     z-index: 102;
 
-    --swiperWidth: 40rem;
-    --swiperHeight: 17rem;
-    width: var(--swiperWidth);
-    height: var(--swiperHeight);
+    @include break('xs') {
+        --swipperWrapper: 3.5rem;
+    }
+
+    @include break('s') {
+        --swipperWrapper: 5.5rem;
+    }
+
+    @include break('sm') {
+        --swipperWrapper: 25%;
+    }
+
+    @include break('lg') {
+        --swipperWrapper: 50%;
+    }
+
+    @include break('lg') {
+        --swipperWrapper: 60%;
+    }
 
     .swiper-wrapper {
         width: 0rem;
         height: fit-content;
 
         .swiper-slide {
-            width: var(--swiperWidth);
-            height: var(--swiperHeight);
+            min-width: var(--swiperWidth);
+            width: calc(100% - 2rem);
             border-radius: 1rem;
             background: transparent !important;
             backface-visibility: hidden;
 
+            .image-box {
+                --imgSize: 7rem;
+
+                width: var(--imgSize);
+                height: var(--imgSize);
+                min-width: var(--imgSize);
+                min-height: var(--imgSize);
+
+                @include break('xs') {
+                    --imgSize: 9rem;
+                }
+
+                @include break('s') {
+                    --imgSize: 11rem;
+                }
+            }
 
             &.swiper-slide-visible {
                 overflow: visible;
@@ -32,10 +68,11 @@
     }
 
     .swiper-next,
-    .swiper-prev {
+    .swiper-prev,
+    .swiper-autoplay {
         position: absolute;
-        top: 0;
-        left: 112%;
+        top: 105%;
+        right: 0;
         z-index: 1;
 
         svg {
@@ -43,74 +80,24 @@
         }
     }
 
-    .swiper-next {
-        top: 15%;
-        right: -20%;
-
-        @include break('md') {
-            top: 110%;
-            left: 91%;
-        }
-
-        @include break('sm') {
-            top: 110%;
-            left: 89.5%;
-        }
-
-        @include break('xs') {
-            top: 110%;
-            left: 84.5%;
-        }
-    }
-
     .swiper-prev {
-        top: 45%;
-        left: 112%;
-
-        @include break('md') {
-            top: 110%;
-            left: 69%;
-        }
-
-        @include break('sm') {
-            top: 110%;
-            left: 64.5%;
-        }
-
-        @include break('xs') {
-            top: 110%;
-            left: 45.5%;
-        }
+        right: 8rem;
     }
 
     .swiper-autoplay {
-        position: absolute;
-        top: 75%;
-        left: 112%;
-        z-index: 1;
+        right: 4rem;
 
-        @include break('md') {
-            top: 110%;
-            left: 80%;
-        }
-
-        @include break('sm') {
-            top: 110%;
-            left: 77%;
-        }
-
-        @include break('xs') {
-            top: 110%;
-            left: 65%;
+        svg {
+            width: 2rem;
         }
     }
 
     .swiper-pagination {
         left: 0 !important;
-        transform: translateX(7.5rem) !important;
+        transform: translate(0.5rem, 0.25rem) !important;
 
         .swiper-pagination-bullet {
-            background-color: $secondary_90;
+            background-color: $third_100;
 
             &.swiper-pagination-bullet-active {
                 background-color: $primary;
@@ -120,10 +107,10 @@
 
     .autoplay-progress {
         position: absolute;
-        bottom: 0.5rem;
+        bottom: 0;
         right: 0.5rem;
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 1.25rem;
+        height: 1.25rem;
         z-index: 1;
         display: flex;
         align-items: center;
@@ -151,8 +138,8 @@
             width: fit-content;
             height: fit-content;
             transform: translate(-50%, -50%);
-            font-size: 0.90rem;
-            font-weight: 700;
+            font-size: 0.75rem;
+            font-weight: 500;
             color: $third_100;
         }
     }
@@ -160,18 +147,8 @@
     .close-window {
         position: absolute;
         top: -4rem;
-        right: -8rem;
+        right: 0;
         width: 3rem;
         z-index: 1;
-
-        @include break('md') {
-            top: -4rem;
-            right: -2rem;
-            width: 2rem;
-        }
-
-        @include break('xxs') {
-            right: -1.75rem;
-        }
     }
 }

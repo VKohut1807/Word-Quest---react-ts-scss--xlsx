@@ -11,9 +11,8 @@ body {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
-    height: 100%;
     overflow-y: auto;
-    font-size: clamp(0.75rem, 0.4651rem + 0.5935vw, 1rem);
+    font-size: 1rem;
     font-family:
         "Bradley Hand",
         "Segoe Script",
@@ -23,24 +22,16 @@ body {
     scrollbar-width: thin;
     scrollbar-gutter: stable;
     scrollbar-color: $primary $secondary_10;
-
-    @include break("lg") {
-        font-size: 14px;
-    }
-
-    @include break("sm") {
-        font-size: 12px;
-    }
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100dvh;
     background-color: $secondary_10;
 
     #root {
-        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100dvh;
     }
 }
 

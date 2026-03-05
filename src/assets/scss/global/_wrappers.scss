@@ -1,44 +1,20 @@
 @use "../config/mixins" as *;
 
 .wrapper {
-    width: 85%;
-    margin: 9rem auto 0;
+    width: 96%;
+    margin: 11rem auto 0;
 
     &.margin-sero {
         margin: 0 auto;
     }
 
-    @include break("lg") {
+    @include break("s") {
         width: 90%;
+        margin: 13rem auto 0;
     }
 
-    @include break("xl") {
-        margin: 8rem auto 1rem;
-    }
-
-    @include break("md") {
-        margin: 7.5rem auto 1rem;
-    }
-
-    @include break("xs") {
-        margin: 11rem auto 1rem;
-    }
-
-    @include break("xxs") {
-        width: 97%;
-    }
-
-    &-75 {
-        width: 75%;
-        margin: 0 auto;
-    }
-
-    &-50 {
-        width: 50%;
-        margin: 0 auto;
-
-        @include break("lg") {
-            width: 75%;
-        }
+    @include break("lg") {
+        width: 85%;
+        margin: 14rem auto 0;
     }
 }

@@ -12,7 +12,6 @@ import Settings from "@/pages/Settings";
 
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import RouteWrapper from "@/components/RouteWrapper";
 
 import {ContextSettingsProvider, ContextModalProvider} from "@/context";
 
@@ -34,38 +33,36 @@ const App: React.FC = () => {
     return (
         <ContextSettingsProvider>
             <ContextModalProvider>
-                <RouteWrapper>
-                    <Router basename="/">
-                        <Header />
-                        <>
-                            <Routes>
-                                <Route path={ROUTES.HOME} element={<Home />} />
-                                <Route
-                                    path={ROUTES.DICTIONARY}
-                                    element={
-                                        <Dictionary
-                                            data={excelData}
-                                            setExcelData={setExcelData}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path={ROUTES.GAMES.ROOT}
-                                    element={
-                                        <TwinQuest localstorData={excelData} />
-                                    }
-                                />
-                                <Route
-                                    path={ROUTES.SETTINGS}
-                                    element={
-                                        <Settings setExcelData={setExcelData} />
-                                    }
-                                />
-                            </Routes>
-                        </>
-                        <Footer />
-                    </Router>
-                </RouteWrapper>
+                <Router basename="/">
+                    <Header />
+                    <>
+                        <Routes>
+                            <Route path={ROUTES.HOME} element={<Home />} />
+                            <Route
+                                path={ROUTES.DICTIONARY}
+                                element={
+                                    <Dictionary
+                                        data={excelData}
+                                        setExcelData={setExcelData}
+                                    />
+                                }
+                            />
+                            <Route
+                                path={ROUTES.GAMES.ROOT}
+                                element={
+                                    <TwinQuest localstorData={excelData} />
+                                }
+                            />
+                            <Route
+                                path={ROUTES.SETTINGS}
+                                element={
+                                    <Settings setExcelData={setExcelData} />
+                                }
+                            />
+                        </Routes>
+                    </>
+                    <Footer />
+                </Router>
             </ContextModalProvider>
         </ContextSettingsProvider>
     );

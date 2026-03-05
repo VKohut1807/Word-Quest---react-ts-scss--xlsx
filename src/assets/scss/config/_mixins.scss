@@ -4,7 +4,7 @@
 
 @mixin break($breakpoint) {
     @if map.has-key(breakpoints.$breakpoints, $breakpoint) {
-        @media (max-width: map.get(breakpoints.$breakpoints, $breakpoint)) {
+        @media (min-width: map.get(breakpoints.$breakpoints, $breakpoint)) {
             @content;
         }
     }

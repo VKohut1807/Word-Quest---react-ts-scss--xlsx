@@ -10,18 +10,6 @@
     border-radius: 50%;
     z-index: 100;
 
-    @include break("md") {
-        bottom: 3.5rem;
-        right: 1.5rem;
-        width: 4rem;
-        height: 4rem;
-    }
-
-    @include break("sm") {
-        bottom: 6.5rem;
-        right: 2.5rem;
-    }
-
     .circle-box {
         display: block;
         cursor: pointer;
@@ -33,6 +21,11 @@
         transition:
             visibility 0.3s ease-in-out,
             opacity 0.3s ease-in-out;
+
+        &.active {
+            visibility: visible;
+            opacity: 1;
+        }
 
         .icon-arrow {
             position: absolute;
@@ -46,12 +39,8 @@
             z-index: 1;
             box-shadow: 0rem 0rem 2rem $primary_30;
 
-            @include break("md") {
-                width: 2rem;
-            }
-
             path {
-                animation: scroll-top 4s linear infinite;
+                animation: scrollTop 4s linear infinite;
             }
         }
 

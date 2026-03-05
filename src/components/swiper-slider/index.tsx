@@ -12,7 +12,7 @@ import "@/assets/scss/components/swiper-slider.scss";
 
 import InputButton from "@/components/inputs/InputButton";
 import FlipCard from "@/components/FlipCard";
-import ShortWordCardFront from "@/components/dictionary/ShortWordCardFront";
+import WordCardFront from "@/components/dictionary/WordCardFront";
 import WordCardBack from "@/components/dictionary/WordCardBack";
 
 import ProgressIcon from "@/assets/icons/progress.svg?react";
@@ -109,6 +109,8 @@ const SwiperSlider: React.FC<SwiperProps> = ({
         }
     };
 
+    const [isCardFirst, setIsCardFirst] = useState<boolean>(false);
+    const [isCardLast, setIsCardLast] = useState<boolean>(false);
     const [lastPage, setLastPage] = useState<number>(
         Math.floor(initialSlide / itemsPerPage) + 1,
     );
@@ -123,6 +125,13 @@ const SwiperSlider: React.FC<SwiperProps> = ({
         const globalIndex = data.findIndex(
             (item) => item.id === activeSlide.id,
         );
+
+        setIsCardFirst(globalIndex === 0 || activeSlide.id === 1);
+        setIsCardLast(
+            globalIndex === data[data.length - 1].id ||
+                activeSlide.id === data[data.length - 1].id,
+        );
+
         if (globalIndex === -1) return;
 
         const currentPage = Math.floor(globalIndex / itemsPerPage) + 1;
@@ -164,7 +173,9 @@ const SwiperSlider: React.FC<SwiperProps> = ({
             setPendingSlideShift(null);
         }
     }, [pendingSlideShift]);
-
+    useEffect(() => {
+        handleSlideChange();
+    }, []);
     return (
         <>
             <div className="bg-swiper"></div>
@@ -205,8 +216,13 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                     >
                         {({isActive}) => (
                             <FlipCard
-                                resetOnSwiper={!isActive}
-                                front={<ShortWordCardFront row={row} />}
+                                removeToggleFlip={!isActive}
+                                front={
+                                    <WordCardFront
+                                        row={row as LocalStorage}
+                                        otherClasses="short-option"
+                                    />
+                                }
                                 back={<WordCardBack row={row} />}
                             />
                         )}
@@ -227,7 +243,8 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                     additionalText=""
                     label={<PrevButtonIcon />}
                     onSelect={() => handleNavigation("prev")}
-                    classesName="swiper-prev"
+                    classesName={`swiper-prev ${initialSlide}`}
+                    disabledes={isCardFirst}
                 />
 
                 <InputButton
@@ -238,6 +255,7 @@ const SwiperSlider: React.FC<SwiperProps> = ({
                     label={<NextButtonIcon />}
                     onSelect={() => handleNavigation("next")}
                     classesName="swiper-next"
+                    disabledes={isCardLast}
                 />
 
                 <InputButton

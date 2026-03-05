@@ -15,26 +15,13 @@
         justify-content: center;
         position: relative;
         min-height: 20%;
+        padding: 0 0 0.5rem;
 
         h3 {
             text-transform: uppercase;
             font-size: 1.5rem;
             line-height: 1;
             color: $third_120;
-
-            @include break('lg') {
-                font-size: 1.25rem;
-            }
-
-            @include break('sm') {
-                font-size: 1.75rem;
-                margin: 0 0 0.25rem auto;
-            }
-
-            @include break('xs') {
-                font-size: 1.25rem;
-                z-index: 1;
-            }
         }
 
         u {
@@ -42,6 +29,7 @@
             font-size: 1rem;
             font-style: italic;
             color: $fourth;
+            line-height: 1;
         }
 
         .info {
@@ -50,7 +38,7 @@
             top: 0.25rem;
 
             svg {
-                width: 1rem;
+                width: 1.25rem;
 
                 path {
                     fill: $fifth;
@@ -62,6 +50,7 @@
             .color-box {
                 position: relative;
                 padding-left: 1.25rem;
+                white-space: nowrap;
 
                 .color {
                     display: flex;
@@ -69,7 +58,7 @@
                     position: absolute;
                     top: 50%;
                     left: 0.25rem;
-                    transform: translateY(-35%);
+                    transform: translateY(-50%);
                     width: 0.75rem;
                     height: 0.75rem;
                     border-radius: 50%;

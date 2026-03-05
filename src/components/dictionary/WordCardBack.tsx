@@ -13,7 +13,11 @@ const WordCardBack: React.FC<WordCard> = ({row}) => {
                 <div className="title">
                     <h3>{row.englishWord}</h3>
                     <u>{row.partOfSpeech}</u>
-                    <div className="info" data-tooltip>
+                    <div
+                        onClick={(e) => e.stopPropagation()}
+                        data-tooltip
+                        className="info"
+                    >
                         <InfoIcon />
                         <div className="tooltip-info">
                             <div className="colors">

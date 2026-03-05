@@ -6,8 +6,10 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 60%;
+    width: 96%;
     height: fit-content;
+    min-height: 47dvh;
+    max-height: 80dvh;
     transform: translate(-50%, -50%);
     border-radius: 1rem;
     background-color: $third_10;
@@ -17,26 +19,48 @@
     z-index: 100;
     overflow: hidden;
     padding: 1rem 0;
-
-    @include break('md') {
-        width: 85%;
-    }
-
-    @include break('xs') {
-        width: 96%;
-    }
+    box-sizing: border-box;
 
     .header {
         display: grid;
         grid-template-columns: 1fr auto;
         align-items: center;
         justify-items: center;
-        padding: 1rem 1.5rem 1rem;
+        padding: 1rem 0.5rem 1rem;
         flex-shrink: 0;
 
+        @include break("sm") {
+            padding: 1rem 2rem;
+        }
+
         h3 {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: $primary;
+        }
+    }
+
+    .modal-image-box {
+        display: flex;
+        justify-content: center;
+        min-height: 15rem;
+        height: 100%;
+        position: relative;
+        padding: 0 0.5rem;
+        overflow: hidden;
+
+        @include break("sm") {
+            min-height: 30rem;
+            margin: 0 2rem;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: auto;
+            height: 100%;
+            object-fit: cover;
         }
     }
 }

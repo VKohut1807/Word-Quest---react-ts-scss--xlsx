@@ -4,7 +4,7 @@ export type SlotProps = {
 };
 
 export type FlipCardProps = {
-    resetOnSwiper?: boolean;
+    removeToggleFlip?: boolean;
     front: React.ReactNode;
     back: React.ReactNode;
 };

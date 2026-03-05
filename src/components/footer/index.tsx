@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
     return (
         <>
             <section
-                className={`footer ${parts.length <= 0 ? "without-info" : ""}`}
+                className={`footer wrapper margin-sero ${parts.length <= 0 ? "without-info" : ""}`}
             >
                 {parts.length > 0 && (
                     <div className="vocabulary-info">

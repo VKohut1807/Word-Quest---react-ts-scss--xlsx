@@ -22,15 +22,6 @@ const Pagination: React.FC<PaginationProps> = ({
 
     return (
         <div className={`pagination ${otherClasses || ""}`}>
-            <InputButton
-                label="Back"
-                selected={false}
-                buttonKey="pagination-back"
-                variant="pager"
-                disabledes={currentPage === 1}
-                onSelect={handlePrev}
-                classesName="prev"
-            />
             <div className="buttons-box">
                 {Array.from({length: totalPages}, (_, i) => {
                     const page = i + 1;
@@ -46,15 +37,26 @@ const Pagination: React.FC<PaginationProps> = ({
                     );
                 })}
             </div>
-            <InputButton
-                label="Next"
-                selected={false}
-                buttonKey="pagination-next"
-                variant="pager"
-                disabledes={currentPage === totalPages}
-                onSelect={handleNext}
-                classesName="next"
-            />
+            <div className="control-box">
+                <InputButton
+                    label="Back"
+                    selected={false}
+                    buttonKey="pagination-back"
+                    variant="pager"
+                    disabledes={currentPage === 1}
+                    onSelect={handlePrev}
+                    classesName="prev"
+                />
+                <InputButton
+                    label="Next"
+                    selected={false}
+                    buttonKey="pagination-next"
+                    variant="pager"
+                    disabledes={currentPage === totalPages}
+                    onSelect={handleNext}
+                    classesName="next"
+                />
+            </div>
         </div>
     );
 };

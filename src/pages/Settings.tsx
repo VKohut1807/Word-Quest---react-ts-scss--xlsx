@@ -47,7 +47,7 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
                 <FileUploader setExcelData={setExcelData} />
             </ModalWindow>
 
-            <section className="settings">
+            <section className="settings wrapper">
                 <h1>Settings</h1>
                 <ul className="settings-group">
                     <li className="settings-box">
@@ -69,7 +69,7 @@ const Settings: React.FC<FileUploaderType> = ({setExcelData}) => {
                     </li>
                     <li className="settings-box">
                         <h3>Data from:</h3>
-                        <div className="button-group">
+                        <div className="button-group column-box">
                             <InputButton
                                 label={
                                     isDefFile

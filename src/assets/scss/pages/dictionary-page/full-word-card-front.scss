@@ -1,18 +1,28 @@
 @use "../../config/index.scss" as *;
 
 .full-word-card-front {
-    display: grid;
-    grid-template-areas:
-        "up up"
-        "left right";
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &.short-option {
+        .up {
+            top: 0rem;
+            right: 0rem;
+        }
+
+        .right {
+            right: 0rem;
+            bottom: 0rem;
+        }
+    }
 
     .up {
-        grid-area: up;
         margin: 0 0 0 auto;
-
-        @include break('lg') {
-            max-width: 75%;
-        }
+        max-width: 75%;
+        position: absolute;
+        top: 0.5rem;
+        right: 1.5rem;
 
         .transcription-box {
             display: flex;
@@ -27,19 +37,13 @@
                 flex-wrap: wrap;
                 gap: 0.25rem;
                 width: fit-content;
-                font-size: 1.25rem;
+                font-size: 1rem;
                 font-family: 'Times New Roman', Times, serif;
                 padding: 0 0.25rem;
                 color: $secondary;
                 letter-spacing: 0.25rem;
 
-                @include break('lg') {
-                    letter-spacing: 0.1rem;
-                    font-size: 0.9rem;
-                }
-
-                @include break('sm') {
-                    letter-spacing: 0.25rem;
+                @include break('xxs') {
                     font-size: 1.25rem;
                 }
             }
@@ -47,16 +51,9 @@
     }
 
     .left {
-        grid-area: left;
         display: flex;
         align-items: center;
-        gap: 2rem;
-        margin-top: -1.5rem;
-
-        @include break('lg') {
-            margin-top: -1.25rem;
-            gap: 0.75rem;
-        }
+        gap: 0.75rem;
 
         .image-box {
             background-color: $third_60;
@@ -65,13 +62,20 @@
             align-items: center;
             border-radius: 0.5rem;
             overflow: hidden;
-            width: 9rem;
-            height: 9rem;
-            min-width: 9rem;
-            min-height: 9rem;
+            width: 6.75rem;
+            height: 6.75rem;
+            min-width: 6.75rem;
+            min-height: 6.75rem;
             border: 0.0625rem solid $secondary_40;
             position: relative;
             box-shadow: 0.3rem 0.3rem 0.75rem $third_60;
+
+            @include break('xxs') {
+                width: 7.25rem;
+                height: 7.25rem;
+                min-width: 7.25rem;
+                min-height: 7.25rem;
+            }
 
             &:hover {
                 cursor: zoom-in;
@@ -85,6 +89,7 @@
                 width: 1.75rem;
                 height: 1.75rem;
                 letter-spacing: -0.25rem;
+                font-size: 0.85rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -103,36 +108,25 @@
         .text-box {
             display: flex;
             flex-direction: column;
-            column-gap: 1rem;
-
-            @include break('lg') {
-                column-gap: 0.5rem;
-            }
+            gap: 0.5rem;
 
             h2 {
-                font-size: 2rem;
+                font-size: 1.15rem;
                 line-height: 1.25;
                 color: $third_120;
 
-                @include break('lg') {
-                    font-size: 1.7rem;
-                }
-
-                @include break('sm') {
-                    font-size: 1.55rem;
+                @include break('xxs') {
+                    font-size: 1.25rem;
                 }
             }
 
             h5 {
-                font-size: 1rem;
+                font-size: 0.8rem;
+                line-height: 1;
                 font-style: italic;
                 color: $third_90;
 
-                @include break('lg') {
-                    font-size: 0.86rem;
-                }
-
-                @include break('sm') {
+                @include break('xxs') {
                     font-size: 1rem;
                 }
             }
@@ -140,33 +134,35 @@
     }
 
     .right {
-        grid-area: right;
-        margin: 1rem 0 0 auto;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        justify-content: space-between;
+        justify-content: flex-end;
+        position: absolute;
+        bottom: 0.5rem;
+        right: 1.5rem;
 
         u {
-            font-size: 1rem;
             font-style: italic;
             color: $fourth;
+            font-size: 0.75rem;
 
-            @include break('lg') {
-                font-size: 0.86rem;
-            }
-
-            @include break('sm') {
+            @include break('xxs') {
                 font-size: 1rem;
+                line-height: 1;
             }
         }
 
         .readmore {
-            font-size: 0.75rem;
+            font-size: 0.6rem;
             color: $primary;
             width: fit-content;
             white-space: nowrap;
             transition: color 0.3s ease-in-out;
+
+            @include break('xxs') {
+                font-size: 0.75rem;
+            }
 
             &:hover {
                 color: $primary_120;

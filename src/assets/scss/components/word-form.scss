@@ -4,21 +4,21 @@
 .word-form {
     .top-box {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 13rem;
-        padding: 0 1.5rem 1rem;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 0 0.5rem 1rem;
 
-        .row {
-            width: 100%;
+        @include break("sm") {
+            gap: 1rem;
+            padding: 0 2rem 1rem;
         }
 
-        @include break("lg") {
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 1rem;
-            padding: 0 1.5rem;
+        .label {
+            margin-left: auto;
+        }
+
+        .flip-card-box {
+            max-width: 40rem;
         }
     }
 
@@ -52,9 +52,13 @@
             position: relative;
             max-height: 20rem;
             scrollbar-width: thin;
-            padding: 0 1rem;
+            padding: 0 0.5rem;
             scroll-padding: 10rem;
             scrollbar-gutter: stable both-edges;
+
+            @include break("sm") {
+                padding: 0 2rem;
+            }
 
             .patrol-scroll {
                 display: block;
@@ -65,7 +69,11 @@
                 min-height: 1.5rem;
                 width: fit-content;
                 z-index: 1;
-                animation: patrol-vertical 7s ease-in-out infinite;
+                animation: patrolVertical 7s ease-in-out infinite;
+
+                @include break("sm") {
+                    right: 0.5rem;
+                }
 
                 path {
                     fill: $secondary;
@@ -74,16 +82,7 @@
 
             .inputs-row {
                 display: flex;
-                gap: 5rem;
-
-                @include break("lg") {
-                    gap: 3rem;
-                }
-
-                @include break("md") {
-                    flex-direction: column;
-                    gap: 0.25rem;
-                }
+                flex-direction: column;
             }
 
             .group-buttons {

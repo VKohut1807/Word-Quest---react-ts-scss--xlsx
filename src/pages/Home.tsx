@@ -4,7 +4,7 @@ import "@/assets/scss/pages/home.scss";
 
 const Home: React.FC = () => {
     return (
-        <section className="home">
+        <section className="home wrapper">
             <header>
                 <h1>Home Page</h1>
             </header>

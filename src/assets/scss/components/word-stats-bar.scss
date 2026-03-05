@@ -1,24 +1,12 @@
 @use "../config/index.scss" as *;
 
 .word-stats-bar {
-    margin: -0.5rem 0.5rem 1rem 0;
+    margin: 0 0 0.5rem;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 0.25rem;
     position: relative;
-
-    @include break("xl") {
-        margin: -1rem 0.5rem 0.5rem 0;
-    }
-
-    @include break("md") {
-        margin: -0.5rem 0.5rem 0.5rem 0;
-    }
-
-    @include break("xs") {
-        margin: -0.25rem 0.5rem 0.5rem 0;
-    }
 
     .summ-box {
         display: flex;
@@ -29,7 +17,7 @@
         border-radius: 0.5rem;
         font-weight: 700;
         box-shadow: 0 0.1rem 0.3rem $primary_90;
-        font-size: 1.15rem;
+        font-size: 1rem;
         background-color: $secondary_10;
 
         .sum-number {

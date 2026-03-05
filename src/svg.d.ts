@@ -1,5 +1,10 @@
 declare module "*.svg?react" {
-    import {FC, SVGProps} from "react";
-    const content: FC<SVGProps<SVGSVGElement>>;
+    import * as React from "react";
+
+    const content: React.ForwardRefExoticComponent<
+        React.SVGProps<SVGSVGElement> &
+        React.RefAttributes<SVGSVGElement>
+    >;
+
     export default content;
 }

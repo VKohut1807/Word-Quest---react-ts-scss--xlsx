@@ -9,29 +9,29 @@ const ScrollProgress: React.FC = () => {
     const circleBox = useRef<HTMLDivElement>(null);
     const progressCircle = useRef<SVGSVGElement>(null);
 
+    const handleScroll = () => {
+        const scrollTop = window.scrollY;
+        const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+        let progress = docHeight > 0 ? scrollTop / docHeight : 0;
+
+        progress = Math.min(Math.max(progress, 0), 1);
+
+        if (progress > 0.05) {
+            circleBox.current?.classList.add("active");
+        } else {
+            circleBox.current?.classList.remove("active");
+        }
+
+        if (progressCircle.current) {
+            progressCircle.current.style.setProperty(
+                "--progress",
+                `${1 - progress}`,
+            );
+        }
+    };
+
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollTop = window.scrollY;
-            const docHeight =
-                document.documentElement.scrollHeight - window.innerHeight;
-            let progress = docHeight > 0 ? scrollTop / docHeight : 0;
-
-            progress = Math.min(Math.max(progress, 0), 1);
-
-            if (circleBox.current) {
-                circleBox.current.style.visibility =
-                    progress > 0.075 ? "visible" : "hidden";
-                circleBox.current.style.opacity = progress > 0.075 ? "1" : "0";
-            }
-
-            if (progressCircle.current) {
-                progressCircle.current.style.setProperty(
-                    "--progress",
-                    `${1 - progress}`,
-                );
-            }
-        };
-
         window.addEventListener("scroll", handleScroll);
         handleScroll();
 

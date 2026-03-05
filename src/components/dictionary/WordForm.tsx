@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import "@/assets/scss/components/word-form.scss";
 
 import FlipCard from "@/components/FlipCard";
-import FullWordCardFront from "@/components/dictionary/FullWordCardFront";
+import WordCardFront from "@/components/dictionary/WordCardFront";
 import WordCardBack from "@/components/dictionary/WordCardBack";
 import InputText from "@/components/inputs/InputText";
 import InputButton from "@/components/inputs/InputButton";
@@ -148,10 +148,6 @@ const WordForm: React.FC<WordFormProps> = ({
 
             <div className="word-form">
                 <div className="top-box">
-                    <FlipCard
-                        front={<FullWordCardFront row={word as LocalStorage} />}
-                        back={<WordCardBack row={word as LocalStorage} />}
-                    />
                     <InputButton
                         label={
                             showInputsBox ? (
@@ -164,6 +160,15 @@ const WordForm: React.FC<WordFormProps> = ({
                         selected={false}
                         buttonKey="eye-form"
                         onSelect={onShowInputsBox}
+                    />
+                    <FlipCard
+                        front={
+                            <WordCardFront
+                                row={word as LocalStorage}
+                                otherClasses="short-option"
+                            />
+                        }
+                        back={<WordCardBack row={word as LocalStorage} />}
                     />
                 </div>
 
